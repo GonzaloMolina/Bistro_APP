@@ -1,8 +1,6 @@
 package model.Bistro_BackEnd;
 
 import javax.persistence.*;
-
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
