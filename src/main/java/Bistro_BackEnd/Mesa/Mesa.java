@@ -1,6 +1,6 @@
-package model.Mesa;
-import model.Orden.Orden;
-import model.empleado.Mozo;
+package Bistro_BackEnd.Mesa;
+import Bistro_BackEnd.Orden.Orden;
+import Bistro_BackEnd.empleado.Mozo;
 
 import javax.persistence.*;
 

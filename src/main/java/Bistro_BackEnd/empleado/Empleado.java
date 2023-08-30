@@ -1,4 +1,4 @@
-package model.empleado;
+package Bistro_BackEnd.empleado;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,7 +12,7 @@ import javax.persistence.InheritanceType;
 public abstract class Empleado {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String nombre;
     private String apellido;

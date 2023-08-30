@@ -1,44 +1,44 @@
-package model.consumibles;
-import model.consumibles.Plato;
+package Bistro_BackEnd.consumibles;
 
 import javax.persistence.*;
 
 @Entity
-public class Acompanamiento {
+public class Salsa {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nombre;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "plato_id")
     private Plato plato;
 
-    public Acompanamiento() {
+    // Constructores, getters y setters
+
+    // Constructor vacío requerido por Hibernate
+    public Salsa() {
     }
 
-    // Constructor
-    public Acompanamiento(String nombre) {
+    // Constructor con parámetros
+    public Salsa(String nombre) {
         this.nombre = nombre;
     }
 
-    //Getters
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getNombre() {
         return nombre;
     }
 
-    //Setters
     public void setNombre(String nombre) {
         this.nombre = nombre;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public Plato getPlato() {
