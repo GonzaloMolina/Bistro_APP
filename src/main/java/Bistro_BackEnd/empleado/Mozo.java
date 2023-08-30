@@ -1,4 +1,6 @@
-package model.Bistro_BackEnd;
+package Bistro_BackEnd.empleado;
+
+import Bistro_BackEnd.Mesa.Mesa;
 
 import javax.persistence.*;
 import java.util.List; // Importa la clase List si usas List

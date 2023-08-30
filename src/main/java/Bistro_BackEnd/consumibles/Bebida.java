@@ -1,4 +1,6 @@
-package model.Bistro_BackEnd;
+package Bistro_BackEnd.consumibles;
+import Bistro_BackEnd.Orden.Orden;
+
 import javax.persistence.*;
 
 @Entity
