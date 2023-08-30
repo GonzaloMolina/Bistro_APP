@@ -1,4 +1,4 @@
-package Bistro_BackEnd.service.empleado;
+package Bistro_BackEnd.servicios.empleado;
 
 import Bistro_BackEnd.dao.empleado.MozoDao;
 import Bistro_BackEnd.empleado.Mozo;

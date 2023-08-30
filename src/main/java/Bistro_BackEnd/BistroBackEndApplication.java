@@ -1,6 +1,7 @@
 package Bistro_BackEnd;
 
 import Bistro_BackEnd.dao.empleado.MozoDao;
+import Bistro_BackEnd.dao.mesa.MesaDao;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
@@ -19,8 +20,9 @@ public class BistroBackEndApplication {
 	public static void main(String[] args) {
 		ConfigurableApplicationContext configApp = SpringApplication.run(BistroBackEndApplication.class, args);
 		MozoDao mozoDao = configApp.getBean(MozoDao.class);
+		MesaDao mesaDao =configApp.getBean(MesaDao.class);
 
-		Seeder seeder = new Seeder(mozoDao);
+		Seeder seeder = new Seeder(mozoDao, mesaDao);
 		seeder.plant();
 	}
 
