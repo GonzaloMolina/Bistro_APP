@@ -1,4 +1,6 @@
-package model.Bistro_BackEnd;
+package model.consumibles;
+import model.consumibles.Plato;
+
 import javax.persistence.*;
 
 @Entity

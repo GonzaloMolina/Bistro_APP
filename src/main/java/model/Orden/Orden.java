@@ -1,4 +1,8 @@
-package model.Bistro_BackEnd;
+package model.Orden;
+
+import model.Mesa.Mesa;
+import model.consumibles.Bebida;
+import model.consumibles.Plato;
 
 import javax.persistence.*;
 import java.util.List;

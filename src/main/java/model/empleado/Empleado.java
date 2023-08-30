@@ -1,4 +1,4 @@
-package model.Bistro_BackEnd;
+package model.empleado;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

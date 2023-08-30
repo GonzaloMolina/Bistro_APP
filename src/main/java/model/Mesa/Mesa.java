@@ -1,4 +1,7 @@
-package model.Bistro_BackEnd;
+package model.Mesa;
+import model.Orden.Orden;
+import model.empleado.Mozo;
+
 import javax.persistence.*;
 
 @Entity
