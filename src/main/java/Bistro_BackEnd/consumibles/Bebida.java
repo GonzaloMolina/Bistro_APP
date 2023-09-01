@@ -4,58 +4,40 @@ import Bistro_BackEnd.Orden.Orden;
 import javax.persistence.*;
 
 @Entity
-public class Bebida {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String nombre;
-    private double precio;
-
+public class Bebida extends Consumible {
+    
     @ManyToOne
     @JoinColumn(name = "orden_id")
     private Orden orden;
+    @Enumerated(EnumType.STRING)
+    private TamanioBebida tamanio;
 
     public Bebida() {
     }
 
     // Constructor
-    public Bebida(String nombre, double precio) {
-        this.nombre = nombre;
-        this.precio = precio;
+    public Bebida(String nombre, TamanioBebida tamanio, double precio) {
+        super(nombre, precio);
+        this.tamanio = tamanio;
     }
 
     //Getters
-    public Long getId() {
-        return id;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
 
     public Orden getOrden() {
         return orden;
     }
 
-    public double getPrecio() {
-        return precio;
+    public TamanioBebida getTamanio(){
+        return tamanio;
     }
 
     //Setters
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public void setPrecio(double precio) {
-        this.precio = precio;
-    }
 
     public void setOrden(Orden orden) {
         this.orden = orden;
+    }
+
+    public void setTamanio(TamanioBebida tamanio){
+        this.tamanio = tamanio;
     }
 }

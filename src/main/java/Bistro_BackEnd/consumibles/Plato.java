@@ -7,14 +7,10 @@ import java.util.List;
 import javax.persistence.*;
 
 @Entity
-public class Plato {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String nombre;
-    private double precio;
-    private String tipo; // Por ejemplo, "Pasta", "Carne", "Pescado", etc.
+public class Plato extends Consumible {
+    
+    @Enumerated(EnumType.STRING)
+    private TipoPlato tipo;
 
     @ManyToOne
     @JoinColumn(name = "orden_id")
@@ -30,31 +26,18 @@ public class Plato {
     }
 
     // Constructor
-    public Plato(String nombre, double precio, String tipo) {
-        this.nombre = nombre;
-        this.precio = precio;
+    public Plato(String nombre, double precio, TipoPlato tipo) {
+        super(nombre, precio);
         this.tipo = tipo;
     }
 
     //Getters
-    public Long getId() {
-        return id;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public double getPrecio() {
-        return precio;
+    public TipoPlato getTipo() {
+        return tipo;
     }
 
     public Orden getOrden() {
         return orden;
-    }
-
-    public String getTipo() {
-        return tipo;
     }
 
     public List<Acompanamiento> getAcompanamientos() {
@@ -62,23 +45,11 @@ public class Plato {
     }
 
     //Setters
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public void setPrecio(double precio) {
-        this.precio = precio;
-    }
-
     public void setOrden(Orden orden) {
         this.orden = orden;
     }
 
-    public void setTipo(String tipo) {
+    public void setTipo(TipoPlato tipo) {
         this.tipo = tipo;
     }
 
