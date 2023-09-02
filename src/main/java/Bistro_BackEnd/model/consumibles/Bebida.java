@@ -1,5 +1,5 @@
-package Bistro_BackEnd.consumibles;
-import Bistro_BackEnd.Orden.Orden;
+package Bistro_BackEnd.model.consumibles;
+import Bistro_BackEnd.model.Orden.Orden;
 
 import javax.persistence.*;
 

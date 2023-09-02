@@ -1,6 +1,6 @@
-package Bistro_BackEnd.consumibles;
+package Bistro_BackEnd.model.consumibles;
 
-import Bistro_BackEnd.Orden.Orden;
+import Bistro_BackEnd.model.Orden.Orden;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package Bistro_BackEnd.consumibles;
+package Bistro_BackEnd.model.consumibles;
 
 public enum TamanioBebida {
     CHICO,

@@ -1,7 +1,6 @@
 package Bistro_BackEnd.servicios.empleado;
 
 import Bistro_BackEnd.controladores.empleado.MozoResponseBody;
-import Bistro_BackEnd.empleado.Mozo;
 import Bistro_BackEnd.servicios.excepciones.ExcepcionIdInvalida;
 
 import java.util.List;
@@ -10,5 +9,5 @@ public interface MozoService {
 
     List<MozoResponseBody> listAll();
 
-    MozoResponseBody getById(Integer id) throws ExcepcionIdInvalida;
+    MozoResponseBody getById(Integer id) throws ExcepcionIdInvalida, ExcepcionIdInvalida;
 }

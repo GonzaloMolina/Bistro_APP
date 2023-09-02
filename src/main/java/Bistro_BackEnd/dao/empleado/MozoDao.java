@@ -1,6 +1,6 @@
 package Bistro_BackEnd.dao.empleado;
 
-import Bistro_BackEnd.empleado.Mozo;
+import Bistro_BackEnd.model.empleado.Mozo;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

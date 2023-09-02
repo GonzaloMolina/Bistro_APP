@@ -1,6 +1,6 @@
-package Bistro_BackEnd.Mesa;
-import Bistro_BackEnd.Orden.Orden;
-import Bistro_BackEnd.empleado.Mozo;
+package Bistro_BackEnd.model.Mesa;
+import Bistro_BackEnd.model.Orden.Orden;
+import Bistro_BackEnd.model.empleado.Mozo;
 
 import javax.persistence.*;
 
@@ -12,10 +12,6 @@ public class Mesa {
     private Long id;
     private int capacidad;
     private Double cuenta;
-
-    @ManyToOne
-    @JoinColumn(name = "mozo_id")
-    private Mozo mozo;
 
     @OneToOne(mappedBy = "mesa")
     private Orden orden;
@@ -42,9 +38,6 @@ public class Mesa {
     }
 
     //Setters
-    public void setMozo(Mozo mozo) {
-        this.mozo = mozo;
-    }
 
     public void setCapacidad(int capacidad) {
         this.capacidad = capacidad;

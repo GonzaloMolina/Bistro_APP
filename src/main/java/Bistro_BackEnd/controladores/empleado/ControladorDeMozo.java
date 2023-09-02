@@ -32,7 +32,7 @@ public class ControladorDeMozo {
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Successful retrieval of a user",response = MozoResponseBody.class),
     })
-    public ResponseEntity<MozoResponseBody> getUser(@PathVariable Integer id) throws ExcepcionIdInvalida {
+    public ResponseEntity<MozoResponseBody> getMozo(@PathVariable Integer id) throws ExcepcionIdInvalida {
         return new ResponseEntity<>(mozoService.getById(id), HttpStatus.OK);
     }
 }

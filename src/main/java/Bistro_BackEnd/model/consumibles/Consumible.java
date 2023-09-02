@@ -1,4 +1,4 @@
-package Bistro_BackEnd.consumibles;
+package Bistro_BackEnd.model.consumibles;
 
 import javax.persistence.*;
 
@@ -7,7 +7,7 @@ import javax.persistence.*;
 public abstract class Consumible {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String nombre;
     private double precio;
