@@ -55,26 +55,14 @@ public class Seeder {
 /////////////////////////////////////////////////////////////////////////////
 
         Bebida bebida0 = new Bebida("2,25l", TamanioBebida.GRANDE, 800.00);
-        Bebida bebida1 = new Bebida("1,5l", TamanioBebida.MEDIANO, 700.00);
-        Bebida bebida2 = new Bebida("500ml", TamanioBebida.CHICO, 600.00);
         List<Bebida> bebidas = new ArrayList<>();
         bebidas.add(bebida0);
-        bebidas.add(bebida1);
-        bebidas.add(bebida2);
+        Plato plato0 = new Plato("", 20000.00, TipoPlato.POSTRE);
+        List<Plato> platos = new ArrayList<>();
+        platos.add(plato0);
 
-        Orden orden = new Orden(new ArrayList<>(), bebidas);
+        Orden orden = new Orden(bebidas, platos);
         orderDao.save(orden);
 /////////////////////////////////////////////////////////////////////////////
-
-        Plato plato0 = new Plato("", 3500.00, TipoPlato.POSTRE);
-        Plato plato1 = new Plato("", 2500.00, TipoPlato.POSTRE);
-        Plato plato2 = new Plato("", 2000.00, TipoPlato.POSTRE);
-        List<Plato> postres = new ArrayList<>();
-        postres.add(plato0);
-        postres.add(plato1);
-        postres.add(plato2);
-
-        Orden orden1 = new Orden(postres, new ArrayList<>());
-        orderDao.save(orden1);
     }
 }

@@ -7,6 +7,7 @@ import javax.persistence.*;
 public abstract class Consumible {
 
     @Id
+    @Column(name = "consumible_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String nombre;

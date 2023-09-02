@@ -10,7 +10,7 @@ public class Menu {
 
     @Id
     @Column(name = "menu_id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     //@OneToMany(mappedBy = "menu_id", cascade = CascadeType.ALL)
