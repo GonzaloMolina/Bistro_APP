@@ -9,11 +9,12 @@ import java.util.List;
 public class Menu {
 
     @Id
+    @Column(name = "menu_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToMany(mappedBy = "menu", cascade = CascadeType.ALL)
-    private List<Consumible> consumibles = new ArrayList<>();
+    //@OneToMany(mappedBy = "menu_id", cascade = CascadeType.ALL)
+    //private List<Consumible> consumibles = new ArrayList<>();
 
     // Constructores, getters y setters
 
@@ -22,9 +23,9 @@ public class Menu {
     }
 
     // Constructor con parámetros
-    public Menu(List<Consumible> consumibles) {
-        this.consumibles = consumibles;
-    }
+    //public Menu(List<Consumible> consumibles) {
+    //    this.consumibles = consumibles;
+    //}
 
     public Long getId() {
         return id;
@@ -34,11 +35,11 @@ public class Menu {
         this.id = id;
     }
 
-    public List<Consumible> getConsumibles() {
-        return consumibles;
-    }
+    //public List<Consumible> getConsumibles() {
+    //    return consumibles;
+    //}
 
-    public void setConsumibles(List<Consumible> consumibles) {
-        this.consumibles = consumibles;
-    }
+    //public void setConsumibles(List<Consumible> consumibles) {
+//        this.consumibles = consumibles;
+//    }
 }

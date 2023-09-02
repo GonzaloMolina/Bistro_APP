@@ -13,10 +13,6 @@ public class Mesa {
     private int capacidad;
     private Double cuenta;
 
-    @ManyToOne
-    @JoinColumn(name = "mozo_id")
-    private Mozo mozo;
-
     @OneToOne(mappedBy = "mesa")
     private Orden orden;
 
@@ -42,9 +38,6 @@ public class Mesa {
     }
 
     //Setters
-    public void setMozo(Mozo mozo) {
-        this.mozo = mozo;
-    }
 
     public void setCapacidad(int capacidad) {
         this.capacidad = capacidad;

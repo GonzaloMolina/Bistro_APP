@@ -3,6 +3,8 @@ package Bistro_BackEnd.model.Orden;
 import Bistro_BackEnd.model.Mesa.Mesa;
 import Bistro_BackEnd.model.consumibles.Bebida;
 import Bistro_BackEnd.model.consumibles.Plato;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import java.util.List;
@@ -14,10 +16,14 @@ public class Orden {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @OneToMany(mappedBy = "orden", cascade = CascadeType.ALL)
+    //@OneToMany(mappedBy = "orden", cascade = CascadeType.MERGE)
+    @OneToMany(cascade = CascadeType.ALL)
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<Plato> platos;
 
-    @OneToMany(mappedBy = "orden", cascade = CascadeType.ALL)
+    //@OneToMany(mappedBy = "orden", cascade = CascadeType.MERGE)
+    @OneToMany(cascade = CascadeType.ALL)
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<Bebida> bebidas;
 
     @OneToOne
