@@ -1,6 +1,6 @@
 package Bistro_BackEnd.controladores.orden;
 
-import Bistro_BackEnd.Orden.Orden;
+import Bistro_BackEnd.model.Orden.Orden;
 
 public class OrdenBodyResponse {
 

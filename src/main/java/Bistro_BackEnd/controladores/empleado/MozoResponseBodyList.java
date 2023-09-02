@@ -1,6 +1,6 @@
 package Bistro_BackEnd.controladores.empleado;
 
-import Bistro_BackEnd.empleado.Mozo;
+import Bistro_BackEnd.model.empleado.Mozo;
 
 public class MozoResponseBodyList {
     private Long id;

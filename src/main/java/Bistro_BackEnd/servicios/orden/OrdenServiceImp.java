@@ -1,6 +1,6 @@
 package Bistro_BackEnd.servicios.orden;
 
-import Bistro_BackEnd.Orden.Orden;
+import Bistro_BackEnd.model.Orden.Orden;
 import Bistro_BackEnd.controladores.orden.OrdenBodyResponse;
 import Bistro_BackEnd.controladores.orden.OrdenBodyResponseList;
 import Bistro_BackEnd.dao.orden.OrdenDao;

@@ -1,8 +1,8 @@
-package Bistro_BackEnd.Orden;
+package Bistro_BackEnd.model.Orden;
 
-import Bistro_BackEnd.Mesa.Mesa;
-import Bistro_BackEnd.consumibles.Bebida;
-import Bistro_BackEnd.consumibles.Plato;
+import Bistro_BackEnd.model.Mesa.Mesa;
+import Bistro_BackEnd.model.consumibles.Bebida;
+import Bistro_BackEnd.model.consumibles.Plato;
 
 import javax.persistence.*;
 import java.util.List;

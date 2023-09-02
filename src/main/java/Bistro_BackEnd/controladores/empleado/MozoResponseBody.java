@@ -1,7 +1,7 @@
 package Bistro_BackEnd.controladores.empleado;
 
-import Bistro_BackEnd.Mesa.Mesa;
-import Bistro_BackEnd.empleado.Mozo;
+import Bistro_BackEnd.model.Mesa.Mesa;
+import Bistro_BackEnd.model.empleado.Mozo;
 
 import java.util.List;
 import java.util.stream.Collectors;

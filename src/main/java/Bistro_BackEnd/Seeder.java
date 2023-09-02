@@ -1,11 +1,11 @@
 package Bistro_BackEnd;
 
-import Bistro_BackEnd.Mesa.Mesa;
-import Bistro_BackEnd.Orden.Orden;
+import Bistro_BackEnd.model.Mesa.Mesa;
+import Bistro_BackEnd.model.Orden.Orden;
 import Bistro_BackEnd.dao.empleado.MozoDao;
 import Bistro_BackEnd.dao.mesa.MesaDao;
 import Bistro_BackEnd.dao.orden.OrdenDao;
-import Bistro_BackEnd.empleado.Mozo;
+import Bistro_BackEnd.model.empleado.Mozo;
 
 import java.util.ArrayList;
 import java.util.List;

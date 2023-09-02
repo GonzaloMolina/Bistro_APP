@@ -1,5 +1,5 @@
-package Bistro_BackEnd.Menu;
-import Bistro_BackEnd.consumibles.Consumible;
+package Bistro_BackEnd.model.Menu;
+import Bistro_BackEnd.model.consumibles.Consumible;
 
 import javax.persistence.*;
 import java.util.ArrayList;
