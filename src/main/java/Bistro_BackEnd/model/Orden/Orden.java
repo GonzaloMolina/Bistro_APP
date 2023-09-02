@@ -13,63 +13,53 @@ import java.util.List;
 public class Orden {
 
     @Id
+    @Column(name = "orden_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    //@OneToMany(mappedBy = "orden", cascade = CascadeType.MERGE)
-    @OneToMany(cascade = CascadeType.PERSIST)
-    @LazyCollection(LazyCollectionOption.FALSE)
-    private List<Plato> platos;
-
-    //@OneToMany(mappedBy = "orden", cascade = CascadeType.MERGE)
-    @OneToMany(cascade = CascadeType.PERSIST)
-    @LazyCollection(LazyCollectionOption.FALSE)
-    private List<Bebida> bebidas;
-
     @OneToOne
-    @JoinColumn(name = "mesa_id")
     private Mesa mesa;
 
-    public Orden() {
+    @ManyToMany(cascade = CascadeType.ALL)
+    private List<Bebida> bebida;
+    @ManyToMany(cascade = CascadeType.ALL)
+    private List<Plato> plato;
+
+    public Orden(){}
+    public Orden(List<Bebida> bebida, List<Plato> plato){
+        this.bebida = bebida;
+        this.plato = plato;
     }
 
-    // Constructor 
-    public Orden(List<Plato> platos, List<Bebida> bebidas) {
-        this.platos = platos;
-        this.bebidas = bebidas;
-    }
-
-    //Getters
     public Long getId() {
         return id;
-    }
-
-    public List<Plato> getPlatos() {
-        return platos;
-    }
-
-    public Mesa getMesa() {
-        return mesa;
-    }
-
-    public List<Bebida> getBebidas() {
-        return bebidas;
-    }
-
-    //Setters
-    public void setMesa(Mesa mesa) {
-        this.mesa = mesa;
     }
 
     public void setId(Long id) {
         this.id = id;
     }
 
-    public void setPlatos(List<Plato> platos) {
-        this.platos = platos;
+    public Mesa getMesa() {
+        return mesa;
     }
 
-    public void setBebidas(List<Bebida> bebidas) {
-        this.bebidas = bebidas;
+    public void setMesa(Mesa mesa) {
+        this.mesa = mesa;
+    }
+
+    public List<Bebida> getBebidas() {
+        return bebida;
+    }
+
+    public void setBebida(List<Bebida> bebida) {
+        this.bebida = bebida;
+    }
+
+    public List<Plato> getPlato() {
+        return plato;
+    }
+
+    public void setPlato(List<Plato> plato) {
+        this.plato = plato;
     }
 }

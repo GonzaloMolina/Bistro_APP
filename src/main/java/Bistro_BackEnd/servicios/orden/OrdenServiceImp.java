@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -52,25 +53,14 @@ public class OrdenServiceImp implements OrdenService {
 
     @Override
     public Integer save(OrdenBodyPost ordenBody) throws ExcepcionIdInvalida {
-        //this.validarIdMozo(Long.valueOf(ordenBody.getMozoId()));
-        //this.validarIdMesa(Long.valueOf(ordenBody.getMesaId()));
-        List<Plato> platos = new ArrayList<>();//this.mapPlatos(ordenBody.getPlatos());
-        List<Bebida> bebidas = new ArrayList<>();//this.mapBebidas(ordenBody.getBebidas());
-        Orden newOrden = new Orden(platos, bebidas);
-        this.ordenDao.save(newOrden);
-        return 1;
-    }
+        List<Integer> valuesB = ordenBody.getBebidas();
+        List<Integer> valuesP = ordenBody.getPlatos();
 
-    private List<Bebida> mapBebidas(List<Integer> bebidas) {
-        return bebidas.stream().map(
-                id -> bebidaDao.findById(Long.valueOf(id)).orElse(new Bebida())
-        ).collect(Collectors.toList());
-    }
+        List<Bebida> bebidas = valuesB.stream().map(id -> bebidaDao.findById(Long.valueOf(id)).orElse(new Bebida())).collect(Collectors.toList());
+        List<Plato> platos = valuesP.stream().map(id -> platoDao.findById(Long.valueOf(id)).orElse(new Plato())).collect(Collectors.toList()); ;
+        Orden newOrden = new Orden(bebidas, platos);
 
-    private List<Plato> mapPlatos(List<Integer> platos) {
-        return platos.stream().map(
-                id -> platoDao.findById(Long.valueOf(id)).orElse(new Plato())
-        ).collect(Collectors.toList());
+        return this.ordenDao.save(newOrden).getId().intValue();
     }
 
     private void validarIdMesa(Long id) throws ExcepcionIdInvalida {

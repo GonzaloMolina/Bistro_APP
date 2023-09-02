@@ -6,8 +6,8 @@ import javax.persistence.*;
 @Entity
 public class Bebida extends Consumible {
     
-    @ManyToOne
-    @JoinColumn(name = "orden_id")
+    @OneToOne
+    //@JoinColumn(name = "orden_id")
     private Orden orden;
     @Enumerated(EnumType.STRING)
     private TamanioBebida tamanio;

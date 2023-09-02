@@ -11,23 +11,24 @@ import java.util.stream.Collectors;
 
 public class OrdenBodyResponse {
 
+
     private Long id;
-    private List<PlatoBodyResponse> platos;
     private List<BebidaBodyResponse> bebidas;
+    private List<PlatoBodyResponse> platos;
 
     public OrdenBodyResponse() {}
 
     public OrdenBodyResponse(Orden orden){
         this.id = orden.getId();
-        this.platos = this.mapPlatos(orden.getPlatos());
+        this.platos = this.mapPlatos(orden.getPlato());
         this.bebidas = this.mapBebidas(orden.getBebidas());
     }
 
-    private List<BebidaBodyResponse> mapBebidas(List<Bebida> bebidas) {
+    private  List<BebidaBodyResponse> mapBebidas(List<Bebida> bebidas) {
         return bebidas.stream().map(BebidaBodyResponse::new).collect(Collectors.toList());
     }
 
-    private List<PlatoBodyResponse> mapPlatos(List<Plato> platos) {
+    private  List<PlatoBodyResponse> mapPlatos(List<Plato> platos) {
         return platos.stream().map(PlatoBodyResponse::new).collect(Collectors.toList());
     }
 
@@ -39,13 +40,6 @@ public class OrdenBodyResponse {
         this.id = id;
     }
 
-    public List<PlatoBodyResponse> getPlatos() {
-        return platos;
-    }
-
-    public void setPlatos(List<PlatoBodyResponse> platos) {
-        this.platos = platos;
-    }
 
     public List<BebidaBodyResponse> getBebidas() {
         return bebidas;
@@ -53,5 +47,13 @@ public class OrdenBodyResponse {
 
     public void setBebidas(List<BebidaBodyResponse> bebidas) {
         this.bebidas = bebidas;
+    }
+
+    public List<PlatoBodyResponse> getPlatos() {
+        return platos;
+    }
+
+    public void setPlatos(List<PlatoBodyResponse> platos) {
+        this.platos = platos;
     }
 }

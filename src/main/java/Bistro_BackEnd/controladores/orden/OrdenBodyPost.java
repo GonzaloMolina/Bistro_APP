@@ -6,15 +6,16 @@ public class OrdenBodyPost {
 
     private Integer mozoId;
     private Integer mesaId;
-    private List<Integer> platos;
     private List<Integer> bebidas;
+    private List<Integer> platos;
 
-    public OrdenBodyPost(){}
-    public OrdenBodyPost(Integer mozoId, Integer mesaId, List<Integer> platos, List<Integer> bebidas){
+    public OrdenBodyPost(){}//cambiar list por unitario
+
+    public OrdenBodyPost(Integer mozoId, Integer mesaId, List<Integer> bebidas, List<Integer> platos){
         this.mozoId = mozoId;
         this.mesaId = mesaId;
-        this.platos = platos;
         this.bebidas = bebidas;
+        this.platos = platos;
     }
 
     public Integer getMozoId() {
@@ -33,13 +34,13 @@ public class OrdenBodyPost {
         this.mesaId = mesaId;
     }
 
-    public List<Integer> getPlatos() {
-        return platos;
-    }
+    //public List<Integer> getPlatos() {
+    //    return platos;
+    //}
 
-    public void setPlatos(List<Integer> platos) {
-        this.platos = platos;
-    }
+    //public void setPlatos(List<Integer> platos) {
+    //    this.platos = platos;
+    //}
 
     public List<Integer> getBebidas() {
         return bebidas;
@@ -47,5 +48,13 @@ public class OrdenBodyPost {
 
     public void setBebidas(List<Integer> bebidas) {
         this.bebidas = bebidas;
+    }
+
+    public List<Integer> getPlatos() {
+        return platos;
+    }
+
+    public void setPlatos(List<Integer> platos) {
+        this.platos = platos;
     }
 }
