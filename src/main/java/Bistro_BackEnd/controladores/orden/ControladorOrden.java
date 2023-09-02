@@ -1,6 +1,7 @@
 package Bistro_BackEnd.controladores.orden;
 
 import Bistro_BackEnd.servicios.excepciones.ExcepcionIdInvalida;
+import Bistro_BackEnd.servicios.excepciones.InvalidOrNullFieldException;
 import Bistro_BackEnd.servicios.orden.OrdenService;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
@@ -35,5 +36,14 @@ public class ControladorOrden {
     })
     public ResponseEntity<OrdenBodyResponse> getOrden(@PathVariable Integer id) throws ExcepcionIdInvalida {
         return new ResponseEntity<>(ordenService.getById(id), HttpStatus.OK);
+    }
+
+    //ADD_ONE
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Successful retrieval of all users",response = String.class),
+    })
+    @PostMapping(value = "/new", produces = { "application/json" },consumes = { "application/json" })
+    public ResponseEntity<Integer> addOrder(@RequestBody OrdenBodyPost ordenBody) throws InvalidOrNullFieldException, ExcepcionIdInvalida {
+        return new ResponseEntity<>(ordenService.save(ordenBody), HttpStatus.OK);
     }
 }

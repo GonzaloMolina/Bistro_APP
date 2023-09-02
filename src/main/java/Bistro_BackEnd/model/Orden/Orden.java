@@ -17,12 +17,12 @@ public class Orden {
     private Long id;
 
     //@OneToMany(mappedBy = "orden", cascade = CascadeType.MERGE)
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.PERSIST)
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<Plato> platos;
 
     //@OneToMany(mappedBy = "orden", cascade = CascadeType.MERGE)
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.PERSIST)
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<Bebida> bebidas;
 

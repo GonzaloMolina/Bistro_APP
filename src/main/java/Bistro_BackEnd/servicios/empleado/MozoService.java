@@ -9,5 +9,5 @@ public interface MozoService {
 
     List<MozoResponseBody> listAll();
 
-    MozoResponseBody getById(Integer id) throws ExcepcionIdInvalida;
+    MozoResponseBody getById(Integer id) throws ExcepcionIdInvalida, ExcepcionIdInvalida;
 }
