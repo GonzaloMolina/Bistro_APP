@@ -1,6 +1,7 @@
 package Bistro_BackEnd.servicios.orden;
 
 import Bistro_BackEnd.controladores.orden.OrdenBodyPost;
+import Bistro_BackEnd.controladores.orden.OrdenBodyPut;
 import Bistro_BackEnd.controladores.orden.OrdenBodyResponse;
 import Bistro_BackEnd.dao.consumibles.BebidaDao;
 import Bistro_BackEnd.dao.consumibles.PlatoDao;
@@ -15,9 +16,7 @@ import Bistro_BackEnd.servicios.excepciones.ExcepcionIdInvalida;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -53,6 +52,9 @@ public class OrdenServiceImp implements OrdenService {
 
     @Override
     public Integer save(OrdenBodyPost ordenBody) throws ExcepcionIdInvalida {
+        this.validarIdMozo(Long.valueOf(ordenBody.getMozoId()));
+        this.validarIdMesa(Long.valueOf(ordenBody.getMesaId()));
+
         List<Integer> valuesB = ordenBody.getBebidas();
         List<Integer> valuesP = ordenBody.getPlatos();
 
@@ -61,6 +63,26 @@ public class OrdenServiceImp implements OrdenService {
         Orden newOrden = new Orden(bebidas, platos);
 
         return this.ordenDao.save(newOrden).getId().intValue();
+    }
+
+    @Override
+    public void delete(Integer id) throws ExcepcionIdInvalida {
+        Long value = Long.valueOf(id);
+        this.validarId(value);
+        this.ordenDao.deleteById(value);
+    }
+
+    @Override
+    public void update(OrdenBodyPut ordenBody) throws ExcepcionIdInvalida {
+        Long value = Long.valueOf(ordenBody.getOrdenId());
+        this.validarIdMozo(Long.valueOf(ordenBody.getMozoId()));
+
+        Orden recOrden = ordenDao.findById(value).orElse(new Orden());
+
+        recOrden.setBebida(ordenBody.getBebidas().stream().map(id -> bebidaDao.findById(Long.valueOf(id)).orElse(new Bebida())).collect(Collectors.toList()));
+        recOrden.setPlato(ordenBody.getPlatos().stream().map(id -> platoDao.findById(Long.valueOf(id)).orElse(new Plato())).collect(Collectors.toList()));
+
+        ordenDao.save(recOrden);
     }
 
     private void validarIdMesa(Long id) throws ExcepcionIdInvalida {

@@ -1,5 +1,6 @@
 package Bistro_BackEnd.model.Orden;
 
+import Bistro_BackEnd.controladores.orden.OrdenBodyPost;
 import Bistro_BackEnd.model.Mesa.Mesa;
 import Bistro_BackEnd.model.consumibles.Bebida;
 import Bistro_BackEnd.model.consumibles.Plato;
