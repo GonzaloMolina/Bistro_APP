@@ -1,6 +1,6 @@
 package Bistro_BackEnd;
 
-import Bistro_BackEnd.model.Mesa.Mesa;
+import Bistro_BackEnd.model.mesa.Mesa;
 import Bistro_BackEnd.model.Orden.Orden;
 import Bistro_BackEnd.dao.empleado.MozoDao;
 import Bistro_BackEnd.dao.mesa.MesaDao;

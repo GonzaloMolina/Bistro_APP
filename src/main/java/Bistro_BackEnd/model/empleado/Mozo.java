@@ -1,10 +1,11 @@
 package Bistro_BackEnd.model.empleado;
 
-import Bistro_BackEnd.model.Mesa.Mesa;
+import Bistro_BackEnd.model.mesa.Mesa;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List; // Importa la clase List si usas List
 
 @Entity
@@ -20,6 +21,7 @@ public class Mozo extends Empleado {
     // Constructor
     public Mozo(String nombre, String apellido) {
         super(nombre, apellido);
+        this.mesasAsignadas = new ArrayList<>();
     }
 
     public List<Mesa> getMesasAsignadas() {
