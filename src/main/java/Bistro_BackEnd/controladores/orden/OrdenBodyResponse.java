@@ -20,7 +20,7 @@ public class OrdenBodyResponse {
 
     public OrdenBodyResponse(Orden orden){
         this.id = orden.getId();
-        this.platos = this.mapPlatos(orden.getPlato());
+        this.platos = this.mapPlatos(orden.getPlatos());
         this.bebidas = this.mapBebidas(orden.getBebidas());
     }
 

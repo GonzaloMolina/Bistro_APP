@@ -1,6 +1,5 @@
-package Bistro_BackEnd.model.Mesa;
+package Bistro_BackEnd.model.mesa;
 import Bistro_BackEnd.model.Orden.Orden;
-import Bistro_BackEnd.model.empleado.Mozo;
 
 import javax.persistence.*;
 
@@ -38,6 +37,9 @@ public class Mesa {
     }
 
     //Setters
+    public void setId(Long id){
+        this.id = id;
+    }
 
     public void setCapacidad(int capacidad) {
         this.capacidad = capacidad;

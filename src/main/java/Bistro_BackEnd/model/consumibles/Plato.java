@@ -45,6 +45,10 @@ public class Plato extends Consumible {
         return acompanamientos;
     }
 
+    public Salsa getSalsa(){
+        return this.salsa;
+    }
+
     //Setters
     public void setOrden(Orden orden) {
         this.orden = orden;

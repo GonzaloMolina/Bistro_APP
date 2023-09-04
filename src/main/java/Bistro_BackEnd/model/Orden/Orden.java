@@ -1,11 +1,8 @@
 package Bistro_BackEnd.model.Orden;
 
-import Bistro_BackEnd.controladores.orden.OrdenBodyPost;
-import Bistro_BackEnd.model.Mesa.Mesa;
+import Bistro_BackEnd.model.mesa.Mesa;
 import Bistro_BackEnd.model.consumibles.Bebida;
 import Bistro_BackEnd.model.consumibles.Plato;
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import java.util.List;
@@ -56,7 +53,7 @@ public class Orden {
         this.bebida = bebida;
     }
 
-    public List<Plato> getPlato() {
+    public List<Plato> getPlatos() {
         return plato;
     }
 
