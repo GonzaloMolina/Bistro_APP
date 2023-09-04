@@ -46,4 +46,18 @@ public class ControladorOrden {
     public ResponseEntity<Integer> addOrder(@RequestBody OrdenBodyPost ordenBody) throws InvalidOrNullFieldException, ExcepcionIdInvalida {
         return new ResponseEntity<>(ordenService.save(ordenBody), HttpStatus.OK);
     }
+
+    //DELETE_ONE exception for id
+    @DeleteMapping(value = "/{id}", produces = { "application/json" })
+    public ResponseEntity<String> deleteOrder(@PathVariable Integer id) throws ExcepcionIdInvalida {
+        ordenService.delete(id);
+        return new ResponseEntity<>("OK", HttpStatus.OK);
+    }
+
+    //update exception for id and body
+    @PutMapping(value = "/", produces = { "application/json" },consumes = { "application/json" })
+    public  ResponseEntity updateUser(@RequestBody OrdenBodyPut ordenBody) throws ExcepcionIdInvalida, InvalidOrNullFieldException {
+        ordenService.update(ordenBody);
+        return new ResponseEntity<>("OK", HttpStatus.OK);
+    }
 }
