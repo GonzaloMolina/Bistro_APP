@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:3000", methods = {RequestMethod.GET, RequestMethod.POST,RequestMethod.DELETE, RequestMethod.PUT})
 @RestController
 @RequestMapping("/orden")
-@CrossOrigin(origins = "*")
 public class ControladorOrden {
 
     @Autowired
@@ -48,6 +48,7 @@ public class ControladorOrden {
     }
 
     //DELETE_ONE exception for id
+    @CrossOrigin(origins = "http://localhost:3000")
     @DeleteMapping(value = "/{id}", produces = { "application/json" })
     public ResponseEntity<String> deleteOrder(@PathVariable Integer id) throws ExcepcionIdInvalida {
         ordenService.delete(id);
