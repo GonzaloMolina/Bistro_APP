@@ -10,7 +10,7 @@ public class Acompanamiento {
     private Long id;
     private String nombre;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "plato_id")
     private Plato plato;
 

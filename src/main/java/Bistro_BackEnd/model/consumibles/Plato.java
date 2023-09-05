@@ -17,8 +17,8 @@ public class Plato extends Consumible {
     @JoinColumn(name = "orden_id")
     private Orden orden;
 
-    @OneToMany(mappedBy = "plato", cascade = CascadeType.PERSIST)
-    private List<Acompanamiento> acompanamientos = new ArrayList<>();
+    @OneToOne(mappedBy = "plato", cascade = CascadeType.PERSIST)
+    private Acompanamiento acompanamiento;
 
     @OneToOne(mappedBy = "plato", cascade = CascadeType.PERSIST) // Solo si el plato es Pasta
     private Salsa salsa;
@@ -41,8 +41,8 @@ public class Plato extends Consumible {
         return orden;
     }
 
-    public List<Acompanamiento> getAcompanamientos() {
-        return acompanamientos;
+    public Acompanamiento getAcompanamiento() {
+        return acompanamiento;
     }
 
     public Salsa getSalsa(){
@@ -62,7 +62,7 @@ public class Plato extends Consumible {
         this.salsa = salsa;
     }
 
-    public void setAcompanamientos(List<Acompanamiento> acompanamientos) {
-        this.acompanamientos = acompanamientos;
+    public void setAcompanamiento(Acompanamiento acompanamiento) {
+        this.acompanamiento = acompanamiento;
     }
 }

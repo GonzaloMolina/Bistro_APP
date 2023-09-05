@@ -5,8 +5,10 @@ import Bistro_BackEnd.model.Orden.Orden;
 import Bistro_BackEnd.dao.empleado.MozoDao;
 import Bistro_BackEnd.dao.mesa.MesaDao;
 import Bistro_BackEnd.dao.orden.OrdenDao;
+import Bistro_BackEnd.model.consumibles.Acompanamiento;
 import Bistro_BackEnd.model.consumibles.Bebida;
 import Bistro_BackEnd.model.consumibles.Plato;
+import Bistro_BackEnd.model.consumibles.Salsa;
 import Bistro_BackEnd.model.consumibles.TamanioBebida;
 import Bistro_BackEnd.model.consumibles.TipoPlato;
 import Bistro_BackEnd.model.empleado.Mozo;
@@ -54,10 +56,17 @@ public class Seeder {
         empDao.save(emp2);
 /////////////////////////////////////////////////////////////////////////////
 
-        Bebida bebida0 = new Bebida("2,25l", TamanioBebida.GRANDE, 800.00);
+        Bebida bebida0 = new Bebida("Coca-Cola", TamanioBebida.GRANDE, 800.00);
+        Bebida bebida1 = new Bebida("Sprite", TamanioBebida.MEDIANO, 450.00);
         List<Bebida> bebidas = new ArrayList<>();
         bebidas.add(bebida0);
-        Plato plato0 = new Plato("", 20000.00, TipoPlato.POSTRE);
+        bebidas.add(bebida1);
+        Plato plato0 = new Plato("Porcion Vacio", 4000.00, TipoPlato.CARNE);
+        Acompanamiento acompanamiento0 = new Acompanamiento("Papas Fritas")
+        plato0.setAcompanamiento(acompanamiento0);
+        Plato plato01 = new Plato("Tallarines", 3000.00, TipoPlato.PASTA);
+        Salsa salsa0 = new Salsa("Bolognesa");
+        plato0.setSalsa(salsa0);
         List<Plato> platos = new ArrayList<>();
         platos.add(plato0);
 
