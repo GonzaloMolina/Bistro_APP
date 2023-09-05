@@ -62,13 +62,14 @@ public class Seeder {
         bebidas.add(bebida0);
         bebidas.add(bebida1);
         Plato plato0 = new Plato("Porcion Vacio", 4000.00, TipoPlato.CARNE);
-        Acompanamiento acompanamiento0 = new Acompanamiento("Papas Fritas")
+        Acompanamiento acompanamiento0 = new Acompanamiento("Papas Fritas");
         plato0.setAcompanamiento(acompanamiento0);
-        Plato plato01 = new Plato("Tallarines", 3000.00, TipoPlato.PASTA);
-        Salsa salsa0 = new Salsa("Bolognesa");
-        plato0.setSalsa(salsa0);
+        Plato plato1 = new Plato("Tallarines", 3000.00, TipoPlato.PASTA);
+        Salsa salsa1 = new Salsa("Bolognesa");
+        plato1.setSalsa(salsa1);
         List<Plato> platos = new ArrayList<>();
         platos.add(plato0);
+        platos.add(plato1);
 
         Orden orden = new Orden(bebidas, platos);
         orderDao.save(orden);
