@@ -13,10 +13,10 @@ public class Plato extends Consumible {
     @JoinColumn(name = "orden_id")
     private Orden orden;
 
-    @OneToOne(mappedBy = "plato", cascade = CascadeType.PERSIST)
+    @OneToOne(cascade = CascadeType.ALL)
     private Acompanamiento acompanamiento;
 
-    @OneToOne(mappedBy = "plato", cascade = CascadeType.PERSIST) // Solo si el plato es Pasta
+    @OneToOne(cascade = CascadeType.ALL) // Solo si el plato es Pasta
     private Salsa salsa;
 
     public Plato() {
@@ -26,6 +26,14 @@ public class Plato extends Consumible {
     public Plato(String nombre, double precio, TipoPlato tipo) {
         super(nombre, precio);
         this.tipo = tipo;
+    }
+
+    // Constructor
+    public Plato(String nombre, double precio, TipoPlato tipo, Acompanamiento acompanamiento, Salsa salsa) {
+        super(nombre, precio);
+        this.tipo = tipo;
+        this.acompanamiento = acompanamiento;
+        this.salsa = salsa;
     }
 
     //Getters

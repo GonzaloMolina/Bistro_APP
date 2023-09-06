@@ -11,8 +11,8 @@ public class PlatoBodyResponse {
     private String nombre;
     private double precio;
     private TipoPlato tipo;
-    private Acompanamiento acompanamiento;
-    private Salsa salsa;
+    private AcompanammientoBodyResponse acompanamiento;
+    private SalsaBodyResponse salsa;
 
     public PlatoBodyResponse(){}
 
@@ -21,9 +21,28 @@ public class PlatoBodyResponse {
         this.nombre = plato.getNombre();
         this.precio = plato.getPrecio();
         this.tipo = plato.getTipo();
-        this.acompanamiento = plato.getAcompanamiento();
-        this.salsa = plato.getSalsa();
+        this.acompanamiento = this.mapAcompanamiento(plato.getAcompanamiento());
+        this.salsa = this.mapSalsa(plato.getSalsa());
     }
+
+    private SalsaBodyResponse mapSalsa(Salsa salsa) {
+        if(salsa != null){
+            return new SalsaBodyResponse(salsa);
+        }
+        else{
+            return null;
+        }
+    }
+
+    private AcompanammientoBodyResponse mapAcompanamiento(Acompanamiento acompanamiento) {
+        if(acompanamiento != null){
+            return new AcompanammientoBodyResponse(acompanamiento);
+        }
+        else{
+            return null;
+        }
+    }
+
 
     public Long getId() {
         return id;
@@ -57,19 +76,19 @@ public class PlatoBodyResponse {
         this.tipo = tipo;
     }
 
-    public Acompanamiento getAcompanamiento() {
+    public AcompanammientoBodyResponse getAcompanamiento() {
         return acompanamiento;
     }
 
-    public void setAcompanamiento(Acompanamiento acompanamiento) {
+    public void setAcompanamiento(AcompanammientoBodyResponse acompanamiento) {
         this.acompanamiento = acompanamiento;
     }
 
-    public Salsa getSalsa() {
+    public SalsaBodyResponse getSalsa() {
         return salsa;
     }
 
-    public void setSalsa(Salsa salsa) {
+    public void setSalsa(SalsaBodyResponse salsa) {
         this.salsa = salsa;
     }
 
