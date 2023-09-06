@@ -4,8 +4,6 @@ import Bistro_BackEnd.model.Orden.Orden;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 
@@ -26,7 +24,7 @@ class PlatoTest {
         assertNull(plato.getTipo());
         assertNull(plato.getOrden());
         assertNull(plato.getSalsa());
-        assertEquals(plato.getAcompanamientos().size(), 0);
+        assertNull(plato.getAcompanamiento());
         assertEquals(plato.getPrecio(), 0);
     }
     @Test
@@ -34,7 +32,8 @@ class PlatoTest {
         assertNull(pla.getId());
         assertNull(pla.getOrden());
         assertNull(plato.getSalsa());
-        assertEquals(pla.getAcompanamientos().size(), 0);
+        assertNull(plato.getSalsa());
+        assertNull(plato.getAcompanamiento());
         assertEquals(pla.getNombre(), "Salmon");
         assertEquals(pla.getTipo(), TipoPlato.PESCADO);
         assertEquals(pla.getPrecio(), 0.0);
@@ -56,8 +55,9 @@ class PlatoTest {
     }
     @Test
     void test_04_setAcompaniamiento(){
-        pla.setAcompanamientos(new ArrayList<>());
-        assertNotNull(pla.getAcompanamientos());
+        Acompanamiento acompanamiento = new Acompanamiento("Papas Fritas");
+        pla.setAcompanamiento(acompanamiento);
+        assertNotNull(pla.getAcompanamiento());
     }
     @Test
     void test_05_setNombre(){

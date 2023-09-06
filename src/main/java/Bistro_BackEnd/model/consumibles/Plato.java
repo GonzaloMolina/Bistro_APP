@@ -1,10 +1,6 @@
 package Bistro_BackEnd.model.consumibles;
 
 import Bistro_BackEnd.model.Orden.Orden;
-import com.sun.istack.Nullable;
-
-import java.util.ArrayList;
-import java.util.List;
 import javax.persistence.*;
 
 @Entity
@@ -17,8 +13,8 @@ public class Plato extends Consumible {
     @JoinColumn(name = "orden_id")
     private Orden orden;
 
-    @OneToMany(mappedBy = "plato", cascade = CascadeType.PERSIST)
-    private List<Acompanamiento> acompanamientos = new ArrayList<>();
+    @OneToOne(mappedBy = "plato", cascade = CascadeType.PERSIST)
+    private Acompanamiento acompanamiento;
 
     @OneToOne(mappedBy = "plato", cascade = CascadeType.PERSIST) // Solo si el plato es Pasta
     private Salsa salsa;
@@ -41,12 +37,20 @@ public class Plato extends Consumible {
         return orden;
     }
 
-    public List<Acompanamiento> getAcompanamientos() {
-        return acompanamientos;
+    public Acompanamiento getAcompanamiento() {
+        Acompanamiento acompanamientoPlato = null;
+        if (this.getTipo() == TipoPlato.CARNE || this.getTipo() == TipoPlato.PESCADO) {
+            acompanamientoPlato = acompanamiento;
+        };
+        return acompanamientoPlato;
     }
 
     public Salsa getSalsa(){
-        return this.salsa;
+        Salsa salsaDelPlato = null;
+        if (this.getTipo() == TipoPlato.PASTA) {
+            salsaDelPlato = salsa;
+        };
+        return salsaDelPlato;
     }
 
     //Setters
@@ -62,7 +66,7 @@ public class Plato extends Consumible {
         this.salsa = salsa;
     }
 
-    public void setAcompanamientos(List<Acompanamiento> acompanamientos) {
-        this.acompanamientos = acompanamientos;
+    public void setAcompanamiento(Acompanamiento acompanamiento) {
+        this.acompanamiento = acompanamiento;
     }
 }
