@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class AcompanamientpTest {
+class AcompanamientoTest {
 
     private Acompanamiento aco = new Acompanamiento();
     private Acompanamiento aco1;

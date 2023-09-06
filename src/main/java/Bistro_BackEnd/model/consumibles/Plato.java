@@ -1,10 +1,6 @@
 package Bistro_BackEnd.model.consumibles;
 
 import Bistro_BackEnd.model.Orden.Orden;
-import com.sun.istack.Nullable;
-
-import java.util.ArrayList;
-import java.util.List;
 import javax.persistence.*;
 
 @Entity
@@ -42,11 +38,19 @@ public class Plato extends Consumible {
     }
 
     public Acompanamiento getAcompanamiento() {
-        return acompanamiento;
+        Acompanamiento acompanamientoPlato = null;
+        if (this.getTipo() == TipoPlato.CARNE || this.getTipo() == TipoPlato.PESCADO) {
+            acompanamientoPlato = acompanamiento;
+        };
+        return acompanamientoPlato;
     }
 
     public Salsa getSalsa(){
-        return this.salsa;
+        Salsa salsaDelPlato = null;
+        if (this.getTipo() == TipoPlato.PASTA) {
+            salsaDelPlato = salsa;
+        };
+        return salsaDelPlato;
     }
 
     //Setters
