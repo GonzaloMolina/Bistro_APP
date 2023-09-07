@@ -46,10 +46,6 @@ public class OrdenServiceImp implements OrdenService {
     public OrdenBodyResponse getById(Integer idParam) throws ExcepcionIdInvalida {
         Long id = Long.valueOf(idParam);
         this.validarId(id);
-        System.out.println("");
-        System.out.println(ordenDao.findById(id).get().getPlatos().get(0).getSalsa());
-        System.out.println(ordenDao.findById(id).get().getPlatos().get(0).getTipo());
-        System.out.println("");
         Orden orden = ordenDao.findById(id).orElse(new Orden());
         return new OrdenBodyResponse(orden);
     }
