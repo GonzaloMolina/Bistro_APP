@@ -18,9 +18,9 @@ public class Orden {
     @OneToOne
     private Mesa mesa;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.PERSIST)
     private List<Bebida> bebida;
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.PERSIST)
     private List<Plato> plato;
 
     public Orden(){}
