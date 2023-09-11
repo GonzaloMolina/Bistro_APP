@@ -2,6 +2,7 @@ package Bistro_BackEnd.model.Orden;
 
 import Bistro_BackEnd.model.consumibles.Bebida;
 import Bistro_BackEnd.model.consumibles.Plato;
+import Bistro_BackEnd.model.consumibles.TamanioBebida;
 import Bistro_BackEnd.model.mesa.Mesa;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -17,11 +18,13 @@ class OrdenTest {
     private Orden ord = new Orden();
     private Orden ord1;
     private List<Bebida> bebidas = new ArrayList<>();
+    private List<Bebida> drinks = new ArrayList<>();
     private List<Plato> platos = new ArrayList<>();
 
     @BeforeEach
     void setUp(){
         ord1 = new Orden(bebidas, platos);
+        drinks.add(new Bebida("", TamanioBebida.CHICO, 600.0));
     }
 
     @Test
@@ -63,5 +66,12 @@ class OrdenTest {
     void test_05_setPlatos(){
         ord.setPlato(platos);
         assertEquals(ord.getPlatos(), platos);
+    }
+
+    @Test
+    void test_06_calcularCuenta(){
+        ord.setBebida(drinks);
+        ord.setPlato(platos);
+        assertEquals(ord.calcularCuenta(), 600.0);
     }
 }

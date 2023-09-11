@@ -1,11 +1,13 @@
 package Bistro_BackEnd.model.Orden;
 
+import Bistro_BackEnd.model.consumibles.Consumible;
 import Bistro_BackEnd.model.mesa.Mesa;
 import Bistro_BackEnd.model.consumibles.Bebida;
 import Bistro_BackEnd.model.consumibles.Plato;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Entity
 public class Orden {
@@ -62,6 +64,8 @@ public class Orden {
     }
 
     public Double calcularCuenta() {
-        return 0.0;
+        return this.bebida.stream().mapToDouble(Consumible::getPrecio).sum() +
+                this.plato.stream().mapToDouble(Consumible::getPrecio).sum();
+
     }
 }
