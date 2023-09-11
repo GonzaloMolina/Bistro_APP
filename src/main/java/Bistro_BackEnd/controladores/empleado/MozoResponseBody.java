@@ -11,6 +11,7 @@ public class MozoResponseBody {
     private Long id;
     private String nombre;
     private String apellido;
+    private String email;
     private List<Long> mesas;
 
     public MozoResponseBody(){}
@@ -19,6 +20,7 @@ public class MozoResponseBody {
         this.id = mozo.getId();
         this.nombre = mozo.getNombre();
         this.apellido = mozo.getApellido();
+        this.email = mozo.getEmail();
         this.mesas = this.mapMesas(mozo.getMesasAsignadas());
     }
 
@@ -56,5 +58,13 @@ public class MozoResponseBody {
 
     public void setMesas(List<Long> mesas) {
         this.mesas = mesas;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }
