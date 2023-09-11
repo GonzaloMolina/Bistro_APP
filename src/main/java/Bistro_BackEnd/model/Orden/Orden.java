@@ -60,4 +60,8 @@ public class Orden {
     public void setPlato(List<Plato> plato) {
         this.plato = plato;
     }
+
+    public Double calcularCuenta() {
+        return 0.0;
+    }
 }

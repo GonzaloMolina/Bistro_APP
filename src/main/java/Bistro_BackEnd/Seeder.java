@@ -31,6 +31,8 @@ public class Seeder {
     void plant() {
         Mesa mesa = new Mesa();Mesa mesa1 = new Mesa();
         List<Mesa> mesas1 = new ArrayList<>();
+        mesa.setCapacidad(3);
+        mesa1.setCapacidad(3);
         mesas1.add(mesa); mesas1.add(mesa1);
 
         Mozo emp = new Mozo("Smitty", "Smith", "admin@mail.com", "public123");
@@ -39,6 +41,8 @@ public class Seeder {
 /////////////////////////////////////////////////////////////////////////////
 
         Mesa mesa2 = new Mesa();Mesa mesa3 = new Mesa();
+        mesa2.setCapacidad(4);
+        mesa3.setCapacidad(4);
         List<Mesa> mesas2 = new ArrayList<>();
         mesas2.add(mesa2); mesas2.add(mesa3);
 
@@ -47,7 +51,10 @@ public class Seeder {
         empDao.save(emp1);
 /////////////////////////////////////////////////////////////////////////////
 
-        Mesa mesa4 = new Mesa();Mesa mesa5 = new Mesa();
+        Mesa mesa4 = new Mesa();
+        mesa4.setCapacidad(5);
+        Mesa mesa5 = new Mesa();
+        mesa5.setCapacidad(5);
         List<Mesa> mesas3 = new ArrayList<>();
         mesas3.add(mesa4); mesas3.add(mesa5);
 

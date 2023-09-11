@@ -14,7 +14,7 @@ public class MesaBodyResponse {
     public MesaBodyResponse(Mesa mesaR) {
         this.id = mesaR.getId();
         this.capacidad = mesaR.getCapacidad();
-        this.cuenta = 0.0;
+        this.cuenta = mesaR.getCuenta();
         this.orden = this.mapOrden(mesaR.getOrden());
     }
 
