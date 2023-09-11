@@ -1,5 +1,7 @@
 package Bistro_BackEnd.model.Menu;
+import Bistro_BackEnd.model.consumibles.Bebida;
 import Bistro_BackEnd.model.consumibles.Consumible;
+import Bistro_BackEnd.model.consumibles.Plato;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -13,9 +15,11 @@ public class Menu {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    //@OneToMany(mappedBy = "menu_id", cascade = CascadeType.ALL)
-    //private List<Consumible> consumibles = new ArrayList<>();
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Plato> platos = new ArrayList<>();
 
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Bebida> bebidas = new ArrayList<>();
     // Constructores, getters y setters
 
     // Constructor vacío requerido por Hibernate
@@ -23,23 +27,32 @@ public class Menu {
     }
 
     // Constructor con parámetros
-    //public Menu(List<Consumible> consumibles) {
-    //    this.consumibles = consumibles;
-    //}
+    public Menu(List<Plato> platos, List<Bebida> bebidas) {
+        this.platos = platos;
+        this.bebidas = bebidas;
+    }
 
     public Long getId() {
         return id;
+    }
+
+    public List<Plato> getPlatos() {
+        return platos;
+    }
+
+    public List<Bebida> getBebidas() {
+        return bebidas;
     }
 
     public void setId(Long id) {
         this.id = id;
     }
 
-    //public List<Consumible> getConsumibles() {
-    //    return consumibles;
-    //}
+    public void setPlatos(List<Plato> platos) {
+        this.platos = platos;
+    }
 
-    //public void setConsumibles(List<Consumible> consumibles) {
-//        this.consumibles = consumibles;
-//    }
+    public void setBebidas(List<Bebida> bebidas) {
+        this.bebidas = bebidas;
+    }
 }
