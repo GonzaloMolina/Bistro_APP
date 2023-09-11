@@ -15,7 +15,7 @@ public class Orden {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.PERSIST)
     private Mesa mesa;
 
     @ManyToMany(cascade = CascadeType.PERSIST)

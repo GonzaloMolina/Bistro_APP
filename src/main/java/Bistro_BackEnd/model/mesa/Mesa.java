@@ -12,7 +12,7 @@ public class Mesa {
     private int capacidad;
     private Double cuenta;
 
-    @OneToOne(mappedBy = "mesa")
+    @OneToOne
     private Orden orden;
 
     // Constructor vacío
