@@ -17,12 +17,16 @@ class MozoTest {
     private Mozo emp1;
     private String nombre;
     private String apellido;
+    private String email;
+    private String password;
 
     @BeforeEach
     void setUp(){
         nombre = "Mike";
         apellido = "Ashton";
-        emp1 = new Mozo(nombre, apellido);
+        email = "admin@mail.com";
+        password ="public123";
+        emp1 = new Mozo(nombre, apellido, email, password);
     }
 
     @Test
@@ -31,6 +35,8 @@ class MozoTest {
         assertNull(emp.getNombre());
         assertNull(emp.getApellido());
         assertNull(emp.getMesasAsignadas());
+        assertNull(emp.getEmail());
+        assertNull(emp.getPassword());
     }
 
     @Test
@@ -39,6 +45,8 @@ class MozoTest {
         assertEquals(emp1.getNombre(), nombre);
         assertEquals(emp1.getApellido(), apellido);
         assertEquals(emp1.getMesasAsignadas().size(), 0);
+        assertEquals(emp1.getEmail(), email);
+        assertEquals(emp1.getPassword(), password);
     }
 
     @Test
@@ -64,5 +72,17 @@ class MozoTest {
         List<Mesa> mesas = new ArrayList<>();
         emp1.setMesasAsignadas(mesas);
         assertEquals(emp1.getMesasAsignadas(), mesas);
+    }
+
+    @Test
+    void test_06_setEmail(){
+        emp1.setEmail("");
+        assertEquals(emp1.getEmail(), "");
+    }
+
+    @Test
+    void test_07_setEmail(){
+        emp1.setPassword("");
+        assertEquals(emp1.getPassword(), "");
     }
 }

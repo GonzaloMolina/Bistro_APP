@@ -19,8 +19,8 @@ public class Mozo extends Empleado {
     }
 
     // Constructor
-    public Mozo(String nombre, String apellido) {
-        super(nombre, apellido);
+    public Mozo(String nombre, String apellido, String email, String password) {
+        super(nombre, apellido, email, password);
         this.mesasAsignadas = new ArrayList<>();
     }
 
