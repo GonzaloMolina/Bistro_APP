@@ -76,8 +76,10 @@ class PlatoTest {
     }
     @Test
     void test_08_setSalsa(){
-        assertNull(pla.getSalsa());
-        pla.setSalsa(new Salsa());
-        assertNotNull(pla.getSalsa());
+        Salsa s = new Salsa();
+        plato.setTipo(TipoPlato.PASTA);
+        assertNull(plato.getSalsa());
+        plato.setSalsa(s);
+        assertEquals(s, plato.getSalsa());
     }
 }

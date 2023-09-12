@@ -33,7 +33,7 @@ public class Seeder {
         List<Mesa> mesas1 = new ArrayList<>();
         mesas1.add(mesa); mesas1.add(mesa1);
 
-        Mozo emp = new Mozo("Smitty", "Smith");
+        Mozo emp = new Mozo("Smitty", "Smith", "admin@mail.com", "public123");
         emp.setMesasAsignadas(mesas1);
         empDao.save(emp);
 /////////////////////////////////////////////////////////////////////////////
@@ -42,7 +42,7 @@ public class Seeder {
         List<Mesa> mesas2 = new ArrayList<>();
         mesas2.add(mesa2); mesas2.add(mesa3);
 
-        Mozo emp1 = new Mozo("Fidel", "Martinez");
+        Mozo emp1 = new Mozo("Fidel", "Martinez", "admin@mail.com", "public123");
         emp1.setMesasAsignadas(mesas2);
         empDao.save(emp1);
 /////////////////////////////////////////////////////////////////////////////
@@ -51,7 +51,7 @@ public class Seeder {
         List<Mesa> mesas3 = new ArrayList<>();
         mesas3.add(mesa4); mesas3.add(mesa5);
 
-        Mozo emp2 = new Mozo("Valentin", "Barco");
+        Mozo emp2 = new Mozo("Valentin", "Barco", "admin@mail.com", "public123");
         emp2.setMesasAsignadas(mesas3);
         empDao.save(emp2);
 /////////////////////////////////////////////////////////////////////////////
