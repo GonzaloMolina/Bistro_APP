@@ -1,5 +1,7 @@
 package Bistro_BackEnd;
 
+import Bistro_BackEnd.dao.menu.MenuDao;
+import Bistro_BackEnd.model.Menu.Menu;
 import Bistro_BackEnd.model.mesa.Mesa;
 import Bistro_BackEnd.model.Orden.Orden;
 import Bistro_BackEnd.dao.empleado.MozoDao;
@@ -21,14 +23,19 @@ public class Seeder {
     private OrdenDao orderDao;
     private MozoDao empDao;
     private MesaDao mesaDao;
+    private MenuDao menuDao;
 
-    public Seeder(MozoDao empDao, MesaDao mesaDao, OrdenDao ordenDao) {
+
+    public Seeder(MozoDao empDao, MesaDao mesaDao, OrdenDao ordenDao, MenuDao menuDao) {
         this.empDao = empDao;
         this.mesaDao = mesaDao;
         this.orderDao = ordenDao;
+        this.menuDao = menuDao;
     }
 
     void plant() {
+        Menu menu = new Menu();
+/////////////////////////////////////////////////////////////////////////////
         Mesa mesa = new Mesa();Mesa mesa1 = new Mesa();
         List<Mesa> mesas1 = new ArrayList<>();
         mesa.setCapacidad(3);
@@ -138,25 +145,27 @@ public class Seeder {
         platosMenu.add(platoE);
         platosMenu.add(platoF);
 
-        Orden ordenMenu = new Orden(bebidasMenu, platosMenu);
-        orderDao.save(ordenMenu);
+        menu.setBebidas(bebidasMenu);
+        menu.setPlatos(platosMenu);
+        this.menuDao.save(menu);
+
 /////////////////////////////////////////////////////////////////////////////
         Bebida bebida10 = new Bebida("Quilmes", TamanioBebida.GRANDE, 800.00);
         Bebida bebida11 = new Bebida("red bull", TamanioBebida.CHICO, 700.00);
-        List<Bebida> bebidas = new ArrayList<>();
-        bebidas.add(bebida10);
-        bebidas.add(bebida11);
+        List<Bebida> bebidas2 = new ArrayList<>();
+        bebidas2.add(bebida10);
+        bebidas2.add(bebida11);
 
         Plato plato = new Plato("Porcion Vacio", 4000.00, TipoPlato.CARNE);
         plato.setAcompanamiento(new Acompanamiento("Papas Fritas"));
 
         Plato platox = new Plato("Tallarines", 3000.00, TipoPlato.PASTA);
         platox.setSalsa(new Salsa("Bolognesa"));
-        List<Plato> platos = new ArrayList<>();
-        platos.add(plato);
-        platos.add(platox);
+        List<Plato> platos2 = new ArrayList<>();
+        platos2.add(plato);
+        platos2.add(platox);
 
-        Orden orden = new Orden(bebidas, platos);
+        Orden orden = new Orden(bebidas2, platos2);
         orderDao.save(orden);
 /////////////////////////////////////////////////////////////////////////////
     }
