@@ -2,6 +2,7 @@ package Bistro_BackEnd;
 
 import Bistro_BackEnd.dao.menu.MenuDao;
 import Bistro_BackEnd.model.Menu.Menu;
+import Bistro_BackEnd.model.empleado.Peticion;
 import Bistro_BackEnd.model.mesa.Mesa;
 import Bistro_BackEnd.model.Orden.Orden;
 import Bistro_BackEnd.dao.empleado.MozoDao;
@@ -55,6 +56,7 @@ public class Seeder {
 
         Mozo emp1 = new Mozo("Fidel", "Martinez", "admin@mail.com", "public123");
         emp1.setMesasAsignadas(mesas2);
+        emp1.addPeticion(new Peticion("sistem@mail.com", "admin@mail.com", "Licencia por enfermedad", ""));
         empDao.save(emp1);
 /////////////////////////////////////////////////////////////////////////////
 
