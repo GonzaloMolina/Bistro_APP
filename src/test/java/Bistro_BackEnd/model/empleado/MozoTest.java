@@ -7,8 +7,7 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 class MozoTest {
@@ -35,6 +34,7 @@ class MozoTest {
         assertNull(emp.getNombre());
         assertNull(emp.getApellido());
         assertNull(emp.getMesasAsignadas());
+        assertNull(emp.getPeticiones());
         assertNull(emp.getEmail());
         assertNull(emp.getPassword());
     }
@@ -45,6 +45,7 @@ class MozoTest {
         assertEquals(emp1.getNombre(), nombre);
         assertEquals(emp1.getApellido(), apellido);
         assertEquals(emp1.getMesasAsignadas().size(), 0);
+        assertEquals(emp1.getPeticiones().size(), 0);
         assertEquals(emp1.getEmail(), email);
         assertEquals(emp1.getPassword(), password);
     }
@@ -84,5 +85,46 @@ class MozoTest {
     void test_07_setEmail(){
         emp1.setPassword("");
         assertEquals(emp1.getPassword(), "");
+    }
+
+    @Test
+    void test_08_setPeticiones(){
+        List<Peticion> peticiones = new ArrayList<>();
+        emp1.setPeticiones(peticiones);
+        assertEquals(emp1.getPeticiones(), peticiones);
+    }
+
+    @Test
+    void test_09_addPeticion(){
+        Peticion pet = new Peticion();
+        emp1.addPeticion(pet);
+        assertFalse(emp1.getPeticiones().isEmpty());
+        assertEquals(emp1.getPeticiones().get(0), pet);
+    }
+
+    @Test
+    void test_09_getPeticion(){
+        Peticion pet = new Peticion();
+        pet.setId(1L);
+        emp1.addPeticion(pet);
+        assertEquals(emp1.getPeticion(1L), pet);
+    }
+
+    @Test
+    void test_09_deletePeticion(){
+        Peticion pet = new Peticion();
+        pet.setId(1L);
+        emp1.addPeticion(pet);
+
+        Peticion pet1 = new Peticion();
+        pet1.setId(2L);
+        emp1.addPeticion(pet1);
+
+        assertFalse(emp1.getPeticiones().isEmpty());
+
+        emp1.deletePeticion(1L);
+
+        assertFalse(emp1.getPeticiones().isEmpty());
+        assertEquals(emp1.getPeticiones().size(), 1);
     }
 }
