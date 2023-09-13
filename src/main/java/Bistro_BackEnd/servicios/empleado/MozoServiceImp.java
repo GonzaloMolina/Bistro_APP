@@ -1,5 +1,6 @@
 package Bistro_BackEnd.servicios.empleado;
 
+import Bistro_BackEnd.controladores.empleado.LogInBody;
 import Bistro_BackEnd.controladores.empleado.MozoResponseBody;
 import Bistro_BackEnd.dao.empleado.MozoDao;
 import Bistro_BackEnd.model.empleado.Mozo;
@@ -26,6 +27,14 @@ public class MozoServiceImp implements MozoService{
         this.validarId(id);
         Mozo mozo = mozoDao.findById(id).orElse(new Mozo());
         return new MozoResponseBody(mozo);
+    }
+
+    @Override
+    public MozoResponseBody logIn(LogInBody body) {
+        Mozo mozoR = ((List<Mozo>) mozoDao.findAll()).stream().filter(
+                mozo -> mozo.getEmail().equals(body.getEmail()) && mozo.getPassword().equals(body.getPassword())
+        ).collect(Collectors.toList()).get(0);
+        return new MozoResponseBody(mozoR);
     }
 
     private void validarId(Long id) throws ExcepcionIdInvalida {

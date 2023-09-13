@@ -35,4 +35,13 @@ public class ControladorDeMozo {
     public ResponseEntity<MozoResponseBody> getMozo(@PathVariable Integer id) throws ExcepcionIdInvalida {
         return new ResponseEntity<>(mozoService.getById(id), HttpStatus.OK);
     }
+
+    //ADD_ONE
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Successful retrieval of all users",response = String.class),
+    })
+    @PostMapping(value = "/logIn", produces = { "application/json" },consumes = { "application/json" })
+    public ResponseEntity<MozoResponseBody> addOrder(@RequestBody LogInBody body) throws ExcepcionIdInvalida {
+        return new ResponseEntity<>(mozoService.logIn(body), HttpStatus.OK);
+    }
 }

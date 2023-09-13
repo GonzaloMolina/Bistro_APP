@@ -43,7 +43,7 @@ public class Seeder {
         mesa1.setCapacidad(3);
         mesas1.add(mesa); mesas1.add(mesa1);
 
-        Mozo emp = new Mozo("Smitty", "Smith", "admin@mail.com", "public123");
+        Mozo emp = new Mozo("Smitty", "Smith", "SS@mail.com", "public123");
         emp.setMesasAsignadas(mesas1);
         empDao.save(emp);
 /////////////////////////////////////////////////////////////////////////////
@@ -67,7 +67,7 @@ public class Seeder {
         List<Mesa> mesas3 = new ArrayList<>();
         mesas3.add(mesa4); mesas3.add(mesa5);
 
-        Mozo emp2 = new Mozo("Valentin", "Barco", "admin@mail.com", "public123");
+        Mozo emp2 = new Mozo("Valentin", "Barco", "VBarco@mail.com", "public123");
         emp2.setMesasAsignadas(mesas3);
         empDao.save(emp2);
 /////////////////////////////////////////////////////////////////////////////
