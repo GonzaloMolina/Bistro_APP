@@ -1,11 +1,13 @@
 package Bistro_BackEnd.model.Orden;
 
+import Bistro_BackEnd.model.consumibles.Consumible;
 import Bistro_BackEnd.model.mesa.Mesa;
 import Bistro_BackEnd.model.consumibles.Bebida;
 import Bistro_BackEnd.model.consumibles.Plato;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Entity
 public class Orden {
@@ -15,7 +17,7 @@ public class Orden {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.PERSIST)
     private Mesa mesa;
 
     @ManyToMany(cascade = CascadeType.PERSIST)
@@ -59,5 +61,11 @@ public class Orden {
 
     public void setPlato(List<Plato> plato) {
         this.plato = plato;
+    }
+
+    public Double calcularCuenta() {
+        return this.bebida.stream().mapToDouble(Consumible::getPrecio).sum() +
+                this.plato.stream().mapToDouble(Consumible::getPrecio).sum();
+
     }
 }

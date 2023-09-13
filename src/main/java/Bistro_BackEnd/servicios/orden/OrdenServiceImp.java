@@ -12,6 +12,7 @@ import Bistro_BackEnd.controladores.orden.OrdenBodyResponseList;
 import Bistro_BackEnd.dao.orden.OrdenDao;
 import Bistro_BackEnd.model.consumibles.Bebida;
 import Bistro_BackEnd.model.consumibles.Plato;
+import Bistro_BackEnd.model.mesa.Mesa;
 import Bistro_BackEnd.servicios.excepciones.ExcepcionIdInvalida;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -62,7 +63,14 @@ public class OrdenServiceImp implements OrdenService {
         List<Plato> platos = valuesP.stream().map(id -> platoDao.findById(Long.valueOf(id)).orElse(new Plato())).collect(Collectors.toList()); ;
         Orden newOrden = new Orden(bebidas, platos);
 
-        return this.ordenDao.save(newOrden).getId().intValue();
+        int ordenId = this.ordenDao.save(newOrden).getId().intValue();
+
+        Mesa mesa = this.mesaDao.findById(Long.valueOf(ordenBody.getMesaId())).orElse(new Mesa());
+
+        mesa.setOrden(this.ordenDao.findById((long) ordenId).orElse(new Orden()));
+        mesaDao.save(mesa);
+
+        return ordenId;
     }
 
     @Override
