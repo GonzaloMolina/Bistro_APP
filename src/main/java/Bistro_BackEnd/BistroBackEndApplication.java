@@ -1,6 +1,7 @@
 package Bistro_BackEnd;
 
 import Bistro_BackEnd.dao.empleado.MozoDao;
+import Bistro_BackEnd.dao.menu.MenuDao;
 import Bistro_BackEnd.dao.mesa.MesaDao;
 import Bistro_BackEnd.dao.orden.OrdenDao;
 import org.springframework.boot.SpringApplication;
@@ -31,8 +32,9 @@ public class BistroBackEndApplication {
 		MozoDao mozoDao = configApp.getBean(MozoDao.class);
 		MesaDao mesaDao = configApp.getBean(MesaDao.class);
 		OrdenDao ordenDao = configApp.getBean(OrdenDao.class);
+		MenuDao menuDao = configApp.getBean(MenuDao.class);
 
-		Seeder seeder = new Seeder(mozoDao, mesaDao, ordenDao);
+		Seeder seeder = new Seeder(mozoDao, mesaDao, ordenDao, menuDao);
 		seeder.plant();
 	}
 

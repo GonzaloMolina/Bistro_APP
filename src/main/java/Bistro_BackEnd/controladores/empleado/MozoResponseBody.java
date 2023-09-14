@@ -1,5 +1,6 @@
 package Bistro_BackEnd.controladores.empleado;
 
+import Bistro_BackEnd.model.empleado.Peticion;
 import Bistro_BackEnd.model.mesa.Mesa;
 import Bistro_BackEnd.model.empleado.Mozo;
 
@@ -13,6 +14,7 @@ public class MozoResponseBody {
     private String apellido;
     private String email;
     private List<Long> mesas;
+    private List<PeticionBodyResponseList> peticiones;
 
     public MozoResponseBody(){}
 
@@ -22,10 +24,15 @@ public class MozoResponseBody {
         this.apellido = mozo.getApellido();
         this.email = mozo.getEmail();
         this.mesas = this.mapMesas(mozo.getMesasAsignadas());
+        this.peticiones = this.mapPeticiones(mozo.getPeticiones());
     }
 
     private List<Long> mapMesas(List<Mesa> mesasAsignadas) {
         return mesasAsignadas.stream().map(Mesa::getId).collect(Collectors.toList());
+    }
+
+    private List<PeticionBodyResponseList> mapPeticiones(List<Peticion> peticiones){
+        return peticiones.stream().map(PeticionBodyResponseList::new).collect(Collectors.toList());
     }
 
     public Long getId() {
@@ -66,5 +73,13 @@ public class MozoResponseBody {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public List<PeticionBodyResponseList> getPeticiones() {
+        return peticiones;
+    }
+
+    public void setPeticiones(List<PeticionBodyResponseList> peticiones) {
+        this.peticiones = peticiones;
     }
 }
