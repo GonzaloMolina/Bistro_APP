@@ -53,8 +53,8 @@ public class Seeder {
         mesa3.setCapacidad(4);
         List<Mesa> mesas2 = new ArrayList<>();
         mesas2.add(mesa2); mesas2.add(mesa3);
-
-        Mozo emp1 = new Mozo("Fidel", "Martinez", "admin@mail.com", "public123");
+//TODO MOZO PASSWORD public123 >> link usefull >>https://bcrypt-generator.com/
+        Mozo emp1 = new Mozo("Fidel", "Martinez", "admin@mail.com", "$2a$04$P4C638KeS..J1FzWl8WMLOoMyRsw8JTgJBFerInAsFh0viVGPjaXG");
         emp1.setMesasAsignadas(mesas2);
         emp1.addPeticion(new Peticion("sistem@mail.com", "admin@mail.com", "Licencia por enfermedad", ""));
         empDao.save(emp1);
@@ -67,7 +67,7 @@ public class Seeder {
         List<Mesa> mesas3 = new ArrayList<>();
         mesas3.add(mesa4); mesas3.add(mesa5);
 
-        Mozo emp2 = new Mozo("Valentin", "Barco", "VBarco@mail.com", "public123");
+        Mozo emp2 = new Mozo("Valentin", "Barco", "VBarco@mail.com", "$2a$04$P4C638KeS..J1FzWl8WMLOoMyRsw8JTgJBFerInAsFh0viVGPjaXG");
         emp2.setMesasAsignadas(mesas3);
         empDao.save(emp2);
 /////////////////////////////////////////////////////////////////////////////
