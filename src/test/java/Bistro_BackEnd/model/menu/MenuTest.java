@@ -1,8 +1,8 @@
 package Bistro_BackEnd.model.menu;
 
-import Bistro_BackEnd.model.Menu.Menu;
 import Bistro_BackEnd.model.consumibles.Bebida;
-import Bistro_BackEnd.model.consumibles.Plato;
+import Bistro_BackEnd.model.consumibles.TamanioBebida;
+import Bistro_BackEnd.model.consumibles.TipoPlato;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -12,7 +12,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
-public class MenuTest {
+class MenuTest {
 
     private Menu menuE = new Menu();
     private Menu menu;
@@ -20,10 +20,14 @@ public class MenuTest {
     @BeforeEach
     void setUp(){
         List<Bebida> drinks = new ArrayList<>();
-        drinks.add(new Bebida());
+        Bebida b = new Bebida();
+        b.setTamanio(TamanioBebida.MEDIANO);
+        drinks.add(b);
 
-        List<Plato> plates = new ArrayList<>();
-        plates.add(new Plato());
+        List<PlatoM> plates = new ArrayList<>();
+        PlatoM p = new PlatoM();
+        p.setTipo(TipoPlato.PESCADO);
+        plates.add(p);
 
         menu = new Menu(plates, drinks);
     }
@@ -44,7 +48,7 @@ public class MenuTest {
 
     @Test
     void test_02_setPlatos() {
-        List<Plato> pls = new ArrayList<>();
+        List<PlatoM> pls = new ArrayList<>();
         menu.setPlatos(pls);
         assertEquals(menu.getPlatos(), pls);
     }
@@ -61,5 +65,17 @@ public class MenuTest {
         Long id = 1L;
         menu.setId(id);
         assertEquals(menu.getId(), id);
+    }
+
+    @Test
+    void test_05_listTypesOfPlates() {
+        assertEquals(menu.listTamanio().size(), 1);
+        assertEquals(menu.listTamanio().get(0), TamanioBebida.MEDIANO);
+    }
+
+    @Test
+    void test_06_listTamanio() {
+        assertEquals(menu.listTypesOfPlates().size(), 1);
+        assertEquals(menu.listTypesOfPlates().get(0), TipoPlato.PESCADO);
     }
 }

@@ -2,7 +2,7 @@ package Bistro_BackEnd.servicios.menu;
 
 import Bistro_BackEnd.controladores.menu.MenuResponseBody;
 import Bistro_BackEnd.dao.menu.MenuDao;
-import Bistro_BackEnd.model.Menu.Menu;
+import Bistro_BackEnd.model.menu.Menu;
 import Bistro_BackEnd.servicios.excepciones.ExcepcionIdInvalida;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

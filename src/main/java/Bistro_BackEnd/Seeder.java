@@ -1,8 +1,9 @@
 package Bistro_BackEnd;
 
 import Bistro_BackEnd.dao.menu.MenuDao;
-import Bistro_BackEnd.model.Menu.Menu;
+import Bistro_BackEnd.model.menu.Menu;
 import Bistro_BackEnd.model.empleado.Peticion;
+import Bistro_BackEnd.model.menu.PlatoM;
 import Bistro_BackEnd.model.mesa.Mesa;
 import Bistro_BackEnd.model.Orden.Orden;
 import Bistro_BackEnd.dao.empleado.MozoDao;
@@ -109,27 +110,49 @@ public class Seeder {
         bebidasMenu.add(bebidaD);
         bebidasMenu.add(bebidaE);
 
-        Plato plato0 = new Plato("Milanesa", 1234.0, TipoPlato.CARNE);
-        Plato plato1 = new Plato("pechuga de pollo", 1032.0, TipoPlato.CARNE);
-        Plato plato2 = new Plato("costilla de cerdo", 4531.0, TipoPlato.CARNE);
-        Plato plato3 = new Plato("cesos de vaca", 0.0, TipoPlato.CARNE);
+        Acompanamiento pure = new Acompanamiento("Pure de papas");
+        Acompanamiento pureB = new Acompanamiento("Pure de batatas");
+        Acompanamiento salad = new Acompanamiento("ensalada de Tomate y lechuga");
+        Acompanamiento rise = new Acompanamiento("Arroz");
+        Acompanamiento honey = new Acompanamiento("Miel");
+        Salsa sauce =new Salsa("Fileto");
+        Salsa sauce1 =new Salsa("pesto genovés");
 
-        Plato plato4 = new Plato("Canelones", 10200.0, TipoPlato.PASTA);
-        Plato plato5 = new Plato("Espagueti", 5230.0, TipoPlato.PASTA);
-        Plato plato6 = new Plato("Fettuccini", 684.0, TipoPlato.PASTA);
-        Plato plato7 = new Plato("Ñoquis", 5372.0, TipoPlato.PASTA);
 
-        Plato plato8 = new Plato("Salmon", 7544.0, TipoPlato.PESCADO);
-        Plato plato9 = new Plato("Atun", 5682.0, TipoPlato.PESCADO);
-        Plato platoA = new Plato("Trucha", 7950.0, TipoPlato.PESCADO);
-        Plato platoB = new Plato("Pejerey", 8954.0, TipoPlato.PESCADO);
+        PlatoM plato0 = (new PlatoM("Milanesa", 1234.0, TipoPlato.CARNE));
+        plato0.addAcompanamiento(pure);
+        PlatoM plato1 = new PlatoM("pechuga de pollo", 1032.0, TipoPlato.CARNE);
+        plato1.addAcompanamiento(pureB);
+        PlatoM plato2 = new PlatoM("costilla de cerdo", 4531.0, TipoPlato.CARNE);
+        plato2.addAcompanamiento(salad);
+        plato2.addAcompanamiento(pure);
+        PlatoM plato3 = new PlatoM("cesos de vaca", 0.0, TipoPlato.CARNE);
 
-        Plato platoC = new Plato("Tiramisu", 345430.0, TipoPlato.POSTRE);
-        Plato platoD = new Plato("Budin de chocolate", 3242.0, TipoPlato.POSTRE);
-        Plato platoE = new Plato("Sufle", 2312.0, TipoPlato.POSTRE);
-        Plato platoF = new Plato("3bochas de helado", 3543.0, TipoPlato.POSTRE);
+        PlatoM plato4 = new PlatoM("Canelones", 10200.0, TipoPlato.PASTA);
+        plato4.addSalsa(sauce);
+        PlatoM plato5 = new PlatoM("Espagueti", 5230.0, TipoPlato.PASTA);
+        plato5.addSalsa(sauce);
+        plato5.addSalsa(sauce1);
+        PlatoM plato6 = new PlatoM("Fettuccini", 684.0, TipoPlato.PASTA);
+        plato6.addSalsa(sauce1);
+        PlatoM plato7 = new PlatoM("Ñoquis", 5372.0, TipoPlato.PASTA);
 
-        List<Plato> platosMenu = new ArrayList<>();
+        PlatoM plato8 = new PlatoM("Salmon", 7544.0, TipoPlato.PESCADO);
+        plato8.addAcompanamiento(rise);
+        PlatoM plato9 = new PlatoM("Atun", 5682.0, TipoPlato.PESCADO);
+        plato9.addAcompanamiento(rise);
+        PlatoM platoA = new PlatoM("Trucha", 7950.0, TipoPlato.PESCADO);
+        platoA.addAcompanamiento(rise);
+        PlatoM platoB = new PlatoM("Pejerey", 8954.0, TipoPlato.PESCADO);
+        platoB.addAcompanamiento(rise);
+
+        PlatoM platoC = new PlatoM("Tiramisu", 345430.0, TipoPlato.POSTRE);
+        PlatoM platoD = new PlatoM("Budin de chocolate", 3242.0, TipoPlato.POSTRE);
+        platoD.addAcompanamiento(honey);
+        PlatoM platoE = new PlatoM("Sufle", 2312.0, TipoPlato.POSTRE);
+        PlatoM platoF = new PlatoM("3bochas de helado", 3543.0, TipoPlato.POSTRE);
+
+        List<PlatoM> platosMenu = new ArrayList<>();
         platosMenu.add(plato0);
         platosMenu.add(plato1);
         platosMenu.add(plato2);
