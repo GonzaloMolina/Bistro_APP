@@ -11,10 +11,14 @@ class PlatoTest {
 
     private Plato plato = new Plato();
     private Plato pla;
+    private Plato plt;
+    private Acompanamiento acom;
+    private Salsa sauce;
 
     @BeforeEach
     void setUp(){
         pla = new Plato("Salmon", 0.0, TipoPlato.PESCADO);
+        plt = new Plato("s", 0.1, TipoPlato.CARNE, acom, sauce);
     }
 
     @Test
@@ -31,12 +35,21 @@ class PlatoTest {
     void test_01_constructorParametrizado(){
         assertNull(pla.getId());
         assertNull(pla.getOrden());
-        assertNull(plato.getSalsa());
-        assertNull(plato.getSalsa());
-        assertNull(plato.getAcompanamiento());
+        assertNull(pla.getSalsa());
+        assertNull(pla.getAcompanamiento());
         assertEquals(pla.getNombre(), "Salmon");
         assertEquals(pla.getTipo(), TipoPlato.PESCADO);
         assertEquals(pla.getPrecio(), 0.0);
+    }
+    @Test
+    void test_0_constructorParametrizado(){
+        assertNull(plt.getId());
+        assertNull(plt.getOrden());
+        assertEquals(plt.getSalsa(), sauce);
+        assertEquals(plt.getAcompanamiento(), acom);
+        assertEquals(plt.getNombre(), "s");
+        assertEquals(plt.getTipo(), TipoPlato.CARNE);
+        assertEquals(plt.getPrecio(), 0.1);
     }
     @Test
     void test_0_setId(){
