@@ -1,7 +1,7 @@
-package Bistro_BackEnd.model.Menu;
+package Bistro_BackEnd.model.menu;
 import Bistro_BackEnd.model.consumibles.Bebida;
-import Bistro_BackEnd.model.consumibles.Consumible;
-import Bistro_BackEnd.model.consumibles.Plato;
+import Bistro_BackEnd.model.consumibles.TamanioBebida;
+import Bistro_BackEnd.model.consumibles.TipoPlato;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -15,10 +15,10 @@ public class Menu {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.PERSIST)
     private List<PlatoM> platos = new ArrayList<>();
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.PERSIST)
     private List<Bebida> bebidas = new ArrayList<>();
     // Constructores, getters y setters
 
@@ -27,7 +27,7 @@ public class Menu {
     }
 
     // Constructor con parámetros
-    public Menu(List<Plato> platos, List<Bebida> bebidas) {
+    public Menu(List<PlatoM> platos, List<Bebida> bebidas) {
         this.platos = platos;
         this.bebidas = bebidas;
     }
@@ -36,7 +36,7 @@ public class Menu {
         return id;
     }
 
-    public List<Plato> getPlatos() {
+    public List<PlatoM> getPlatos() {
         return platos;
     }
 
@@ -48,11 +48,27 @@ public class Menu {
         this.id = id;
     }
 
-    public void setPlatos(List<Plato> platos) {
+    public void setPlatos(List<PlatoM> platos) {
         this.platos = platos;
     }
 
     public void setBebidas(List<Bebida> bebidas) {
         this.bebidas = bebidas;
+    }
+
+    public List<TipoPlato> listTypesOfPlates(){
+        List<TipoPlato> res=new ArrayList<>();
+        this.platos.forEach(plt -> {
+            if(!res.contains(plt.getTipo())){ res.add(plt.getTipo());}
+        });
+        return res;
+    }
+
+    public List<TamanioBebida> listTamanio() {
+        List<TamanioBebida> res=new ArrayList<>();
+        this.bebidas.forEach(drink -> {
+            if(!res.contains(drink.getTamanio())){ res.add(drink.getTamanio());}
+        });
+        return res;
     }
 }
