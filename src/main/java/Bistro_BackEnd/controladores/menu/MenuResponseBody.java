@@ -1,45 +1,55 @@
 package Bistro_BackEnd.controladores.menu;
 
 import Bistro_BackEnd.controladores.consumibles.BebidaBodyResponse;
-import Bistro_BackEnd.controladores.consumibles.PlatoBodyResponse;
-import Bistro_BackEnd.model.Menu.Menu;
+import Bistro_BackEnd.model.consumibles.TamanioBebida;
+import Bistro_BackEnd.model.consumibles.TipoPlato;
+import Bistro_BackEnd.model.menu.Menu;
 import Bistro_BackEnd.model.consumibles.Bebida;
-import Bistro_BackEnd.model.consumibles.Plato;
+import Bistro_BackEnd.model.menu.PlatoM;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class MenuResponseBody {
 
-    private List<BebidaBodyResponse> bebidasR;
-    private List<PlatoBodyResponse> platosR;
+    private List<MenuElemB> bebidasR;
+    private List<MenuElemP> platosR;
 
     public MenuResponseBody(Menu menu) {
-        this.platosR = this.mapPlatos(menu.getPlatos());
-        this.bebidasR = this.mapBebidas(menu.getBebidas());
+        this.platosR = this.mapPlates(menu.listTypesOfPlates(), menu.getPlatos());
+        this.bebidasR = this.mapDrinks(menu.listTamanio(), menu.getBebidas());
     }
 
-    private List<BebidaBodyResponse> mapBebidas(List<Bebida> bebidas) {
-        return bebidas.stream().map(BebidaBodyResponse::new).collect(Collectors.toList());
+    private List<MenuElemB> mapDrinks(List<TamanioBebida> ts, List<Bebida> bebidas) {
+        return ts.stream().map(t -> {
+            List<Bebida> temp = bebidas.stream()
+                .filter(drink -> drink.getTamanio() == t)
+                    .collect(Collectors.toList());
+            return new MenuElemB(t, temp);
+        }).collect(Collectors.toList());
     }
 
-    private List<PlatoBodyResponse> mapPlatos(List<Plato> platos) {
-        return platos.stream().map(PlatoBodyResponse::new).collect(Collectors.toList());
+    private List<MenuElemP> mapPlates(List<TipoPlato> ts, List<PlatoM> platos) {
+        return ts.stream().map(t -> {
+                List<PlatoM> temp = platos.stream().filter(platoM -> platoM.getTipo() == t).collect(Collectors.toList());
+                return new MenuElemP(t, temp);
+            }
+        ).collect(Collectors.toList());
     }
 
-    public List<BebidaBodyResponse> getBebidasR() {
+    public List<MenuElemB> getBebidasR() {
         return bebidasR;
     }
 
-    public void setBebidasR(List<BebidaBodyResponse> bebidasR) {
+    public void setBebidasR(List<MenuElemB> bebidasR) {
         this.bebidasR = bebidasR;
     }
 
-    public List<PlatoBodyResponse> getPlatosR() {
+    public List<MenuElemP> getPlatosR() {
         return platosR;
     }
 
-    public void setPlatosR(List<PlatoBodyResponse> platosR) {
+    public void setPlatosR(List<MenuElemP> platosR) {
         this.platosR = platosR;
     }
 }
