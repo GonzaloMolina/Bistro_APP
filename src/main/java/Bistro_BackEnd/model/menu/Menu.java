@@ -16,7 +16,7 @@ public class Menu {
     private Long id;
 
     @OneToMany(cascade = CascadeType.ALL)
-    private List<Plato> platos = new ArrayList<>();
+    private List<PlatoM> platos = new ArrayList<>();
 
     @OneToMany(cascade = CascadeType.ALL)
     private List<Bebida> bebidas = new ArrayList<>();
