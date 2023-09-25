@@ -1,5 +1,6 @@
 package Bistro_BackEnd.controladores.empleado;
 
+import Bistro_BackEnd.controladores.peticion.PeticionBodyResponse;
 import Bistro_BackEnd.model.empleado.Peticion;
 import Bistro_BackEnd.model.mesa.Mesa;
 import Bistro_BackEnd.model.empleado.Mozo;
