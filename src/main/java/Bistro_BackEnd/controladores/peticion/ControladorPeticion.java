@@ -20,7 +20,7 @@ public class ControladorPeticion {
     //get_ONE
     @GetMapping(value = "/{id}", produces = { "application/json" })
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Successful retrieval of a user",response = PeticionBodyResponse.class),
+            @ApiResponse(code = 200, message = "Successful retrieval of a petition",response = PeticionBodyResponse.class),
     })
     public ResponseEntity<PeticionBodyResponse> getOrden(@PathVariable Integer id) throws ExcepcionIdInvalida {
         return new ResponseEntity<>(service.getById(id), HttpStatus.OK);
@@ -28,7 +28,7 @@ public class ControladorPeticion {
 
     //ADD_ONE
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Successful retrieval of all users",response = String.class),
+            @ApiResponse(code = 200, message = "Successful creation of a petition",response = String.class),
     })
     @PostMapping(value = "/new", produces = { "application/json" },consumes = { "application/json" })
     public ResponseEntity<String> addOrder(@RequestBody PeticionBodyPost ordenBody) throws ExcepcionIdInvalida {

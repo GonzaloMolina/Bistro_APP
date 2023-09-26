@@ -12,6 +12,6 @@ public interface OrdenService {
     List<OrdenBodyResponseList> list();
     OrdenBodyResponse getById(Integer id) throws ExcepcionIdInvalida;
     Integer save(OrdenBodyPost ordenBody) throws ExcepcionIdInvalida;
-    void delete(Integer id) throws ExcepcionIdInvalida;
+    void delete(Integer mesaId, Integer id) throws ExcepcionIdInvalida;
     void update(OrdenBodyPut ordenBody) throws ExcepcionIdInvalida;
 }

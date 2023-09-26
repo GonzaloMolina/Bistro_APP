@@ -13,7 +13,7 @@ public class Peticion {
     private Long id;
     private String receptor;
     private String emisor;
-    private String asuto;
+    private String asunto;
     private String cuerpo;
     private boolean estado;
 
@@ -23,7 +23,7 @@ public class Peticion {
     public Peticion(String receptor, String emisor, String asunto, String cuerpo) {
         this.receptor = receptor;
         this.emisor = emisor;
-        this.asuto = asunto;
+        this.asunto = asunto;
         this.cuerpo = cuerpo;
         this.estado = false;
     }
@@ -41,7 +41,7 @@ public class Peticion {
     }
 
     public String getAsuto() {
-        return asuto;
+        return asunto;
     }
 
     public String getCuerpo() {
@@ -65,7 +65,7 @@ public class Peticion {
     }
 
     public void setAsuto(String asuto) {
-        this.asuto = asuto;
+        this.asunto = asuto;
     }
 
     public void setCuerpo(String cuerpo) {

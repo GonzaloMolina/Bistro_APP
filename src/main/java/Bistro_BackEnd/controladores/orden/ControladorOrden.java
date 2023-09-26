@@ -49,9 +49,9 @@ public class ControladorOrden {
 
     //DELETE_ONE exception for id
     @CrossOrigin(origins = "http://localhost:3000")
-    @DeleteMapping(value = "/{id}", produces = { "application/json" })
-    public ResponseEntity<String> deleteOrder(@PathVariable Integer id) throws ExcepcionIdInvalida {
-        ordenService.delete(id);
+    @DeleteMapping(value = "{mesaId}/{id}", produces = { "application/json" })
+    public ResponseEntity<String> deleteOrder(@PathVariable Integer mesaId,@PathVariable Integer id) throws ExcepcionIdInvalida {
+        ordenService.delete(mesaId, id);
         return new ResponseEntity<>("OK", HttpStatus.OK);
     }
 

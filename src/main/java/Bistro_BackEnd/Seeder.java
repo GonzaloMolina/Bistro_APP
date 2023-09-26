@@ -1,6 +1,7 @@
 package Bistro_BackEnd;
 
 import Bistro_BackEnd.dao.menu.MenuDao;
+import Bistro_BackEnd.dao.peticion.PeticionDao;
 import Bistro_BackEnd.model.menu.Menu;
 import Bistro_BackEnd.model.empleado.Peticion;
 import Bistro_BackEnd.model.menu.PlatoM;
@@ -26,13 +27,15 @@ public class Seeder {
     private MozoDao empDao;
     private MesaDao mesaDao;
     private MenuDao menuDao;
+    private PeticionDao petdao;
 
 
-    public Seeder(MozoDao empDao, MesaDao mesaDao, OrdenDao ordenDao, MenuDao menuDao) {
+    public Seeder(MozoDao empDao, MesaDao mesaDao, OrdenDao ordenDao, MenuDao menuDao, PeticionDao petdao) {
         this.empDao = empDao;
         this.mesaDao = mesaDao;
         this.orderDao = ordenDao;
         this.menuDao = menuDao;
+        this.petdao = petdao;
     }
 
     void plant() {
@@ -44,7 +47,7 @@ public class Seeder {
         mesa1.setCapacidad(3);
         mesas1.add(mesa); mesas1.add(mesa1);
 
-        Mozo emp = new Mozo("Smitty", "Smith", "SS@mail.com", "public123");
+        Mozo emp = new Mozo("Smitty", "Smith", "SS@mail.com", "$2a$04$P4C638KeS..J1FzWl8WMLOoMyRsw8JTgJBFerInAsFh0viVGPjaXG");
         emp.setMesasAsignadas(mesas1);
         empDao.save(emp);
 /////////////////////////////////////////////////////////////////////////////
@@ -57,8 +60,7 @@ public class Seeder {
 //TODO MOZO PASSWORD public123 >> link usefull >>https://bcrypt-generator.com/
         Mozo emp1 = new Mozo("Fidel", "Martinez", "admin@mail.com", "$2a$04$P4C638KeS..J1FzWl8WMLOoMyRsw8JTgJBFerInAsFh0viVGPjaXG");
         emp1.setMesasAsignadas(mesas2);
-        emp1.addPeticion(new Peticion("sistem@mail.com", "admin@mail.com", "Licencia por enfermedad", ""));
-        empDao.save(emp1);
+
 /////////////////////////////////////////////////////////////////////////////
 
         Mesa mesa4 = new Mesa();
@@ -192,6 +194,9 @@ public class Seeder {
 
         Orden orden = new Orden(bebidas2, platos2);
         orderDao.save(orden);
+        mesa3.setOrden(orden);
+        empDao.save(emp1);
+        //orderDao.save(orden);
 /////////////////////////////////////////////////////////////////////////////
     }
 }

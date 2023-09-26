@@ -12,5 +12,5 @@ public interface MozoService {
 
     MozoResponseBody getById(Integer id) throws ExcepcionIdInvalida, ExcepcionIdInvalida;
 
-    MozoResponseBody logIn(LogInBody body);
+    MozoResponseBody logIn(LogInBody body) throws ExcepcionIdInvalida;
 }

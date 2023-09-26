@@ -13,7 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/mozo")
-@CrossOrigin(origins = "http://localhost:3000", methods = {RequestMethod.GET, RequestMethod.POST,RequestMethod.DELETE, RequestMethod.PUT})
+@CrossOrigin(origins = "http://localhost:3000", methods = {RequestMethod.OPTIONS,RequestMethod.GET, RequestMethod.POST,RequestMethod.DELETE, RequestMethod.PUT})
 public class ControladorDeMozo {
     @Autowired
     private MozoService mozoService;

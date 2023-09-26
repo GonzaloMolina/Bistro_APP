@@ -31,16 +31,24 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-            .csrf().disable()
-            .authorizeRequests().anyRequest().authenticated()
+            .csrf().disable().headers().frameOptions().disable();
+        http
+        .authorizeRequests().anyRequest().authenticated()
             .and()
             .httpBasic();
+    }
+
+    @Override
+    public void configure(WebSecurity web) throws Exception {
+        web.ignoring().antMatchers("/mozo/logIn");
+        web.ignoring().antMatchers("/mesa/**");
+        web.ignoring().antMatchers("/orden/**");
+        web.ignoring().antMatchers("/menu/**");
     }
 
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
         BCryptPasswordEncoder temp = new BCryptPasswordEncoder();
-
         return temp;
     }
 

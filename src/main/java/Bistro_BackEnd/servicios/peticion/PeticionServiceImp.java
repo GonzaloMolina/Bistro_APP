@@ -10,6 +10,9 @@ import Bistro_BackEnd.servicios.excepciones.ExcepcionIdInvalida;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class PeticionServiceImp implements PeticionService{
 
@@ -48,6 +51,9 @@ public class PeticionServiceImp implements PeticionService{
         if(!peticionDao.existsById(id)){ throw new ExcepcionIdInvalida(id); }
         if(!mozoDao.existsById(idEmp)){ throw new ExcepcionIdInvalida(id); }
 
-        peticionDao.deleteById(id);
+        Mozo m = mozoDao.findById(idEmp).orElse(new Mozo());
+        List<Peticion> temp = m.getPeticiones().stream().filter(p -> !p.getId().equals(id)).collect(Collectors.toList());
+        m.setPeticiones(temp);
+        mozoDao.save(m);
     }
 }
