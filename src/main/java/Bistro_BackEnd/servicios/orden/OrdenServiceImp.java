@@ -74,10 +74,14 @@ public class OrdenServiceImp implements OrdenService {
     }
 
     @Override
-    public void delete(Integer id) throws ExcepcionIdInvalida {
-        Long value = Long.valueOf(id);
-        this.validarId(value);
-        this.ordenDao.deleteById(value);
+    public void delete(Integer mesaId, Integer id) throws ExcepcionIdInvalida {
+        Long idOrden = Long.valueOf(id);
+        Long idMesa = Long.valueOf(mesaId);
+        this.validarId(idOrden);
+        Mesa m = this.mesaDao.findById(idMesa).orElse(new Mesa());
+        m.setOrden(null);
+        mesaDao.save(m);
+        this.ordenDao.deleteById(idOrden);
     }
 
     @Override

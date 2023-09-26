@@ -38,10 +38,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .httpBasic();
     }
 
+    @Override
+    public void configure(WebSecurity web) throws Exception {
+        web.ignoring().antMatchers("/mozo/logIn");
+        web.ignoring().antMatchers("/mesa/**");
+        web.ignoring().antMatchers("/orden/**");
+        web.ignoring().antMatchers("/menu/**");
+    }
+
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
         BCryptPasswordEncoder temp = new BCryptPasswordEncoder();
-
         return temp;
     }
 

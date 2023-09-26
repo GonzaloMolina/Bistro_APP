@@ -6,6 +6,7 @@ import Bistro_BackEnd.dao.empleado.MozoDao;
 import Bistro_BackEnd.model.empleado.Mozo;
 import Bistro_BackEnd.servicios.excepciones.ExcepcionIdInvalida;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -30,11 +31,18 @@ public class MozoServiceImp implements MozoService{
     }
 
     @Override
-    public MozoResponseBody logIn(LogInBody body) {
-        Mozo mozoR = ((List<Mozo>) mozoDao.findAll()).stream().filter(
-                mozo -> mozo.getEmail().equals(body.getEmail()) && mozo.getPassword().equals(body.getPassword())
-        ).collect(Collectors.toList()).get(0);
-        return new MozoResponseBody(mozoR);
+    public MozoResponseBody logIn(LogInBody body) throws ExcepcionIdInvalida {
+        List<Mozo> mozoR = ((List<Mozo>) mozoDao.findAll()).stream().filter(
+                mozo -> {
+                    return mozo.getEmail().equals(body.getEmail()) &&
+                            new BCryptPasswordEncoder().matches(body.getPassword(), mozo.getPassword());
+                }
+        ).collect(Collectors.toList());
+        if(mozoR.size()==1){
+            return new MozoResponseBody(mozoR.get(0));
+        }else{
+            throw new ExcepcionIdInvalida(0L);
+        }
     }
 
     private void validarId(Long id) throws ExcepcionIdInvalida {

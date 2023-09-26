@@ -47,7 +47,7 @@ public class Seeder {
         mesa1.setCapacidad(3);
         mesas1.add(mesa); mesas1.add(mesa1);
 
-        Mozo emp = new Mozo("Smitty", "Smith", "SS@mail.com", "public123");
+        Mozo emp = new Mozo("Smitty", "Smith", "SS@mail.com", "$2a$04$P4C638KeS..J1FzWl8WMLOoMyRsw8JTgJBFerInAsFh0viVGPjaXG");
         emp.setMesasAsignadas(mesas1);
         empDao.save(emp);
 /////////////////////////////////////////////////////////////////////////////
@@ -60,7 +60,7 @@ public class Seeder {
 //TODO MOZO PASSWORD public123 >> link usefull >>https://bcrypt-generator.com/
         Mozo emp1 = new Mozo("Fidel", "Martinez", "admin@mail.com", "$2a$04$P4C638KeS..J1FzWl8WMLOoMyRsw8JTgJBFerInAsFh0viVGPjaXG");
         emp1.setMesasAsignadas(mesas2);
-        empDao.save(emp1);
+
 /////////////////////////////////////////////////////////////////////////////
 
         Mesa mesa4 = new Mesa();
@@ -194,6 +194,9 @@ public class Seeder {
 
         Orden orden = new Orden(bebidas2, platos2);
         orderDao.save(orden);
+        mesa3.setOrden(orden);
+        empDao.save(emp1);
+        //orderDao.save(orden);
 /////////////////////////////////////////////////////////////////////////////
     }
 }

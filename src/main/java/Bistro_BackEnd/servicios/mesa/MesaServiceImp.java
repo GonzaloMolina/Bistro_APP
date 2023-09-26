@@ -32,8 +32,11 @@ public class MesaServiceImp implements MesaService {
             throw new ExcepcionIdInvalida(id);
         }
         Mesa mesaR = mesaDao.findById(id).orElse(new Mesa());
-        mesaR.setCuenta(mesaR.getOrden().calcularCuenta());
-
+        if(mesaR.getOrden() != null){
+            mesaR.setCuenta(mesaR.getOrden().calcularCuenta());
+        }else{
+            mesaR.setCuenta(0.0);
+        }
         return new MesaBodyResponse(mesaR);
     }
 }
