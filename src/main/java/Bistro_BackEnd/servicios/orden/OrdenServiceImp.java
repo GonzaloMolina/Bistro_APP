@@ -4,7 +4,7 @@ import Bistro_BackEnd.controladores.orden.OrdenBodyPost;
 import Bistro_BackEnd.controladores.orden.OrdenBodyPut;
 import Bistro_BackEnd.controladores.orden.OrdenBodyResponse;
 import Bistro_BackEnd.dao.consumibles.BebidaDao;
-import Bistro_BackEnd.dao.consumibles.PlatoDao;
+import Bistro_BackEnd.dao.consumibles.PlatoMDao;
 import Bistro_BackEnd.dao.empleado.MozoDao;
 import Bistro_BackEnd.dao.mesa.MesaDao;
 import Bistro_BackEnd.model.Orden.Orden;
@@ -12,11 +12,16 @@ import Bistro_BackEnd.controladores.orden.OrdenBodyResponseList;
 import Bistro_BackEnd.dao.orden.OrdenDao;
 import Bistro_BackEnd.model.consumibles.Bebida;
 import Bistro_BackEnd.model.consumibles.Plato;
+import Bistro_BackEnd.model.consumibles.TipoPlato;
+import Bistro_BackEnd.model.menu.PlatoM;
 import Bistro_BackEnd.model.mesa.Mesa;
+import Bistro_BackEnd.model.pair.Pair;
+import Bistro_BackEnd.model.pair.PairPlatoAcom;
 import Bistro_BackEnd.servicios.excepciones.ExcepcionIdInvalida;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -30,7 +35,7 @@ public class OrdenServiceImp implements OrdenService {
     private MesaDao mesaDao;
 
     @Autowired
-    private PlatoDao platoDao;
+    private PlatoMDao platoDao;
 
     @Autowired
     private BebidaDao bebidaDao;
@@ -56,12 +61,33 @@ public class OrdenServiceImp implements OrdenService {
         this.validarIdMozo(Long.valueOf(ordenBody.getMozoId()));
         this.validarIdMesa(Long.valueOf(ordenBody.getMesaId()));
 
-        List<Integer> valuesB = ordenBody.getBebidas();
-        List<Integer> valuesP = ordenBody.getPlatos();
+        List<Pair> valuesB = ordenBody.getBebidas();
+        List<PairPlatoAcom> valuesP = ordenBody.getPlatos();
 
-        List<Bebida> bebidas = valuesB.stream().map(id -> bebidaDao.findById(Long.valueOf(id)).orElse(new Bebida())).collect(Collectors.toList());
-        List<Plato> platos = valuesP.stream().map(id -> platoDao.findById(Long.valueOf(id)).orElse(new Plato())).collect(Collectors.toList()); ;
-        Orden newOrden = new Orden(bebidas, platos);
+        List<Bebida> drinks = new ArrayList<>();
+        valuesB.forEach(pair -> {
+            Bebida retrieved = this.bebidaDao.findById(Long.valueOf(pair.getKey())).orElse(new Bebida());
+            for (int i=0; i<pair.getAmount(); i++){
+                drinks.add(retrieved);
+            }
+        });
+
+        List<Plato> dishes = new ArrayList<>();
+        valuesP.forEach(pair -> {
+           pair.getValues().forEach(value -> {
+               PlatoM retrieved = this.platoDao.findById(Long.valueOf(pair.getKey())).orElse(new PlatoM());
+               Plato plato = new Plato(retrieved);
+               if(retrieved.getTipo().equals(TipoPlato.PASTA)){
+                   plato.setSalsa(retrieved.getSalsa(Long.valueOf(value)));
+               }
+               else{
+                   plato.setAcompanamiento(retrieved.getAcompanamiento(Long.valueOf(value)));
+               }
+               dishes.add(plato);
+           });
+        });
+
+        Orden newOrden = new Orden(drinks, dishes);
 
         int ordenId = this.ordenDao.save(newOrden).getId().intValue();
 
@@ -69,7 +95,6 @@ public class OrdenServiceImp implements OrdenService {
 
         mesa.setOrden(this.ordenDao.findById((long) ordenId).orElse(new Orden()));
         mesaDao.save(mesa);
-
         return ordenId;
     }
 
@@ -91,8 +116,8 @@ public class OrdenServiceImp implements OrdenService {
 
         Orden recOrden = ordenDao.findById(value).orElse(new Orden());
 
-        recOrden.setBebida(ordenBody.getBebidas().stream().map(id -> bebidaDao.findById(Long.valueOf(id)).orElse(new Bebida())).collect(Collectors.toList()));
-        recOrden.setPlato(ordenBody.getPlatos().stream().map(id -> platoDao.findById(Long.valueOf(id)).orElse(new Plato())).collect(Collectors.toList()));
+        //recOrden.setBebida(ordenBody.getBebidas().stream().map(id -> bebidaDao.findById(Long.valueOf(id)).orElse(new Bebida())).collect(Collectors.toList()));
+        //recOrden.setPlato(ordenBody.getPlatos().stream().map(id -> platoDao.findById(Long.valueOf(id)).orElse(new Plato())).collect(Collectors.toList()));
 
         ordenDao.save(recOrden);
     }

@@ -9,6 +9,7 @@ import Bistro_BackEnd.model.consumibles.TipoPlato;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Entity
 public class PlatoM extends Consumible {
@@ -72,5 +73,23 @@ public class PlatoM extends Consumible {
 
     public void addSalsa(Salsa salsa){
         this.salsas.add(salsa);
+    }
+
+    public Acompanamiento getAcompanamiento(Long acomValue) {
+        return
+            this.acompanamientos
+                .stream()
+                    .filter(acompanamiento ->
+                            acompanamiento.getId().equals(acomValue))
+                    .collect(Collectors.toList()).get(0);
+    }
+
+    public Salsa getSalsa(Long value) {
+        return
+            this.salsas
+                .stream()
+                    .filter(salsa ->
+                            salsa.getId().equals(value))
+                    .collect(Collectors.toList()).get(0);
     }
 }
