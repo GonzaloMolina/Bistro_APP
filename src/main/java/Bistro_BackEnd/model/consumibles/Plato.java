@@ -1,6 +1,8 @@
 package Bistro_BackEnd.model.consumibles;
 
 import Bistro_BackEnd.model.Orden.Orden;
+import Bistro_BackEnd.model.menu.PlatoM;
+
 import javax.persistence.*;
 
 @Entity
@@ -34,6 +36,11 @@ public class Plato extends Consumible {
         this.tipo = tipo;
         this.acompanamiento = acompanamiento;
         this.salsa = salsa;
+    }
+
+    public Plato(PlatoM rPlato) {
+        super(rPlato.getNombre(), rPlato.getPrecio());
+        this.tipo = rPlato.getTipo();
     }
 
     //Getters
