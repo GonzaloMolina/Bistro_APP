@@ -74,17 +74,20 @@ public class OrdenServiceImp implements OrdenService {
 
         List<Plato> dishes = new ArrayList<>();
         valuesP.forEach(pair -> {
-           pair.getValues().forEach(value -> {
-               PlatoM retrieved = this.platoDao.findById(Long.valueOf(pair.getKey())).orElse(new PlatoM());
-               Plato plato = new Plato(retrieved);
-               if(retrieved.getTipo().equals(TipoPlato.PASTA)){
-                   plato.setSalsa(retrieved.getSalsa(Long.valueOf(value)));
-               }
-               else{
-                   plato.setAcompanamiento(retrieved.getAcompanamiento(Long.valueOf(value)));
-               }
-               dishes.add(plato);
-           });
+            PlatoM retrieved = this.platoDao.findById(Long.valueOf(pair.getKey())).orElse(new PlatoM());
+            Plato plato = new Plato(retrieved);
+            if(pair.getValues().isEmpty()){dishes.add(plato);}
+            else{
+                for (int i = 0; i < pair.getValues().size(); i++) {
+                    if(retrieved.getTipo().equals(TipoPlato.PASTA)){
+                        plato.setSalsa(retrieved.getSalsa(Long.valueOf(pair.getValues().get(i))));
+                    }
+                    else{
+                        plato.setAcompanamiento(retrieved.getAcompanamiento(Long.valueOf(pair.getValues().get(i))));
+                    }
+                    dishes.add(plato);
+                }
+            }
         });
 
         Orden newOrden = new Orden(drinks, dishes);

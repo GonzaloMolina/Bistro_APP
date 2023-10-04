@@ -1,6 +1,7 @@
 package Bistro_BackEnd.servicios.empleado;
 
 import Bistro_BackEnd.controladores.empleado.LogInBody;
+import Bistro_BackEnd.controladores.empleado.LogInResponseBody;
 import Bistro_BackEnd.controladores.empleado.MozoResponseBody;
 import Bistro_BackEnd.dao.empleado.MozoDao;
 import Bistro_BackEnd.model.empleado.Mozo;
@@ -31,7 +32,7 @@ public class MozoServiceImp implements MozoService{
     }
 
     @Override
-    public MozoResponseBody logIn(LogInBody body) throws ExcepcionIdInvalida {
+    public LogInResponseBody logIn(LogInBody body) throws ExcepcionIdInvalida {
         List<Mozo> mozoR = ((List<Mozo>) mozoDao.findAll()).stream().filter(
                 mozo -> {
                     return mozo.getEmail().equals(body.getEmail()) &&
@@ -39,7 +40,7 @@ public class MozoServiceImp implements MozoService{
                 }
         ).collect(Collectors.toList());
         if(mozoR.size()==1){
-            return new MozoResponseBody(mozoR.get(0));
+            return new LogInResponseBody(mozoR.get(0));
         }else{
             throw new ExcepcionIdInvalida(0L);
         }

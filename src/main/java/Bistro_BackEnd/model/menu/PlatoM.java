@@ -76,12 +76,13 @@ public class PlatoM extends Consumible {
     }
 
     public Acompanamiento getAcompanamiento(Long acomValue) {
-        return
-            this.acompanamientos
-                .stream()
-                    .filter(acompanamiento ->
-                            acompanamiento.getId().equals(acomValue))
-                    .collect(Collectors.toList()).get(0);
+        if(this.acompanamientos.isEmpty()){return null;}
+        else{return
+                this.acompanamientos
+                        .stream()
+                        .filter(acompanamiento ->
+                                acompanamiento.getId().equals(acomValue))
+                        .collect(Collectors.toList()).get(0);}
     }
 
     public Salsa getSalsa(Long value) {
