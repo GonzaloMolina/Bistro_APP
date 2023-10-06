@@ -10,9 +10,7 @@ import Bistro_BackEnd.dao.mesa.MesaDao;
 import Bistro_BackEnd.model.Orden.Orden;
 import Bistro_BackEnd.controladores.orden.OrdenBodyResponseList;
 import Bistro_BackEnd.dao.orden.OrdenDao;
-import Bistro_BackEnd.model.consumibles.Bebida;
-import Bistro_BackEnd.model.consumibles.Plato;
-import Bistro_BackEnd.model.consumibles.TipoPlato;
+import Bistro_BackEnd.model.consumibles.*;
 import Bistro_BackEnd.model.menu.PlatoM;
 import Bistro_BackEnd.model.mesa.Mesa;
 import Bistro_BackEnd.model.pair.Pair;
@@ -64,6 +62,47 @@ public class OrdenServiceImp implements OrdenService {
         List<Pair> valuesB = ordenBody.getBebidas();
         List<PairPlatoAcom> valuesP = ordenBody.getPlatos();
 
+        List<Bebida> drinks = this.createDrinks(valuesB);
+        List<Plato> dishes = this.createDishes(valuesP);
+        Orden newOrden = new Orden(drinks, dishes);
+
+        int ordenId = this.ordenDao.save(newOrden).getId().intValue();
+
+        Mesa mesa = this.mesaDao.findById(Long.valueOf(ordenBody.getMesaId())).orElse(new Mesa());
+        mesa.setOrden(this.ordenDao.findById((long) ordenId).orElse(new Orden()));
+        mesaDao.save(mesa);
+        return ordenId;
+    }
+
+    private List<Plato> createDishes(List<PairPlatoAcom> valuesP) {
+        List<Plato> dishes = new ArrayList<>();
+        valuesP.forEach(pair -> {
+            PlatoM retrieved = this.platoDao.findById(Long.valueOf(pair.getKey())).orElse(new PlatoM());
+            if(pair.getValues().isEmpty()){dishes.add(new Plato(retrieved));}
+            else{
+                for (int i = 0; i < pair.getValues().size(); i++) {
+                    this.agregarOtros(Long.valueOf(pair.getValues().get(i)), dishes, retrieved);
+                }
+            }
+        });
+        return dishes;
+    }
+
+    private void agregarOtros(Long val, List<Plato> dishes, PlatoM retrieved) {
+        if(retrieved.getTipo().equals(TipoPlato.PASTA)){
+            Plato plato = new Plato(retrieved);
+            Salsa s = retrieved.getSalsa(val);
+            plato.setSalsa(s);
+            dishes.add(plato);
+        }else{
+            Plato plato = new Plato(retrieved);
+            Acompanamiento a = retrieved.getAcompanamiento(val);
+            plato.setAcompanamiento(a);
+            dishes.add(plato);
+        }
+    }
+
+    private List<Bebida> createDrinks(List<Pair> valuesB) {
         List<Bebida> drinks = new ArrayList<>();
         valuesB.forEach(pair -> {
             Bebida retrieved = this.bebidaDao.findById(Long.valueOf(pair.getKey())).orElse(new Bebida());
@@ -71,34 +110,7 @@ public class OrdenServiceImp implements OrdenService {
                 drinks.add(retrieved);
             }
         });
-
-        List<Plato> dishes = new ArrayList<>();
-        valuesP.forEach(pair -> {
-            PlatoM retrieved = this.platoDao.findById(Long.valueOf(pair.getKey())).orElse(new PlatoM());
-            Plato plato = new Plato(retrieved);
-            if(pair.getValues().isEmpty()){dishes.add(plato);}
-            else{
-                for (int i = 0; i < pair.getValues().size(); i++) {
-                    if(retrieved.getTipo().equals(TipoPlato.PASTA)){
-                        plato.setSalsa(retrieved.getSalsa(Long.valueOf(pair.getValues().get(i))));
-                    }
-                    else{
-                        plato.setAcompanamiento(retrieved.getAcompanamiento(Long.valueOf(pair.getValues().get(i))));
-                    }
-                    dishes.add(plato);
-                }
-            }
-        });
-
-        Orden newOrden = new Orden(drinks, dishes);
-
-        int ordenId = this.ordenDao.save(newOrden).getId().intValue();
-
-        Mesa mesa = this.mesaDao.findById(Long.valueOf(ordenBody.getMesaId())).orElse(new Mesa());
-
-        mesa.setOrden(this.ordenDao.findById((long) ordenId).orElse(new Orden()));
-        mesaDao.save(mesa);
-        return ordenId;
+        return drinks;
     }
 
     @Override
