@@ -90,7 +90,7 @@ public class PlatoM extends Consumible {
             this.salsas
                 .stream()
                     .filter(salsa ->
-                            salsa.getId().equals(value))
+                            !salsa.getId().equals(value))
                     .collect(Collectors.toList()).get(0);
     }
 }
