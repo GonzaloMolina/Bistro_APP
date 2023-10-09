@@ -195,6 +195,8 @@ public class Seeder {
         Orden orden = new Orden(bebidas2, platos2);
         orderDao.save(orden);
         mesa3.setOrden(orden);
+        Peticion pet = new Peticion("jefe@email.com", "admin@mail.com", "asunto", "cuerpo");
+        emp1.addPeticion(pet);
         empDao.save(emp1);
         //orderDao.save(orden);
 /////////////////////////////////////////////////////////////////////////////
