@@ -39,7 +39,7 @@ public class MozoServiceImp implements MozoService{
                             new BCryptPasswordEncoder().matches(body.getPassword(), mozo.getPassword());
                 }
         ).collect(Collectors.toList());
-        if(mozoR.size()==1){
+        if(mozoR.size()>0){
             return new LogInResponseBody(mozoR.get(0));
         }else{
             throw new ExcepcionIdInvalida(0L);
