@@ -15,7 +15,7 @@ public class Peticion {
     private String emisor;
     private String asunto;
     private String cuerpo;
-    private boolean estado;
+    private Estado estado;
 
     /*Constructors*/
     public Peticion() {}
@@ -25,7 +25,7 @@ public class Peticion {
         this.emisor = emisor;
         this.asunto = asunto;
         this.cuerpo = cuerpo;
-        this.estado = false;
+        this.estado = Estado.ENPROCESO;
     }
 
     public Long getId() {
@@ -48,7 +48,7 @@ public class Peticion {
         return cuerpo;
     }
 
-    public boolean estaAprobado() {
+    public Estado getEstado() {
         return estado;
     }
 
@@ -72,11 +72,7 @@ public class Peticion {
         this.cuerpo = cuerpo;
     }
 
-    public void setEstado(boolean estado) {
+    public void setEstado(Estado estado) {
         this.estado = estado;
-    }
-
-    public void cambiarEstado() {
-        this.estado = !this.estado;
     }
 }

@@ -1,19 +1,20 @@
 package Bistro_BackEnd.controladores.empleado;
 
+import Bistro_BackEnd.model.empleado.Estado;
 import Bistro_BackEnd.model.empleado.Peticion;
 
 public class PeticionBodyResponseList {
 
     private Long id;
     private String asunto;
-    private boolean estado;
+    private Estado estado;
 
     public PeticionBodyResponseList(){}
 
     public PeticionBodyResponseList(Peticion peticion) {
         this.id = peticion.getId();
         this.asunto = peticion.getAsuto();
-        this.estado = peticion.estaAprobado();
+        this.estado = peticion.getEstado();
     }
 
     public Long getId() {
@@ -32,11 +33,11 @@ public class PeticionBodyResponseList {
         this.asunto = asunto;
     }
 
-    public boolean isEstado() {
+    public Estado getEstado() {
         return estado;
     }
 
-    public void setEstado(boolean estado) {
+    public void setEstado(Estado estado) {
         this.estado = estado;
     }
 }

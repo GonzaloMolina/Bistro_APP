@@ -32,7 +32,7 @@ class PeticionTest {
         assertNull(peticionE.getEmisor());
         assertNull(peticionE.getAsuto());
         assertNull(peticionE.getCuerpo());
-        assertFalse(peticionE.estaAprobado());
+        assertSame(peticionE.getEstado(), null);
     }
 
     @Test
@@ -42,7 +42,7 @@ class PeticionTest {
         assertEquals(pet.getEmisor(), emisor);
         assertEquals(pet.getAsuto(), asunto);
         assertEquals(pet.getCuerpo(), cuerpo);
-        assertFalse(pet.estaAprobado());
+        assertSame(pet.getEstado(), Estado.ENPROCESO);
     }
 
     @Test
@@ -82,15 +82,8 @@ class PeticionTest {
 
     @Test
     void test_07_setEstado() {
-        assertFalse(pet.estaAprobado());
-        pet.setEstado(true);
-        assertTrue(pet.estaAprobado());
-    }
-
-    @Test
-    void test_08_cambiarEstado() {
-        assertFalse(pet.estaAprobado());
-        pet.cambiarEstado();
-        assertTrue(pet.estaAprobado());
+        assertNotSame(pet.getEstado(), Estado.ACEPTADA);
+        pet.setEstado(Estado.ACEPTADA);
+        assertSame(pet.getEstado(), Estado.ACEPTADA);
     }
 }

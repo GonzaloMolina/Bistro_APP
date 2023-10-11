@@ -1,5 +1,6 @@
 package Bistro_BackEnd.controladores.peticion;
 
+import Bistro_BackEnd.model.empleado.Estado;
 import Bistro_BackEnd.model.empleado.Peticion;
 
 public class PeticionBodyResponse {
@@ -9,7 +10,7 @@ public class PeticionBodyResponse {
     private String emisor;
     private String asunto;
     private String body;
-    private boolean estado;
+    private Estado estado;
 
     public PeticionBodyResponse(){}
 
@@ -19,7 +20,7 @@ public class PeticionBodyResponse {
         this.emisor = pet.getEmisor();
         this.asunto = pet.getAsuto();
         this.body = pet.getCuerpo();
-        this.estado = pet.estaAprobado();
+        this.estado = pet.getEstado();
     }
 
     public Long getId() {
@@ -62,11 +63,11 @@ public class PeticionBodyResponse {
         this.body = body;
     }
 
-    public boolean isEstado() {
+    public Estado getEstado() {
         return estado;
     }
 
-    public void setEstado(boolean estado) {
+    public void setEstado(Estado estado) {
         this.estado = estado;
     }
 }

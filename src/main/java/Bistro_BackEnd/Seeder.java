@@ -2,6 +2,7 @@ package Bistro_BackEnd;
 
 import Bistro_BackEnd.dao.menu.MenuDao;
 import Bistro_BackEnd.dao.peticion.PeticionDao;
+import Bistro_BackEnd.model.empleado.Estado;
 import Bistro_BackEnd.model.menu.Menu;
 import Bistro_BackEnd.model.empleado.Peticion;
 import Bistro_BackEnd.model.menu.PlatoM;
@@ -195,8 +196,17 @@ public class Seeder {
         Orden orden = new Orden(bebidas2, platos2);
         orderDao.save(orden);
         mesa3.setOrden(orden);
-        Peticion pet = new Peticion("jefe@email.com", "admin@mail.com", "asunto", "cuerpo");
+        String as = "Cambio de horario";
+        String cuerpo = "un cuerpo que explique lo que pide";
+        Peticion pet = new Peticion("jefe@email.com", "admin@mail.com", as, cuerpo);
+        pet.setEstado(Estado.ENPROCESO);
+        Peticion pet1 = new Peticion("jefe@email.com", "admin@mail.com", "Ausencia por enfermedad", cuerpo);
+        pet1.setEstado(Estado.ACEPTADA);
+        Peticion pet3 = new Peticion("jefe@email.com", "admin@mail.com", "Boca vs Palmeiras", cuerpo);
+        pet3.setEstado(Estado.RECHAZADA);
         emp1.addPeticion(pet);
+        emp1.addPeticion(pet1);
+        emp1.addPeticion(pet3);
         empDao.save(emp1);
         //orderDao.save(orden);
 /////////////////////////////////////////////////////////////////////////////
