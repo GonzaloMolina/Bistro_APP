@@ -36,6 +36,15 @@ public class ControladorDeMozo {
         return new ResponseEntity<>(mozoService.getById(id), HttpStatus.OK);
     }
 
+    //get_ONE
+    @GetMapping(value = "/{id}/solicitudes", produces = { "application/json" })
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Successful retrieval of a user",response = MozoResponseBody.class),
+    })
+    public ResponseEntity<List<PeticionBodyResponseList>> getMozoSolicitudes(@PathVariable Integer id) throws ExcepcionIdInvalida {
+        return new ResponseEntity<>(mozoService.getRequestById(id), HttpStatus.OK);
+    }
+
     //LogIn
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Successful retrieval of all users",response = String.class),
