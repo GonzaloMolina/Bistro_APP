@@ -44,6 +44,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         web.ignoring().antMatchers("/mesa/**");
         web.ignoring().antMatchers("/orden/**");
         web.ignoring().antMatchers("/menu/**");
+        web.ignoring().antMatchers("/peticion/**");
     }
 
     @Bean

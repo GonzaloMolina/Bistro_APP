@@ -22,7 +22,7 @@ public class ControladorPeticion {
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Successful retrieval of a petition",response = PeticionBodyResponse.class),
     })
-    public ResponseEntity<PeticionBodyResponse> getOrden(@PathVariable Integer id) throws ExcepcionIdInvalida {
+    public ResponseEntity<PeticionBodyResponse> getReques(@PathVariable Integer id) throws ExcepcionIdInvalida {
         return new ResponseEntity<>(service.getById(id), HttpStatus.OK);
     }
 
@@ -31,7 +31,7 @@ public class ControladorPeticion {
             @ApiResponse(code = 200, message = "Successful creation of a petition",response = String.class),
     })
     @PostMapping(value = "/new", produces = { "application/json" },consumes = { "application/json" })
-    public ResponseEntity<String> addOrder(@RequestBody PeticionBodyPost ordenBody) throws ExcepcionIdInvalida {
+    public ResponseEntity<String> addRequest(@RequestBody PeticionBodyPost ordenBody) throws ExcepcionIdInvalida {
         service.createPeticion(ordenBody);
         return new ResponseEntity<>("OK", HttpStatus.OK);
     }
@@ -39,7 +39,7 @@ public class ControladorPeticion {
     //DELETE_ONE exception for id
     @CrossOrigin(origins = "http://localhost:3000")
     @DeleteMapping(value = "/{idEmpleado}/{id}", produces = { "application/json" })
-    public ResponseEntity<String> deleteOrder(@PathVariable Integer idEmpleado,@PathVariable Integer id) throws ExcepcionIdInvalida {
+    public ResponseEntity<String> deleteRequest(@PathVariable Integer idEmpleado,@PathVariable Integer id) throws ExcepcionIdInvalida {
         service.deletePeticion(idEmpleado, id);
         return new ResponseEntity<>("OK", HttpStatus.OK);
     }

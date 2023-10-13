@@ -204,9 +204,9 @@ public class Seeder {
         pet1.setEstado(Estado.ACEPTADA);
         Peticion pet3 = new Peticion("jefe@email.com", "admin@mail.com", "Boca vs Palmeiras", cuerpo);
         pet3.setEstado(Estado.RECHAZADA);
-        emp1.addPeticion(pet);
-        emp1.addPeticion(pet1);
         emp1.addPeticion(pet3);
+        emp1.addPeticion(pet1);
+        emp1.addPeticion(pet);
         empDao.save(emp1);
         //orderDao.save(orden);
 /////////////////////////////////////////////////////////////////////////////
