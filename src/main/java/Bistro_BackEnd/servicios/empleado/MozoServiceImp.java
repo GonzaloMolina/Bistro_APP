@@ -3,6 +3,7 @@ package Bistro_BackEnd.servicios.empleado;
 import Bistro_BackEnd.controladores.empleado.LogInBody;
 import Bistro_BackEnd.controladores.empleado.LogInResponseBody;
 import Bistro_BackEnd.controladores.empleado.MozoResponseBody;
+import Bistro_BackEnd.controladores.empleado.PeticionBodyResponseList;
 import Bistro_BackEnd.dao.empleado.MozoDao;
 import Bistro_BackEnd.model.empleado.Mozo;
 import Bistro_BackEnd.servicios.excepciones.ExcepcionIdInvalida;
@@ -44,6 +45,14 @@ public class MozoServiceImp implements MozoService{
         }else{
             throw new ExcepcionIdInvalida(0L);
         }
+    }
+
+    @Override
+    public List<PeticionBodyResponseList> getRequestById(Integer idP) throws ExcepcionIdInvalida {
+        Long id = Long.valueOf(idP);
+        this.validarId(id);
+        Mozo mozo = mozoDao.findById(id).orElse(new Mozo());
+        return mozo.getPeticiones().stream().map(PeticionBodyResponseList::new).collect(Collectors.toList());
     }
 
     private void validarId(Long id) throws ExcepcionIdInvalida {

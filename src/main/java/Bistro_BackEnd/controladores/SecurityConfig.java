@@ -40,7 +40,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers("/mozo/logIn");
+        web.ignoring().antMatchers("/mozo/**");
         web.ignoring().antMatchers("/mesa/**");
         web.ignoring().antMatchers("/orden/**");
         web.ignoring().antMatchers("/menu/**");
