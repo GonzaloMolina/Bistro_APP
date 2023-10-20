@@ -10,4 +10,5 @@ public interface MesaService {
 
     List<MesaBodyResponseList> listAll();
     MesaBodyResponse getById(Integer id) throws ExcepcionIdInvalida;
+    MesaBodyResponse releaseTable(Integer id) throws ExcepcionIdInvalida;
 }
