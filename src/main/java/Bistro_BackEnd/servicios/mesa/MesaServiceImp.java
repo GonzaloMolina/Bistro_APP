@@ -39,4 +39,21 @@ public class MesaServiceImp implements MesaService {
         }
         return new MesaBodyResponse(mesaR);
     }
+
+    @Override
+    public MesaBodyResponse releaseTable(Integer idValue) throws ExcepcionIdInvalida {
+        Long id = Long.valueOf(idValue);
+        if(!mesaDao.existsById(id)){
+            throw new ExcepcionIdInvalida(id);
+        }
+        Mesa mesaR = mesaDao.findById(id).orElse(new Mesa());
+        if(mesaR.getOrden() != null){
+            mesaR.setCuenta(0.0);
+            mesaR.setOrden(null);
+        }else{
+            mesaR.setCuenta(0.0);
+        }
+        mesaDao.save(mesaR);
+        return new MesaBodyResponse(mesaR);
+    }
 }
