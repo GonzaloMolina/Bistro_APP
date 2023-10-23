@@ -89,7 +89,7 @@ public class OrdenServiceImp implements OrdenService {
     }
 
     private void agregarOtros(Long val, List<Plato> dishes, PlatoM retrieved) {
-        if(retrieved.getTipo().equals(TipoPlato.PASTA)){
+        if(!retrieved.belongsAcomponamiento(val)){
             Plato plato = new Plato(retrieved);
             Salsa s = retrieved.getSalsa(val);
             plato.setSalsa(s);

@@ -76,21 +76,17 @@ public class PlatoM extends Consumible {
     }
 
     public Acompanamiento getAcompanamiento(Long acomValue) {
-        if(this.acompanamientos.isEmpty()){return null;}
-        else{return
-                this.acompanamientos
-                        .stream()
-                        .filter(acompanamiento ->
-                                acompanamiento.getId().equals(acomValue))
-                        .collect(Collectors.toList()).get(0);}
+        return this.acompanamientos.stream().filter(acompanamiento ->
+            acompanamiento.getId().equals(acomValue))
+                .collect(Collectors.toList()).get(0);
     }
 
     public Salsa getSalsa(Long value) {
-        return
-            this.salsas
-                .stream()
-                    .filter(salsa ->
-                            !salsa.getId().equals(value))
-                    .collect(Collectors.toList()).get(0);
+        return this.salsas.stream().filter(salsa -> salsa.getId().equals(value))
+            .collect(Collectors.toList()).get(0);
+    }
+
+    public boolean belongsAcomponamiento(Long value){
+        return this.acompanamientos.stream().anyMatch(acompanamiento -> acompanamiento.getId().equals(value));
     }
 }
