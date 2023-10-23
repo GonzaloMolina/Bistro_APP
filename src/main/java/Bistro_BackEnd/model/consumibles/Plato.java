@@ -53,19 +53,11 @@ public class Plato extends Consumible {
     }
 
     public Acompanamiento getAcompanamiento() {
-        Acompanamiento acompanamientoPlato = null;
-        if (this.getTipo() == TipoPlato.CARNE || this.getTipo() == TipoPlato.PESCADO) {
-            acompanamientoPlato = acompanamiento;
-        };
-        return acompanamientoPlato;
+        return this.acompanamiento;
     }
 
     public Salsa getSalsa(){
-        Salsa salsaDelPlato = null;
-        if (this.getTipo() == TipoPlato.PASTA) {
-            salsaDelPlato = salsa;
-        };
-        return salsaDelPlato;
+        return this.salsa;
     }
 
     //Setters
