@@ -198,9 +198,9 @@ public class Seeder {
         mesa3.setOrden(orden);
         String as = "Cambio de horario";
         String cuerpo = "un cuerpo que explique lo que pide";
-        Peticion pet = new Peticion("jefe@email.com", "admin@mail.com", as, cuerpo);
-        pet.setEstado(Estado.ENPROCESO);
-        Peticion pet1 = new Peticion("jefe@email.com", "admin@mail.com", "Ausencia por enfermedad", cuerpo);
+        Peticion pet = new Peticion("", "admin@mail.com", as, cuerpo);
+        pet.setEstado(Estado.ACEPTADA);
+        Peticion pet1 = new Peticion("", "admin@mail.com", "Ausencia por enfermedad", cuerpo);
         pet1.setEstado(Estado.ACEPTADA);
         Peticion pet3 = new Peticion("jefe@email.com", "admin@mail.com", "Boca vs Palmeiras", cuerpo);
         pet3.setEstado(Estado.RECHAZADA);

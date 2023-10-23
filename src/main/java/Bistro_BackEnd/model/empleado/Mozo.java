@@ -47,7 +47,7 @@ public class Mozo extends Empleado {
     }
 
     public void addPeticion(Peticion peticion) {
-        this.peticiones.add(0, peticion);
+        this.peticiones.add(peticion);
     }
 
     public Peticion getPeticion(long l) {
