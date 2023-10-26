@@ -5,6 +5,7 @@ import Bistro_BackEnd.controladores.empleado.LogInResponseBody;
 import Bistro_BackEnd.controladores.empleado.MozoResponseBody;
 import Bistro_BackEnd.controladores.empleado.PeticionBodyResponseList;
 import Bistro_BackEnd.servicios.excepciones.ExcepcionIdInvalida;
+import Bistro_BackEnd.servicios.excepciones.InvalidOrNullFieldException;
 
 import java.util.List;
 
@@ -14,7 +15,7 @@ public interface MozoService {
 
     MozoResponseBody getById(Integer id) throws ExcepcionIdInvalida, ExcepcionIdInvalida;
 
-    LogInResponseBody logIn(LogInBody body) throws ExcepcionIdInvalida;
+    LogInResponseBody logIn(LogInBody body) throws ExcepcionIdInvalida, InvalidOrNullFieldException;
 
     List<PeticionBodyResponseList> getRequestById(Integer id) throws ExcepcionIdInvalida;
 }

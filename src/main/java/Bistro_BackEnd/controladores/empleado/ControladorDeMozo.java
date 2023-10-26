@@ -2,6 +2,7 @@ package Bistro_BackEnd.controladores.empleado;
 
 import Bistro_BackEnd.servicios.empleado.MozoService;
 import Bistro_BackEnd.servicios.excepciones.ExcepcionIdInvalida;
+import Bistro_BackEnd.servicios.excepciones.InvalidOrNullFieldException;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,7 +51,7 @@ public class ControladorDeMozo {
             @ApiResponse(code = 200, message = "Successful retrieval of all users",response = String.class),
     })
     @PostMapping(value = "/logIn", produces = { "application/json" },consumes = { "application/json" })
-    public ResponseEntity<LogInResponseBody> addOrder(@RequestBody LogInBody body) throws ExcepcionIdInvalida {
+    public ResponseEntity<LogInResponseBody> logIn(@RequestBody LogInBody body) throws ExcepcionIdInvalida, InvalidOrNullFieldException {
         return new ResponseEntity<>(mozoService.logIn(body), HttpStatus.OK);
     }
 }

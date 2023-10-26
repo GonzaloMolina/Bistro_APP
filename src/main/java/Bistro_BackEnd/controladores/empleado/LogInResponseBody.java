@@ -1,7 +1,7 @@
 package Bistro_BackEnd.controladores.empleado;
 
 import Bistro_BackEnd.model.empleado.Mozo;
-import Bistro_BackEnd.model.empleado.Peticion;
+import Bistro_BackEnd.model.empleado.Solicitud;
 import Bistro_BackEnd.model.mesa.Mesa;
 
 import java.util.List;
@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 
 public class LogInResponseBody {
 
+        private String jefe;
         private Long id;
         private String nombre;
         private String apellido;
@@ -23,15 +24,16 @@ public class LogInResponseBody {
             this.nombre = mozo.getNombre();
             this.apellido = mozo.getApellido();
             this.email = mozo.getEmail();
+            this.jefe = mozo.getRestaurante().getEmail();
             this.mesas = this.mapMesas(mozo.getMesasAsignadas());
-            this.peticiones = this.mapPeticiones(mozo.getPeticiones());
+            this.peticiones = this.mapPeticiones(mozo.getSolicitudes());
         }
 
         private List<Long> mapMesas(List<Mesa> mesasAsignadas) {
             return mesasAsignadas.stream().map(Mesa::getId).collect(Collectors.toList());
         }
 
-        private List<PeticionBodyResponseList> mapPeticiones(List<Peticion> peticiones){
+        private List<PeticionBodyResponseList> mapPeticiones(List<Solicitud> peticiones){
             return peticiones.stream().map(PeticionBodyResponseList::new).collect(Collectors.toList());
         }
 
@@ -82,4 +84,12 @@ public class LogInResponseBody {
         public void setPeticiones(List<PeticionBodyResponseList> peticiones) {
             this.peticiones = peticiones;
         }
+
+    public String getJefe() {
+        return jefe;
+    }
+
+    public void setJefe(String jefe) {
+        this.jefe = jefe;
+    }
 }

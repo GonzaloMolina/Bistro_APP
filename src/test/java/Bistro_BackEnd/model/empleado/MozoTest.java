@@ -1,6 +1,7 @@
 package Bistro_BackEnd.model.empleado;
 
 import Bistro_BackEnd.model.mesa.Mesa;
+import Bistro_BackEnd.model.restaurante.Restaurante;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -18,6 +19,7 @@ class MozoTest {
     private String apellido;
     private String email;
     private String password;
+    private Restaurante res;
 
     @BeforeEach
     void setUp(){
@@ -25,7 +27,7 @@ class MozoTest {
         apellido = "Ashton";
         email = "admin@mail.com";
         password ="public123";
-        emp1 = new Mozo(nombre, apellido, email, password);
+        emp1 = new Mozo(nombre, apellido, email, password, res);
     }
 
     @Test
@@ -34,7 +36,7 @@ class MozoTest {
         assertNull(emp.getNombre());
         assertNull(emp.getApellido());
         assertNull(emp.getMesasAsignadas());
-        assertNull(emp.getPeticiones());
+        assertNull(emp.getSolicitudes());
         assertNull(emp.getEmail());
         assertNull(emp.getPassword());
     }
@@ -45,7 +47,7 @@ class MozoTest {
         assertEquals(emp1.getNombre(), nombre);
         assertEquals(emp1.getApellido(), apellido);
         assertEquals(emp1.getMesasAsignadas().size(), 0);
-        assertEquals(emp1.getPeticiones().size(), 0);
+        assertEquals(emp1.getSolicitudes().size(), 0);
         assertEquals(emp1.getEmail(), email);
         assertEquals(emp1.getPassword(), password);
     }
@@ -89,42 +91,42 @@ class MozoTest {
 
     @Test
     void test_08_setPeticiones(){
-        List<Peticion> peticiones = new ArrayList<>();
-        emp1.setPeticiones(peticiones);
-        assertEquals(emp1.getPeticiones(), peticiones);
+        List<Solicitud> peticiones = new ArrayList<>();
+        emp1.setSolicitudes(peticiones);
+        assertEquals(emp1.getSolicitudes(), peticiones);
     }
 
     @Test
     void test_09_addPeticion(){
-        Peticion pet = new Peticion();
-        emp1.addPeticion(pet);
-        assertFalse(emp1.getPeticiones().isEmpty());
-        assertEquals(emp1.getPeticiones().get(0), pet);
+        Solicitud pet = new Solicitud();
+        emp1.addSolicitud(pet);
+        assertFalse(emp1.getSolicitudes().isEmpty());
+        assertEquals(emp1.getSolicitudes().get(0), pet);
     }
 
     @Test
     void test_09_getPeticion(){
-        Peticion pet = new Peticion();
+        Solicitud pet = new Solicitud();
         pet.setId(1L);
-        emp1.addPeticion(pet);
-        assertEquals(emp1.getPeticion(1L), pet);
+        emp1.addSolicitud(pet);
+        assertEquals(emp1.getSolicitud(1L), pet);
     }
 
     @Test
     void test_09_deletePeticion(){
-        Peticion pet = new Peticion();
+        Solicitud pet = new Solicitud();
         pet.setId(1L);
-        emp1.addPeticion(pet);
+        emp1.addSolicitud(pet);
 
-        Peticion pet1 = new Peticion();
+        Solicitud pet1 = new Solicitud();
         pet1.setId(2L);
-        emp1.addPeticion(pet1);
+        emp1.addSolicitud(pet1);
 
-        assertFalse(emp1.getPeticiones().isEmpty());
+        assertFalse(emp1.getSolicitudes().isEmpty());
 
-        emp1.deletePeticion(1L);
+        emp1.deleteSolicitud(1L);
 
-        assertFalse(emp1.getPeticiones().isEmpty());
-        assertEquals(emp1.getPeticiones().size(), 1);
+        assertFalse(emp1.getSolicitudes().isEmpty());
+        assertEquals(emp1.getSolicitudes().size(), 1);
     }
 }

@@ -4,16 +4,14 @@ import Bistro_BackEnd.dao.empleado.MozoDao;
 import Bistro_BackEnd.dao.menu.MenuDao;
 import Bistro_BackEnd.dao.mesa.MesaDao;
 import Bistro_BackEnd.dao.orden.OrdenDao;
-import Bistro_BackEnd.dao.peticion.PeticionDao;
+import Bistro_BackEnd.dao.peticion.SolicitudDao;
+import Bistro_BackEnd.dao.restaurante.RestauranteDao;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.CorsConfigurationSource;
-import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -36,9 +34,10 @@ public class BistroBackEndApplication {
 		MesaDao mesaDao = configApp.getBean(MesaDao.class);
 		OrdenDao ordenDao = configApp.getBean(OrdenDao.class);
 		MenuDao menuDao = configApp.getBean(MenuDao.class);
-		PeticionDao petdao = configApp.getBean(PeticionDao.class);
+		SolicitudDao petdao = configApp.getBean(SolicitudDao.class);
+		RestauranteDao restDao = configApp.getBean(RestauranteDao.class);
 
-		Seeder seeder = new Seeder(mozoDao, mesaDao, ordenDao, menuDao, petdao);
+		Seeder seeder = new Seeder(mozoDao, mesaDao, ordenDao, menuDao, petdao, restDao);
 		seeder.plant();
 	}
 

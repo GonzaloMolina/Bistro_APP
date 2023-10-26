@@ -1,10 +1,11 @@
 package Bistro_BackEnd;
 
 import Bistro_BackEnd.dao.menu.MenuDao;
-import Bistro_BackEnd.dao.peticion.PeticionDao;
+import Bistro_BackEnd.dao.peticion.SolicitudDao;
+import Bistro_BackEnd.dao.restaurante.RestauranteDao;
 import Bistro_BackEnd.model.empleado.Estado;
 import Bistro_BackEnd.model.menu.Menu;
-import Bistro_BackEnd.model.empleado.Peticion;
+import Bistro_BackEnd.model.empleado.Solicitud;
 import Bistro_BackEnd.model.menu.PlatoM;
 import Bistro_BackEnd.model.mesa.Mesa;
 import Bistro_BackEnd.model.Orden.Orden;
@@ -18,64 +19,86 @@ import Bistro_BackEnd.model.consumibles.Salsa;
 import Bistro_BackEnd.model.consumibles.TamanioBebida;
 import Bistro_BackEnd.model.consumibles.TipoPlato;
 import Bistro_BackEnd.model.empleado.Mozo;
+import Bistro_BackEnd.model.restaurante.Restaurante;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Seeder {
 
+    private RestauranteDao restDao;
     private OrdenDao orderDao;
     private MozoDao empDao;
     private MesaDao mesaDao;
     private MenuDao menuDao;
-    private PeticionDao petdao;
+    private SolicitudDao petdao;
 
-
-    public Seeder(MozoDao empDao, MesaDao mesaDao, OrdenDao ordenDao, MenuDao menuDao, PeticionDao petdao) {
+    public Seeder(MozoDao empDao, MesaDao mesaDao, OrdenDao ordenDao, MenuDao menuDao, SolicitudDao petdao, RestauranteDao restDao) {
         this.empDao = empDao;
         this.mesaDao = mesaDao;
         this.orderDao = ordenDao;
         this.menuDao = menuDao;
         this.petdao = petdao;
+        this.restDao = restDao;
     }
 
     void plant() {
-        Menu menu = new Menu();
-/////////////////////////////////////////////////////////////////////////////
-        Mesa mesa = new Mesa();Mesa mesa1 = new Mesa();
-        List<Mesa> mesas1 = new ArrayList<>();
-        mesa.setCapacidad(3);
-        mesa1.setCapacidad(3);
-        mesas1.add(mesa); mesas1.add(mesa1);
+        String pass = "$2a$04$P4C638KeS..J1FzWl8WMLOoMyRsw8JTgJBFerInAsFh0viVGPjaXG";
 
-        Mozo emp = new Mozo("Smitty", "Smith", "SS@mail.com", "$2a$04$P4C638KeS..J1FzWl8WMLOoMyRsw8JTgJBFerInAsFh0viVGPjaXG");
-        emp.setMesasAsignadas(mesas1);
-        empDao.save(emp);
-/////////////////////////////////////////////////////////////////////////////
+        //password public123
+        Restaurante resto = new Restaurante("Axel LG", "Il mondo",
+                "axel.lopez.garabal@gmail.com",
+                pass, "nro. tel", "dir");
 
-        Mesa mesa2 = new Mesa();Mesa mesa3 = new Mesa();
-        mesa2.setCapacidad(4);
-        mesa3.setCapacidad(4);
-        List<Mesa> mesas2 = new ArrayList<>();
-        mesas2.add(mesa2); mesas2.add(mesa3);
-//TODO MOZO PASSWORD public123 >> link usefull >>https://bcrypt-generator.com/
-        Mozo emp1 = new Mozo("Fidel", "Martinez", "admin@mail.com", "$2a$04$P4C638KeS..J1FzWl8WMLOoMyRsw8JTgJBFerInAsFh0viVGPjaXG");
-        emp1.setMesasAsignadas(mesas2);
+        if(!restDao.existsById(resto.getEmail())){
+            /////////////////////////////////////////////////
+            //TODO MOZO PASSWORD public123 >> link usefull >>https://bcrypt-generator.com/
+            Mozo emp = new Mozo("Smitty", "Smith", "SS@mail.com", pass, resto);
+            Mozo emp1 = new Mozo("Fidel", "Martinez", "admin@mail.com", pass, resto);
+            Mozo emp2 = new Mozo("Valentin", "Barco", "VBarco@mail.com", pass, resto);
 
-/////////////////////////////////////////////////////////////////////////////
+            Menu menu = menuDao.save(this.setUpMenu(new Menu()));
 
-        Mesa mesa4 = new Mesa();
-        mesa4.setCapacidad(5);
-        Mesa mesa5 = new Mesa();
-        mesa5.setCapacidad(5);
-        List<Mesa> mesas3 = new ArrayList<>();
-        mesas3.add(mesa4); mesas3.add(mesa5);
+            emp.setMesasAsignadas(this.crearMesas(2, menu));
 
-        Mozo emp2 = new Mozo("Valentin", "Barco", "VBarco@mail.com", "$2a$04$P4C638KeS..J1FzWl8WMLOoMyRsw8JTgJBFerInAsFh0viVGPjaXG");
-        emp2.setMesasAsignadas(mesas3);
-        empDao.save(emp2);
-/////////////////////////////////////////////////////////////////////////////
-        //bob esponja
+            emp1.setMesasAsignadas(this.crearMesas(4, menu));
+            emp1.setSolicitudes(this.generarSolicitudes());
+            emp1.getMesasAsignadas().get(1).setOrden(this.generarOrden());
+
+            emp2.setMesasAsignadas(this.crearMesas(2, menu));
+            ////////////////////////////////////////////////
+
+            resto.addEmpleado(emp);
+            resto.addEmpleado(emp1);
+            resto.addEmpleado(emp2);
+
+            resto.setMenu(menu);
+
+            restDao.save(resto);
+        }
+    }
+
+    private List<Solicitud> generarSolicitudes() {
+        List<Solicitud> res = new ArrayList<>();
+        String as = "Cambio de horario";
+        String cuerpo = "un cuerpo que explique lo que pide";
+
+        Solicitud pet1 = new Solicitud("", "admin@mail.com", as, cuerpo);
+        pet1.setEstado(Estado.ACEPTADA);
+        Solicitud pet2 = new Solicitud("", "admin@mail.com", "Ausencia por enfermedad", cuerpo);
+        pet2.setEstado(Estado.ACEPTADA);
+        Solicitud pet3 = new Solicitud("jefe@email.com", "admin@mail.com", "Boca vs Palmeiras", cuerpo);
+        pet3.setEstado(Estado.RECHAZADA);
+
+        res.add(pet3);
+        res.add(pet2);
+        res.add(pet1);
+        return res;
+    }
+
+    private Menu setUpMenu(Menu menu){
+        /////////////////////////////////////////////////////////////////////////////
+
         Bebida bebida0 = new Bebida("Coca-Cola 3l", TamanioBebida.GRANDE, 800.00);
         Bebida bebida1 = new Bebida("Coca-Cola 1,5l", TamanioBebida.MEDIANO, 700.00);
         Bebida bebida2 = new Bebida("Coca-Cola 500ml", TamanioBebida.CHICO, 600.00);
@@ -175,9 +198,10 @@ public class Seeder {
 
         menu.setBebidas(bebidasMenu);
         menu.setPlatos(platosMenu);
-        this.menuDao.save(menu);
+        return menu;
+    }
 
-/////////////////////////////////////////////////////////////////////////////
+    private Orden generarOrden(){
         Bebida bebida10 = new Bebida("Quilmes", TamanioBebida.GRANDE, 800.00);
         Bebida bebida11 = new Bebida("Red Bull", TamanioBebida.CHICO, 700.00);
         List<Bebida> bebidas2 = new ArrayList<>();
@@ -193,22 +217,12 @@ public class Seeder {
         platos2.add(plato);
         platos2.add(platox);
 
-        Orden orden = new Orden(bebidas2, platos2);
-        orderDao.save(orden);
-        mesa3.setOrden(orden);
-        String as = "Cambio de horario";
-        String cuerpo = "un cuerpo que explique lo que pide";
-        Peticion pet = new Peticion("", "admin@mail.com", as, cuerpo);
-        pet.setEstado(Estado.ACEPTADA);
-        Peticion pet1 = new Peticion("", "admin@mail.com", "Ausencia por enfermedad", cuerpo);
-        pet1.setEstado(Estado.ACEPTADA);
-        Peticion pet3 = new Peticion("jefe@email.com", "admin@mail.com", "Boca vs Palmeiras", cuerpo);
-        pet3.setEstado(Estado.RECHAZADA);
-        emp1.addPeticion(pet3);
-        emp1.addPeticion(pet1);
-        emp1.addPeticion(pet);
-        empDao.save(emp1);
-        //orderDao.save(orden);
-/////////////////////////////////////////////////////////////////////////////
+        return orderDao.save(new Orden(bebidas2, platos2));
+    }
+
+    private List<Mesa> crearMesas(Integer n, Menu menu){
+        List<Mesa> res = new ArrayList<>();
+        for (int i = 0; i < n; i++) { res.add(new Mesa(menu.getId())); }
+        return res;
     }
 }

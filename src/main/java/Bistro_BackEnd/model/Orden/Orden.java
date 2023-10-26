@@ -17,9 +17,6 @@ public class Orden {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @OneToOne(cascade = CascadeType.PERSIST)
-    private Mesa mesa;
-
     @ManyToMany(cascade = CascadeType.PERSIST)
     private List<Bebida> bebida;
     @ManyToMany(cascade = CascadeType.PERSIST)
@@ -37,14 +34,6 @@ public class Orden {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Mesa getMesa() {
-        return mesa;
-    }
-
-    public void setMesa(Mesa mesa) {
-        this.mesa = mesa;
     }
 
     public List<Bebida> getBebidas() {

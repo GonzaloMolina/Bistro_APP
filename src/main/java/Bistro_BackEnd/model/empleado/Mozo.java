@@ -1,21 +1,22 @@
 package Bistro_BackEnd.model.empleado;
 
 import Bistro_BackEnd.model.mesa.Mesa;
+import Bistro_BackEnd.model.restaurante.Restaurante;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List; // Importa la clase List si usas List
 
 @Entity
 public class Mozo extends Empleado {
 
+    @ManyToOne
+    private Restaurante restaurante;
     @OneToMany(cascade = CascadeType.ALL)
     @LazyCollection(LazyCollectionOption.FALSE)
-    private List<Peticion> peticiones;
+    private List<Solicitud> solicitudes;
     @OneToMany(cascade = CascadeType.ALL)
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<Mesa> mesasAsignadas;
@@ -24,10 +25,11 @@ public class Mozo extends Empleado {
     }
 
     // Constructor
-    public Mozo(String nombre, String apellido, String email, String password) {
+    public Mozo(String nombre, String apellido, String email, String password, Restaurante resto) {
         super(nombre, apellido, email, password);
         this.mesasAsignadas = new ArrayList<>();
-        this.peticiones = new ArrayList<>();
+        this.solicitudes = new ArrayList<>();
+        this.restaurante = resto;
     }
 
     public List<Mesa> getMesasAsignadas() {
@@ -38,23 +40,31 @@ public class Mozo extends Empleado {
         this.mesasAsignadas = mesasAsignadas;
     }
 
-    public List<Peticion> getPeticiones() {
-        return peticiones;
+    public List<Solicitud> getSolicitudes() {
+        return solicitudes;
     }
 
-    public void setPeticiones(List<Peticion> peticiones) {
-        this.peticiones = peticiones;
+    public void setSolicitudes(List<Solicitud> solicitudes) {
+        this.solicitudes = solicitudes;
     }
 
-    public void addPeticion(Peticion peticion) {
-        this.peticiones.add(peticion);
+    public void addSolicitud(Solicitud peticion) {
+        this.solicitudes.add(peticion);
     }
 
-    public Peticion getPeticion(long l) {
-        return this.peticiones.stream().filter(pet -> pet.getId() == l).toList().get(0);
+    public Solicitud getSolicitud(long l) {
+        return this.solicitudes.stream().filter(pet -> pet.getId() == l).toList().get(0);
     }
 
-    public void deletePeticion(long l) {
-        this.peticiones = this.peticiones.stream().filter(pet -> pet.getId() != l).toList();
+    public void deleteSolicitud(long l) {
+        this.solicitudes = this.solicitudes.stream().filter(pet -> pet.getId() != l).toList();
+    }
+
+    public Restaurante getRestaurante() {
+        return restaurante;
+    }
+
+    public void setRestaurante(Restaurante restaurante) {
+        this.restaurante = restaurante;
     }
 }

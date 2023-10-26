@@ -7,6 +7,7 @@ import Bistro_BackEnd.controladores.empleado.PeticionBodyResponseList;
 import Bistro_BackEnd.dao.empleado.MozoDao;
 import Bistro_BackEnd.model.empleado.Mozo;
 import Bistro_BackEnd.servicios.excepciones.ExcepcionIdInvalida;
+import Bistro_BackEnd.servicios.excepciones.InvalidOrNullFieldException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -33,15 +34,16 @@ public class MozoServiceImp implements MozoService{
     }
 
     @Override
-    public LogInResponseBody logIn(LogInBody body) throws ExcepcionIdInvalida {
-        List<Mozo> mozoR = ((List<Mozo>) mozoDao.findAll()).stream().filter(
-                mozo -> {
-                    return mozo.getEmail().equals(body.getEmail()) &&
-                            new BCryptPasswordEncoder().matches(body.getPassword(), mozo.getPassword());
-                }
-        ).collect(Collectors.toList());
-        if(mozoR.size()>0){
-            return new LogInResponseBody(mozoR.get(0));
+    public LogInResponseBody logIn(LogInBody body) throws ExcepcionIdInvalida, InvalidOrNullFieldException {
+        Mozo mozoR = mozoDao.getUserByUsername(body.getEmail());
+        if(mozoR != null){
+            if(new BCryptPasswordEncoder().matches(body.getPassword(), mozoR.getPassword())){
+                return new LogInResponseBody(mozoR);
+            } else{
+                System.out.println(mozoR.getPassword());
+                System.out.println(body.getPassword());
+                throw new InvalidOrNullFieldException(body.getEmail());
+            }
         }else{
             throw new ExcepcionIdInvalida(0L);
         }
@@ -52,7 +54,7 @@ public class MozoServiceImp implements MozoService{
         Long id = Long.valueOf(idP);
         this.validarId(id);
         Mozo mozo = mozoDao.findById(id).orElse(new Mozo());
-        return mozo.getPeticiones().stream().map(PeticionBodyResponseList::new).collect(Collectors.toList());
+        return mozo.getSolicitudes().stream().map(PeticionBodyResponseList::new).collect(Collectors.toList());
     }
 
     private void validarId(Long id) throws ExcepcionIdInvalida {

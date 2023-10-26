@@ -11,12 +11,17 @@ public class Mesa {
     private Long id;
     private int capacidad;
     private Double cuenta;
+    private Long menuId;
 
     @OneToOne
     private Orden orden;
 
     // Constructor vacío
     public Mesa() {
+    }
+
+    public Mesa(Long menuId) {
+        this.menuId= menuId;
     }
 
     //Getters
@@ -51,5 +56,13 @@ public class Mesa {
 
     public void setOrden(Orden orden) {
         this.orden = orden;
+    }
+
+    public Long getMenuId() {
+        return menuId;
+    }
+
+    public void setMenuId(Long menuId) {
+        this.menuId = menuId;
     }
 }

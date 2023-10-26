@@ -6,7 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Peticion {
+public class Solicitud {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -18,9 +18,9 @@ public class Peticion {
     private Estado estado;
 
     /*Constructors*/
-    public Peticion() {}
+    public Solicitud() {}
 
-    public Peticion(String receptor, String emisor, String asunto, String cuerpo) {
+    public Solicitud(String receptor, String emisor, String asunto, String cuerpo) {
         this.receptor = receptor;
         this.emisor = emisor;
         this.asunto = asunto;
