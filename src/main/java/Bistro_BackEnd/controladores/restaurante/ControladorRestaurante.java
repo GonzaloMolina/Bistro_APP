@@ -22,8 +22,9 @@ public class ControladorRestaurante {
             @ApiResponse(code = 200, message = "Successful retrieval of all users",response = String.class),
     })
     @PostMapping(value = "/logIn", produces = { "application/json" },consumes = { "application/json" })
-    public ResponseEntity<RestauranteBodyResponse> logIn(@RequestBody LogInBody body) throws InvalidOrNullFieldException {
-        return new ResponseEntity<>(service.logIn(body), HttpStatus.OK);
+    public ResponseEntity logIn(@RequestBody LogInBody body) throws InvalidOrNullFieldException {
+        try{ return new ResponseEntity<>(service.logIn(body), HttpStatus.OK); }
+        catch (Exception error) { return new ResponseEntity<>(error.getMessage(), HttpStatus.BAD_REQUEST); }
     }
 
     //get_info
@@ -31,7 +32,8 @@ public class ControladorRestaurante {
             @ApiResponse(code = 200, message = "Successful retrieval of all users",response = String.class),
     })
     @PostMapping(value = "/getInfo", produces = { "application/json" },consumes = { "application/json" })
-    public ResponseEntity<RestauranteSimpleBodyResponse> getInfo(@RequestBody LogInBody body) throws InvalidOrNullFieldException {
-        return new ResponseEntity<>(service.getInfo(body), HttpStatus.OK);
+    public ResponseEntity getInfo(@RequestBody LogInBody body) throws InvalidOrNullFieldException {
+        try{ return new ResponseEntity<>(service.getInfo(body), HttpStatus.OK); }
+        catch (Exception error){ return new ResponseEntity<>(error.getMessage(), HttpStatus.BAD_REQUEST); }
     }
 }

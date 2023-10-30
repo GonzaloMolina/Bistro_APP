@@ -25,8 +25,13 @@ public class ControladorOrden {
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Successful retrieval of all users",response = OrdenBodyResponseList.class, responseContainer = "List"),
     })
-    public ResponseEntity<List> listOrdenes() {
-        return new ResponseEntity<> (ordenService.list(), HttpStatus.OK);
+    public ResponseEntity listOrdenes() {
+        try{
+            return new ResponseEntity<> (ordenService.list(), HttpStatus.OK);
+        }
+        catch (Exception error){
+            return new ResponseEntity<>(error.getMessage(), HttpStatus.BAD_REQUEST);
+        }
     }
 
     //get_ONE
@@ -34,8 +39,13 @@ public class ControladorOrden {
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Successful retrieval of a user",response = OrdenBodyResponse.class),
     })
-    public ResponseEntity<OrdenBodyResponse> getOrden(@PathVariable Integer id) throws ExcepcionIdInvalida {
-        return new ResponseEntity<>(ordenService.getById(id), HttpStatus.OK);
+    public ResponseEntity getOrden(@PathVariable Integer id) throws ExcepcionIdInvalida {
+        try{
+            return new ResponseEntity<>(ordenService.getById(id), HttpStatus.OK);
+        }
+        catch (Exception error){
+            return new ResponseEntity<>(error.getMessage(), HttpStatus.BAD_REQUEST);
+        }
     }
 
     //ADD_ONE
@@ -43,22 +53,37 @@ public class ControladorOrden {
             @ApiResponse(code = 200, message = "Successful retrieval of all users",response = String.class),
     })
     @PostMapping(value = "/new", produces = { "application/json" },consumes = { "application/json" })
-    public ResponseEntity<Integer> addOrder(@RequestBody OrdenBodyPost ordenBody) throws InvalidOrNullFieldException, ExcepcionIdInvalida {
-        return new ResponseEntity<>(ordenService.save(ordenBody), HttpStatus.OK);
+    public ResponseEntity addOrder(@RequestBody OrdenBodyPost ordenBody) throws InvalidOrNullFieldException, ExcepcionIdInvalida {
+        try{
+            return new ResponseEntity<>(ordenService.save(ordenBody), HttpStatus.OK);
+        }
+        catch (Exception error){
+            return new ResponseEntity<>(error.getMessage(), HttpStatus.BAD_REQUEST);
+        }
     }
 
     //DELETE_ONE exception for id
     @CrossOrigin(origins = "http://localhost:3000")
     @DeleteMapping(value = "{mesaId}/{id}", produces = { "application/json" })
     public ResponseEntity<String> deleteOrder(@PathVariable Integer mesaId,@PathVariable Integer id) throws ExcepcionIdInvalida {
-        ordenService.delete(mesaId, id);
-        return new ResponseEntity<>("OK", HttpStatus.OK);
+        try{
+            ordenService.delete(mesaId, id);
+            return new ResponseEntity<>("OK", HttpStatus.OK);
+        }
+        catch (Exception error){
+            return new ResponseEntity<>(error.getMessage(), HttpStatus.BAD_REQUEST);
+        }
     }
 
     //update exception for id and body
     @PutMapping(value = "/", produces = { "application/json" },consumes = { "application/json" })
     public  ResponseEntity updateUser(@RequestBody OrdenBodyPut ordenBody) throws ExcepcionIdInvalida, InvalidOrNullFieldException {
-        ordenService.update(ordenBody);
-        return new ResponseEntity<>("OK", HttpStatus.OK);
+        try{
+            ordenService.update(ordenBody);
+            return new ResponseEntity<>("OK", HttpStatus.OK);
+        }
+        catch (Exception error){
+            return new ResponseEntity<>(error.getMessage(), HttpStatus.BAD_REQUEST);
+        }
     }
 }

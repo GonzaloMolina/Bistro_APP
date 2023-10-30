@@ -27,8 +27,9 @@ public class ControladorMesa {
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Successful retrieval of all users",response = OrdenBodyResponseList.class, responseContainer = "List"),
     })
-    public ResponseEntity<List> listTable() {
-        return new ResponseEntity<> (mesaService.listAll(), HttpStatus.OK);
+    public ResponseEntity listTable() {
+        try { return new ResponseEntity<> (mesaService.listAll(), HttpStatus.OK); }
+        catch (Exception error) { return new ResponseEntity<> (error.getMessage(), HttpStatus.BAD_REQUEST); }
     }
 
     //get_ONE
@@ -36,8 +37,9 @@ public class ControladorMesa {
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Successful retrieval of a user",response = OrdenBodyResponse.class),
     })
-    public ResponseEntity<MesaBodyResponse> getTable(@PathVariable Integer id) throws ExcepcionIdInvalida {
-        return new ResponseEntity<>(mesaService.getById(id), HttpStatus.OK);
+    public ResponseEntity getTable(@PathVariable Integer id) throws ExcepcionIdInvalida {
+        try{ return new ResponseEntity<>(mesaService.getById(id), HttpStatus.OK); }
+        catch (Exception error){ return new ResponseEntity<>(error.getMessage(), HttpStatus.BAD_REQUEST); }
     }
 
     //Release
@@ -45,7 +47,8 @@ public class ControladorMesa {
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Successful retrieval of a user",response = OrdenBodyResponse.class),
     })
-    public ResponseEntity<MesaBodyResponse> releaseTable(@PathVariable Integer id) throws ExcepcionIdInvalida {
-        return new ResponseEntity<>(mesaService.releaseTable(id), HttpStatus.OK);
+    public ResponseEntity releaseTable(@PathVariable Integer id) throws ExcepcionIdInvalida {
+        try{ return new ResponseEntity<>(mesaService.releaseTable(id), HttpStatus.OK); }
+        catch (Exception error) { return new ResponseEntity<>(error.getMessage(), HttpStatus.BAD_REQUEST); }
     }
 }

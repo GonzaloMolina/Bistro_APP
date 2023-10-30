@@ -23,7 +23,8 @@ public class ControladorDeMenu {
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Successful retrieval of a user",response = MenuResponseBody.class),
     })
-    public ResponseEntity<MenuResponseBody> getMenu(@PathVariable Integer id) throws ExcepcionIdInvalida {
-        return new ResponseEntity<>(menuService.getById(id), HttpStatus.OK);
+    public ResponseEntity getMenu(@PathVariable Integer id) throws ExcepcionIdInvalida {
+        try{ return new ResponseEntity<>(menuService.getById(id), HttpStatus.OK); }
+        catch(Exception error) { return new ResponseEntity<>(error.getMessage(), HttpStatus.BAD_REQUEST); }
     }
 }
