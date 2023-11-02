@@ -67,15 +67,24 @@ public class Seeder {
 
             emp2.setMesasAsignadas(this.crearMesas(2, menu));
             ////////////////////////////////////////////////
-
             resto.addEmpleado(emp);
             resto.addEmpleado(emp1);
             resto.addEmpleado(emp2);
-
+            ////////////////////////////////////////////////
             resto.setMenu(menu);
-
+            ////////////////////////////////////////////////
+            this.addMesasToResto(resto, emp.getMesasAsignadas());
+            this.addMesasToResto(resto, emp1.getMesasAsignadas());
+            this.addMesasToResto(resto, emp2.getMesasAsignadas());
+            ////////////////////////////////////////////////
             restDao.save(resto);
         }
+    }
+
+    private void addMesasToResto(Restaurante resto, List<Mesa> mesas){
+        List<Mesa> temp = resto.getMesas();
+        temp.addAll(mesas);
+        resto.setMesas((ArrayList<Mesa>) temp);
     }
 
     private List<Solicitud> generarSolicitudes() {

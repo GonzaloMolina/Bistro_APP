@@ -36,4 +36,17 @@ public class ControladorRestaurante {
         try{ return new ResponseEntity<>(service.getInfo(body), HttpStatus.OK); }
         catch (Exception error){ return new ResponseEntity<>(error.getMessage(), HttpStatus.BAD_REQUEST); }
     }
+
+    //Put_request
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Successful retrieval of all users",response = String.class),
+    })
+    @PutMapping(value = "/updateState", produces = { "application/json" },consumes = { "application/json" })
+    public ResponseEntity updateState(@RequestBody StateBody body) throws InvalidOrNullFieldException {
+        try{
+            service.updateState(body);
+            return new ResponseEntity<>("ok", HttpStatus.OK);
+        }
+        catch (Exception error){ return new ResponseEntity<>(error.getMessage(), HttpStatus.BAD_REQUEST); }
+    }
 }

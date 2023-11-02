@@ -1,6 +1,6 @@
 package Bistro_BackEnd.controladores.restaurante;
 
-import Bistro_BackEnd.controladores.empleado.MozoResponseBodyList;
+import Bistro_BackEnd.controladores.empleado.MozoResponseBody;
 import Bistro_BackEnd.controladores.empleado.PeticionBodyResponseList;
 import Bistro_BackEnd.controladores.mesa.MesaBodyResponseList;
 import Bistro_BackEnd.controladores.orden.OrdenBodyResponseList;
@@ -20,7 +20,7 @@ public class RestauranteBodyResponse {
     private String email;
     private String tel;
     private String direccion;
-    private List<MozoResponseBodyList> empleados;
+    private List<MozoResponseBody> empleados;
     private List<OrdenBodyResponseList> ordenes;
     private List<PeticionBodyResponseList> solicitudes;
     private List<MesaBodyResponseList> mesas;
@@ -49,8 +49,8 @@ public class RestauranteBodyResponse {
         return ordenes.stream().map(OrdenBodyResponseList::new).collect(Collectors.toList());
     }
 
-    private List<MozoResponseBodyList> mapEmpleados(List<Mozo> empleados) {
-        return empleados.stream().map(MozoResponseBodyList::new).collect(Collectors.toList());
+    private List<MozoResponseBody> mapEmpleados(List<Mozo> empleados) {
+        return empleados.stream().map(MozoResponseBody::new).collect(Collectors.toList());
     }
 
     public String getName() { return name; }
@@ -73,11 +73,11 @@ public class RestauranteBodyResponse {
 
     public void setDireccion(String direccion) { this.direccion = direccion; }
 
-    public List<MozoResponseBodyList> getEmpleados() {
+    public List<MozoResponseBody> getEmpleados() {
         return empleados;
     }
 
-    public void setEmpleados(List<MozoResponseBodyList> empleados) {
+    public void setEmpleados(List<MozoResponseBody> empleados) {
         this.empleados = empleados;
     }
 
