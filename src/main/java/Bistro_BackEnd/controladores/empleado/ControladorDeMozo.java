@@ -2,6 +2,7 @@ package Bistro_BackEnd.controladores.empleado;
 
 import Bistro_BackEnd.servicios.empleado.MozoService;
 import Bistro_BackEnd.servicios.excepciones.ExcepcionIdInvalida;
+import Bistro_BackEnd.servicios.excepciones.InvalidOrNullFieldException;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,8 +24,9 @@ public class ControladorDeMozo {
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Successful retrieval of all users",response = MozoResponseBodyList.class, responseContainer = "List"),
     })
-    public ResponseEntity<List> listMozos() {
-        return new ResponseEntity<> (mozoService.listAll(), HttpStatus.OK);
+    public ResponseEntity listMozos() {
+        try{ return new ResponseEntity<>(mozoService.listAll(), HttpStatus.OK); }
+        catch(Exception error) { return new ResponseEntity<>(error.getMessage(), HttpStatus.BAD_REQUEST); }
     }
 
     //get_ONE
@@ -32,8 +34,9 @@ public class ControladorDeMozo {
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Successful retrieval of a user",response = MozoResponseBody.class),
     })
-    public ResponseEntity<MozoResponseBody> getMozo(@PathVariable Integer id) throws ExcepcionIdInvalida {
-        return new ResponseEntity<>(mozoService.getById(id), HttpStatus.OK);
+    public ResponseEntity getMozo(@PathVariable Integer id) throws ExcepcionIdInvalida {
+        try{ return new ResponseEntity<>(mozoService.getById(id), HttpStatus.OK); }
+        catch(Exception error){ return new ResponseEntity<>(error.getMessage(), HttpStatus.BAD_REQUEST); }
     }
 
     //get_ONE
@@ -41,8 +44,9 @@ public class ControladorDeMozo {
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Successful retrieval of a user",response = MozoResponseBody.class),
     })
-    public ResponseEntity<List<PeticionBodyResponseList>> getMozoSolicitudes(@PathVariable Integer id) throws ExcepcionIdInvalida {
-        return new ResponseEntity<>(mozoService.getRequestById(id), HttpStatus.OK);
+    public ResponseEntity getMozoSolicitudes(@PathVariable Integer id) throws ExcepcionIdInvalida {
+        try{ return new ResponseEntity<>(mozoService.getRequestById(id), HttpStatus.OK); }
+        catch(Exception error){ return new ResponseEntity<>(error.getMessage(), HttpStatus.BAD_REQUEST); }
     }
 
     //LogIn
@@ -50,7 +54,10 @@ public class ControladorDeMozo {
             @ApiResponse(code = 200, message = "Successful retrieval of all users",response = String.class),
     })
     @PostMapping(value = "/logIn", produces = { "application/json" },consumes = { "application/json" })
-    public ResponseEntity<LogInResponseBody> addOrder(@RequestBody LogInBody body) throws ExcepcionIdInvalida {
-        return new ResponseEntity<>(mozoService.logIn(body), HttpStatus.OK);
+    public ResponseEntity logIn(@RequestBody LogInBody body) throws ExcepcionIdInvalida, InvalidOrNullFieldException {
+        try {
+            LogInResponseBody res = mozoService.logIn(body);
+            return new ResponseEntity<>(res, HttpStatus.OK);
+        }catch (Exception error){ return new ResponseEntity<>(error.getMessage(), HttpStatus.BAD_REQUEST); }
     }
 }

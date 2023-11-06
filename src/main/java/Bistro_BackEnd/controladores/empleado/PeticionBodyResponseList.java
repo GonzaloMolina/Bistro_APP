@@ -1,7 +1,7 @@
 package Bistro_BackEnd.controladores.empleado;
 
 import Bistro_BackEnd.model.empleado.Estado;
-import Bistro_BackEnd.model.empleado.Peticion;
+import Bistro_BackEnd.model.empleado.Solicitud;
 
 public class PeticionBodyResponseList {
 
@@ -11,7 +11,7 @@ public class PeticionBodyResponseList {
 
     public PeticionBodyResponseList(){}
 
-    public PeticionBodyResponseList(Peticion peticion) {
+    public PeticionBodyResponseList(Solicitud peticion) {
         this.id = peticion.getId();
         this.asunto = peticion.getAsuto();
         this.estado = peticion.getEstado();

@@ -32,13 +32,11 @@ class OrdenTest {
         assertNull(ord.getId());
         assertNull(ord.getBebidas());
         assertNull(ord.getPlatos());
-        assertNull(ord.getMesa());
     }
 
     @Test
     void test_01_constructorParametrizado(){
         assertNull(ord1.getId());
-        assertNull(ord1.getMesa());
         assertEquals(ord1.getBebidas(), bebidas);
         assertEquals(ord1.getPlatos(), platos);
     }
@@ -49,12 +47,6 @@ class OrdenTest {
         assertEquals(ord1.getId(), 1L);
     }
 
-    @Test
-    void test_03_setMesa(){
-        Mesa temp = new Mesa();
-        ord1.setMesa(temp);
-        assertEquals(ord1.getMesa(), temp);
-    }
 
     @Test
     void test_04_setBebidas(){

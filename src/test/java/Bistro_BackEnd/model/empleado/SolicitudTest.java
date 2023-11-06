@@ -5,11 +5,11 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class PeticionTest {
+class SolicitudTest {
 
 
-    private Peticion peticionE = new Peticion();
-    private Peticion pet;
+    private Solicitud peticionE = new Solicitud();
+    private Solicitud pet;
 
     private String receptor;
     private String emisor;
@@ -22,7 +22,7 @@ class PeticionTest {
         emisor = "emp@mail.com";
         asunto = "Licencia por tratamiento medico";
         cuerpo = "";
-        pet = new Peticion(receptor, emisor, asunto, cuerpo);
+        pet = new Solicitud(receptor, emisor, asunto, cuerpo);
     }
 
     @Test

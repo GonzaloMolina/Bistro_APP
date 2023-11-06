@@ -21,11 +21,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        /*auth.inMemoryAuthentication()
+        auth.inMemoryAuthentication()
             .withUser("admin@mail.com")
             .password(passwordEncoder().encode("public123"))
-            .authorities("ROLE_USER");*/
-        auth.authenticationProvider(authenticationProvider());
+            .authorities("ROLE_USER");
+        //auth.authenticationProvider(authenticationProvider());
     }
 
     @Override
@@ -45,6 +45,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         web.ignoring().antMatchers("/orden/**");
         web.ignoring().antMatchers("/menu/**");
         web.ignoring().antMatchers("/peticion/**");
+        web.ignoring().antMatchers("/restaurante/**");
     }
 
     @Bean

@@ -7,12 +7,14 @@ import Bistro_BackEnd.model.mesa.Mesa;
 public class MesaBodyResponse {
 
     private Long id;
+    private Long menuId;
     private Integer capacidad;
     private double cuenta;
     private OrdenBodyResponse orden;
 
     public MesaBodyResponse(Mesa mesaR) {
         this.id = mesaR.getId();
+        this.menuId = mesaR.getMenuId();
         this.capacidad = mesaR.getCapacidad();
         this.cuenta = mesaR.getCuenta();
         this.orden = this.mapOrden(mesaR.getOrden());
@@ -56,5 +58,13 @@ public class MesaBodyResponse {
 
     public void setOrden(OrdenBodyResponse orden) {
         this.orden = orden;
+    }
+
+    public Long getMenuId() {
+        return menuId;
+    }
+
+    public void setMenuId(Long menuId) {
+        this.menuId = menuId;
     }
 }
