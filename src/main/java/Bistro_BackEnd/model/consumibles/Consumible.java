@@ -12,6 +12,7 @@ public abstract class Consumible {
     private Long id;
     private String nombre;
     private double precio;
+    private double cost;
 
     // Constructores, getters y setters
 
@@ -20,9 +21,10 @@ public abstract class Consumible {
     }
 
     // Constructor con parámetros
-    public Consumible(String nombre, double precio) {
+    public Consumible(String nombre, double precio, double cost) {
         this.nombre = nombre;
         this.precio = precio;
+        this.cost = cost;
     }
 
     public Long getId() {
@@ -47,5 +49,13 @@ public abstract class Consumible {
 
     public void setPrecio(double precio) {
         this.precio = precio;
+    }
+
+    public double getCost() {
+        return cost;
+    }
+
+    public void setCost(double cost) {
+        this.cost = cost;
     }
 }

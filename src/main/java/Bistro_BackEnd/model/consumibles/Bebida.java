@@ -16,8 +16,8 @@ public class Bebida extends Consumible {
     }
 
     // Constructor
-    public Bebida(String nombre, TamanioBebida tamanio, double precio) {
-        super(nombre, precio);
+    public Bebida(String nombre, TamanioBebida tamanio, double precio, double cost) {
+        super(nombre, precio, cost);
         this.tamanio = tamanio;
     }
 

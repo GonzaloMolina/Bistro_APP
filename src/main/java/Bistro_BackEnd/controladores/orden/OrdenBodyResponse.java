@@ -6,6 +6,7 @@ import Bistro_BackEnd.model.Orden.Orden;
 import Bistro_BackEnd.model.consumibles.Bebida;
 import Bistro_BackEnd.model.consumibles.Plato;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -13,6 +14,7 @@ public class OrdenBodyResponse {
 
 
     private Long id;
+    private LocalDate date;
     private List<BebidaBodyResponse> bebidas;
     private List<PlatoBodyResponse> platos;
 
@@ -20,6 +22,7 @@ public class OrdenBodyResponse {
 
     public OrdenBodyResponse(Orden orden){
         this.id = orden.getId();
+        this.date = orden.getDate();
         this.platos = this.mapPlatos(orden.getPlatos());
         this.bebidas = this.mapBebidas(orden.getBebidas());
     }
@@ -55,5 +58,13 @@ public class OrdenBodyResponse {
 
     public void setPlatos(List<PlatoBodyResponse> platos) {
         this.platos = platos;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
     }
 }

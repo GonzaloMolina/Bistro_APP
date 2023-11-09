@@ -26,16 +26,16 @@ public class PlatoM extends Consumible {
     }
 
     // Constructor
-    public PlatoM(String nombre, double precio, TipoPlato tipo) {
-        super(nombre, precio);
+    public PlatoM(String nombre, double precio, double cost, TipoPlato tipo) {
+        super(nombre, precio, cost);
         this.tipo = tipo;
         this.acompanamientos= new ArrayList<>();
         this.salsas= new ArrayList<>();
     }
 
     // Constructor
-    public PlatoM(String nombre, double precio, TipoPlato tipo, List<Acompanamiento> acomps, List<Salsa> salsas) {
-        super(nombre, precio);
+    public PlatoM(String nombre, double precio, double cost, TipoPlato tipo, List<Acompanamiento> acomps, List<Salsa> salsas) {
+        super(nombre, precio, cost);
         this.tipo = tipo;
         this.acompanamientos = acomps;
         this.salsas = salsas;

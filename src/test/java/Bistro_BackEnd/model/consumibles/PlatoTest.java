@@ -17,8 +17,8 @@ class PlatoTest {
 
     @BeforeEach
     void setUp(){
-        pla = new Plato("Salmon", 0.0, TipoPlato.PESCADO);
-        plt = new Plato("s", 0.1, TipoPlato.CARNE, acom, sauce);
+        pla = new Plato("Salmon", 0.0,0.0, TipoPlato.PESCADO);
+        plt = new Plato("s", 0.1, 1.0, TipoPlato.CARNE, acom, sauce);
     }
 
     @Test

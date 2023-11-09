@@ -24,7 +24,7 @@ class OrdenTest {
     @BeforeEach
     void setUp(){
         ord1 = new Orden(bebidas, platos);
-        drinks.add(new Bebida("", TamanioBebida.CHICO, 600.0));
+        drinks.add(new Bebida("", TamanioBebida.CHICO, 600.0,0.0));
     }
 
     @Test

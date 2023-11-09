@@ -1,5 +1,6 @@
 package Bistro_BackEnd.model.empleado;
 
+import Bistro_BackEnd.model.Orden.Orden;
 import Bistro_BackEnd.model.mesa.Mesa;
 import Bistro_BackEnd.model.restaurante.Restaurante;
 import org.hibernate.annotations.LazyCollection;
@@ -8,6 +9,7 @@ import org.hibernate.annotations.LazyCollectionOption;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List; // Importa la clase List si usas List
+import java.util.stream.Collectors;
 
 @Entity
 public class Mozo extends Empleado {
@@ -66,5 +68,9 @@ public class Mozo extends Empleado {
 
     public void setRestaurante(Restaurante restaurante) {
         this.restaurante = restaurante;
+    }
+
+    public List<Orden> getOrdenes() {
+        return this.mesasAsignadas.stream().map(Mesa::getOrden).collect(Collectors.toList());
     }
 }

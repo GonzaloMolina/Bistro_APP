@@ -13,7 +13,7 @@ class BebidaTest {
 
     @BeforeEach
     void setUp(){
-        beb = new Bebida("",TamanioBebida.CHICO, 1.0);
+        beb = new Bebida("",TamanioBebida.CHICO, 1.0, 0.0);
     }
 
     @Test

@@ -11,6 +11,7 @@ import Bistro_BackEnd.model.Orden.Orden;
 import Bistro_BackEnd.controladores.orden.OrdenBodyResponseList;
 import Bistro_BackEnd.dao.orden.OrdenDao;
 import Bistro_BackEnd.model.consumibles.*;
+import Bistro_BackEnd.model.empleado.Mozo;
 import Bistro_BackEnd.model.menu.PlatoM;
 import Bistro_BackEnd.model.mesa.Mesa;
 import Bistro_BackEnd.model.pair.Pair;
@@ -67,9 +68,12 @@ public class OrdenServiceImp implements OrdenService {
         Orden newOrden = new Orden(drinks, dishes);
 
         int ordenId = this.ordenDao.save(newOrden).getId().intValue();
-
+        Orden order = this.ordenDao.findById((long) ordenId).orElse(new Orden());
+        Mozo m = this.mozoDao.findById(Long.valueOf(ordenBody.getMozoId())).orElse(new Mozo());
         Mesa mesa = this.mesaDao.findById(Long.valueOf(ordenBody.getMesaId())).orElse(new Mesa());
-        mesa.setOrden(this.ordenDao.findById((long) ordenId).orElse(new Orden()));
+        mesa.setOrden(order);
+        m.getRestaurante().addOrden(order);
+        mozoDao.save(m);
         mesaDao.save(mesa);
         return ordenId;
     }

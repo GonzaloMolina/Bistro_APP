@@ -24,10 +24,10 @@ class PlatoMTest {
     @BeforeEach
     void setUp(){
         emptyPlt = new PlatoM();
-        plt1 = new PlatoM("", 0.0, TipoPlato.PESCADO);
+        plt1 = new PlatoM("", 0.0, 0.0,TipoPlato.PESCADO);
         acom = new ArrayList<>();
         sauce = new ArrayList<>();
-        plt2 = new PlatoM("s", 0.1, TipoPlato.CARNE, acom, sauce);
+        plt2 = new PlatoM("s", 0.1, 0.0,TipoPlato.CARNE, acom, sauce);
     }
 
     @Test
