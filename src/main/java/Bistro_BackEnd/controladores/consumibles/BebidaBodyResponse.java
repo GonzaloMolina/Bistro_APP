@@ -8,6 +8,7 @@ public class BebidaBodyResponse {
     private Long id;
     private String nombre;
     private double precio;
+    private double cost;
     private TamanioBebida tamanio;
 
     public BebidaBodyResponse(){}
@@ -15,6 +16,7 @@ public class BebidaBodyResponse {
         this.id = bebida.getId();
         this.nombre = bebida.getNombre();
         this.precio = bebida.getPrecio();
+        this.cost = bebida.getCost();
         this.tamanio = bebida.getTamanio();
     }
 
@@ -48,5 +50,13 @@ public class BebidaBodyResponse {
 
     public void setTamanio(TamanioBebida tamanio) {
         this.tamanio = tamanio;
+    }
+
+    public double getCost() {
+        return cost;
+    }
+
+    public void setCost(double cost) {
+        this.cost = cost;
     }
 }

@@ -66,7 +66,7 @@ public class Restaurante {
     public void setPassword(String password) { this.password = password; }
     public void setSolicitudes(ArrayList<Solicitud> solicitudes) { this.solicitudes = solicitudes; }
     public void setMesas(ArrayList<Mesa> mesas) { this.mesas = mesas; }
-    public void setOrdenes(ArrayList<Orden> ordenes) { this.ordenes = ordenes; }
+    public void setOrdenes(List<Orden> ordenes) { this.ordenes = ordenes; }
     public void setEmpleados(ArrayList<Mozo> empleados) { this.empleados = empleados; }
 
     //LISTs

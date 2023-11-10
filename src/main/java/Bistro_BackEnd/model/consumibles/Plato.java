@@ -25,21 +25,21 @@ public class Plato extends Consumible {
     }
 
     // Constructor
-    public Plato(String nombre, double precio, TipoPlato tipo) {
-        super(nombre, precio);
+    public Plato(String nombre, double precio, double cost,TipoPlato tipo) {
+        super(nombre, precio, cost);
         this.tipo = tipo;
     }
 
     // Constructor
-    public Plato(String nombre, double precio, TipoPlato tipo, Acompanamiento acompanamiento, Salsa salsa) {
-        super(nombre, precio);
+    public Plato(String nombre, double precio, double cost, TipoPlato tipo, Acompanamiento acompanamiento, Salsa salsa) {
+        super(nombre, precio, cost);
         this.tipo = tipo;
         this.acompanamiento = acompanamiento;
         this.salsa = salsa;
     }
 
     public Plato(PlatoM rPlato) {
-        super(rPlato.getNombre(), rPlato.getPrecio());
+        super(rPlato.getNombre(), rPlato.getPrecio(), rPlato.getCost());
         this.tipo = rPlato.getTipo();
     }
 

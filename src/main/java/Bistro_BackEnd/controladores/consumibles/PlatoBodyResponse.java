@@ -10,6 +10,7 @@ public class PlatoBodyResponse {
     private Long id;
     private String nombre;
     private double precio;
+    private double cost;
     private TipoPlato tipo;
     private AcompanammientoBodyResponse acompanamiento;
     private SalsaBodyResponse salsa;
@@ -20,6 +21,7 @@ public class PlatoBodyResponse {
         this.id = plato.getId();
         this.nombre = plato.getNombre();
         this.precio = plato.getPrecio();
+        this.cost = plato.getCost();
         this.tipo = plato.getTipo();
         this.acompanamiento = this.mapAcompanamiento(plato.getAcompanamiento());
         this.salsa = this.mapSalsa(plato.getSalsa());
@@ -92,4 +94,11 @@ public class PlatoBodyResponse {
         this.salsa = salsa;
     }
 
+    public double getCost() {
+        return cost;
+    }
+
+    public void setCost(double cost) {
+        this.cost = cost;
+    }
 }
