@@ -1,6 +1,5 @@
 package Bistro_BackEnd.model.menu;
 
-import Bistro_BackEnd.model.Orden.Orden;
 import Bistro_BackEnd.model.consumibles.Acompanamiento;
 import Bistro_BackEnd.model.consumibles.Consumible;
 import Bistro_BackEnd.model.consumibles.Salsa;

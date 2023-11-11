@@ -1,15 +1,12 @@
 package Bistro_BackEnd.model.Orden;
 
 import Bistro_BackEnd.model.consumibles.Consumible;
-import Bistro_BackEnd.model.mesa.Mesa;
 import Bistro_BackEnd.model.consumibles.Bebida;
 import Bistro_BackEnd.model.consumibles.Plato;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 @Entity
 public class Orden {

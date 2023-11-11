@@ -12,7 +12,7 @@ public class PlatoBodyResponse {
     private double precio;
     private double cost;
     private TipoPlato tipo;
-    private AcompanammientoBodyResponse acompanamiento;
+    private AcompanamientoBodyResponse acompanamiento;
     private SalsaBodyResponse salsa;
 
     public PlatoBodyResponse(){}
@@ -36,9 +36,9 @@ public class PlatoBodyResponse {
         }
     }
 
-    private AcompanammientoBodyResponse mapAcompanamiento(Acompanamiento acompanamiento) {
+    private AcompanamientoBodyResponse mapAcompanamiento(Acompanamiento acompanamiento) {
         if(acompanamiento != null){
-            return new AcompanammientoBodyResponse(acompanamiento);
+            return new AcompanamientoBodyResponse(acompanamiento);
         }
         else{
             return null;
@@ -78,11 +78,11 @@ public class PlatoBodyResponse {
         this.tipo = tipo;
     }
 
-    public AcompanammientoBodyResponse getAcompanamiento() {
+    public AcompanamientoBodyResponse getAcompanamiento() {
         return acompanamiento;
     }
 
-    public void setAcompanamiento(AcompanammientoBodyResponse acompanamiento) {
+    public void setAcompanamiento(AcompanamientoBodyResponse acompanamiento) {
         this.acompanamiento = acompanamiento;
     }
 

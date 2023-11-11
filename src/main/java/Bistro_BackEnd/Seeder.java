@@ -48,7 +48,7 @@ public class Seeder {
         //password public123
         Restaurante resto = new Restaurante("Axel LG", "Il mondo",
                 "axel.lopez.garabal@gmail.com",
-                pass, "nro. tel", "dir");
+                pass, "Nro. tel", "Dir");
 
         if(!restDao.existsById(resto.getEmail())){
             /////////////////////////////////////////////////
@@ -91,7 +91,7 @@ public class Seeder {
     private List<Solicitud> generarSolicitudes() {
         List<Solicitud> res = new ArrayList<>();
         String as = "Cambio de horario";
-        String cuerpo = "un cuerpo que explique lo que pide";
+        String cuerpo = "Un cuerpo que explique lo que pide";
 
         Solicitud pet1 = new Solicitud("", "admin@mail.com", as, cuerpo);
         pet1.setEstado(Estado.ACEPTADA);
@@ -109,25 +109,26 @@ public class Seeder {
     private Menu setUpMenu(Menu menu){
         /////////////////////////////////////////////////////////////////////////////
 
-        Bebida bebida0 = new Bebida("Coca-Cola 3l", TamanioBebida.GRANDE, 800.00, 500.00);
-        Bebida bebida1 = new Bebida("Coca-Cola 1,5l", TamanioBebida.MEDIANO, 700.00, 400.00);
-        Bebida bebida2 = new Bebida("Coca-Cola 500ml", TamanioBebida.CHICO, 600.00, 300.00);
+        Bebida bebida0 = new Bebida("Coca-Cola 3l", TamanioBebida.GRANDE, 1200.00, 800.00);
+        Bebida bebida1 = new Bebida("Coca-Cola 1,5l", TamanioBebida.MEDIANO, 700.00, 300.00);
+        Bebida bebida2 = new Bebida("Coca-Cola 500ml", TamanioBebida.CHICO, 400.00, 150.00);
 
-        Bebida bebida3 = new Bebida("Fanta 500ml", TamanioBebida.CHICO, 600.00, 500.00);
-        Bebida bebida4 = new Bebida("Fanta 1,5l", TamanioBebida.MEDIANO, 700.00, 500.00);
-        Bebida bebida5 = new Bebida("Fanta 3l", TamanioBebida.GRANDE, 800.00, 500.00);
-
-        Bebida bebida6 = new Bebida("Sprite 500ml", TamanioBebida.CHICO, 600.00, 500.00);
-        Bebida bebida7 = new Bebida("Sprite 1,5l", TamanioBebida.MEDIANO, 700.00, 500.00);
-        Bebida bebida8 = new Bebida("Sprite 3l", TamanioBebida.GRANDE, 800.00, 500.00);
-
-        Bebida bebida9 = new Bebida("Pepsi 500ml", TamanioBebida.CHICO, 600.00, 500.00);
-        Bebida bebidaA = new Bebida("Pepsi 1,5l", TamanioBebida.MEDIANO, 700.00, 500.00);
-        Bebida bebidaB = new Bebida("Pepsi 3l", TamanioBebida.GRANDE, 800.00, 500.00);
-
-        Bebida bebidaC = new Bebida("7up 500ml", TamanioBebida.CHICO, 600.00, 500.00);
-        Bebida bebidaD = new Bebida("7up 1,5l", TamanioBebida.MEDIANO, 700.00, 500.00);
-        Bebida bebidaE = new Bebida("7up 3l", TamanioBebida.GRANDE, 800.00, 500.00);
+        Bebida bebida3 = new Bebida("Fanta 3l", TamanioBebida.GRANDE, 1200.00, 800.00);
+        Bebida bebida4 = new Bebida("Fanta 1,5l", TamanioBebida.MEDIANO, 700.00, 300.00);
+        Bebida bebida5 = new Bebida("Fanta 500ml", TamanioBebida.CHICO, 400.00, 150.00);
+        
+        Bebida bebida6 = new Bebida("Sprite 3l", TamanioBebida.GRANDE, 1200.00, 800.00);
+        Bebida bebida7 = new Bebida("Sprite 1,5l", TamanioBebida.MEDIANO, 700.00, 300.00);
+        Bebida bebida8 = new Bebida("Sprite 500ml", TamanioBebida.CHICO, 400.00, 150.00);
+        
+        Bebida bebida9 = new Bebida("Pepsi 3l", TamanioBebida.GRANDE, 1000.00, 700.00);
+        Bebida bebidaA = new Bebida("Pepsi 1,5l", TamanioBebida.MEDIANO, 600.00, 400.00);
+        Bebida bebidaB = new Bebida("Pepsi 500ml", TamanioBebida.CHICO, 500.00, 300.00);
+        
+        Bebida bebidaC = new Bebida("7up 3l", TamanioBebida.GRANDE, 1000.00, 700.00);
+        Bebida bebidaD = new Bebida("7up 1,5l", TamanioBebida.MEDIANO, 600.00, 400.00);
+        Bebida bebidaE = new Bebida("7up 500ml", TamanioBebida.CHICO, 500.00, 300.00);
+        
 
         List<Bebida> bebidasMenu = new ArrayList<>();
         bebidasMenu.add(bebida0);
@@ -151,42 +152,48 @@ public class Seeder {
         Acompanamiento salad = new Acompanamiento("Ensalada de Tomate y lechuga");
         Acompanamiento rise = new Acompanamiento("Arroz");
         Acompanamiento honey = new Acompanamiento("Miel");
+        Acompanamiento cream = new Acompanamiento("Crema");
         Salsa sauce =new Salsa("Fileto");
         Salsa sauce1 =new Salsa("Pesto genovés");
+        Salsa sauce2 =new Salsa("Carbonara");
+        Salsa sauce3 =new Salsa("Bolognesa");
+        Salsa sauce4 =new Salsa("Mixta");
+        Salsa sauce5 =new Salsa("Blanca");
 
 
-        PlatoM plato0 = (new PlatoM("Milanesa", 1234.0,1234.0, TipoPlato.CARNE));
+        PlatoM plato0 = (new PlatoM("Milanesa", 4000.0,1500.0, TipoPlato.CARNE));
         plato0.addAcompanamiento(pure);
-        PlatoM plato1 = new PlatoM("Pechuga de pollo", 1032.0,1032.0, TipoPlato.CARNE);
+        PlatoM plato1 = new PlatoM("Pechuga de pollo", 3500.0,2000.0, TipoPlato.CARNE);
         plato1.addAcompanamiento(pureB);
-        PlatoM plato2 = new PlatoM("Costilla de cerdo", 4531.0,4531.0, TipoPlato.CARNE);
+        PlatoM plato2 = new PlatoM("Costilla de cerdo", 5000.0,4000.0, TipoPlato.CARNE);
         plato2.addAcompanamiento(salad);
         plato2.addAcompanamiento(pure);
-        PlatoM plato3 = new PlatoM("Sesos de vaca", 0.0, 10.0, TipoPlato.CARNE);
 
-        PlatoM plato4 = new PlatoM("Canelones", 10200.0,4531.0, TipoPlato.PASTA);
+        PlatoM plato3 = new PlatoM("Canelones", 2500.0,2000.0, TipoPlato.PASTA);
+        plato3.addSalsa(sauce);
+        PlatoM plato4 = new PlatoM("Sorrentinos", 2000.0,1300.0, TipoPlato.PASTA);
         plato4.addSalsa(sauce);
-        PlatoM plato5 = new PlatoM("Espagueti", 5230.0,4531.0, TipoPlato.PASTA);
-        plato5.addSalsa(sauce);
-        plato5.addSalsa(sauce1);
-        PlatoM plato6 = new PlatoM("Fettuccini", 684.0,384.0, TipoPlato.PASTA);
-        plato6.addSalsa(sauce1);
-        PlatoM plato7 = new PlatoM("Ñoquis", 5372.0,572.0, TipoPlato.PASTA);
+        plato4.addSalsa(sauce1);
+        PlatoM plato5 = new PlatoM("Fettuccini", 2000.0,1300.0, TipoPlato.PASTA);
+        plato5.addSalsa(sauce4);
+        PlatoM plato6 = new PlatoM("Ñoquis", 1800.0,1300.0, TipoPlato.PASTA);
+        plato6.addSalsa(sauce5);
 
-        PlatoM plato8 = new PlatoM("Salmon", 7544.0,7044.0, TipoPlato.PESCADO);
+        PlatoM plato7 = new PlatoM("Salmon", 6500.0,4000.0, TipoPlato.PESCADO);
+        plato7.addAcompanamiento(rise);
+        PlatoM plato8 = new PlatoM("Dorado", 5500.0, 3500.0, TipoPlato.PESCADO);
         plato8.addAcompanamiento(rise);
-        PlatoM plato9 = new PlatoM("Atun", 5682.0, 180.0, TipoPlato.PESCADO);
-        plato9.addAcompanamiento(rise);
-        PlatoM platoA = new PlatoM("Trucha", 7950.0,950.0, TipoPlato.PESCADO);
+        PlatoM plato9 = new PlatoM("Trucha", 5000.0,3500.0, TipoPlato.PESCADO);
+        plato9.addAcompanamiento(pureB);
+        PlatoM platoA = new PlatoM("Pejerrey", 5000.0,3500.0, TipoPlato.PESCADO);
         platoA.addAcompanamiento(rise);
-        PlatoM platoB = new PlatoM("Pejerey", 8954.0,950.0, TipoPlato.PESCADO);
-        platoB.addAcompanamiento(rise);
 
-        PlatoM platoC = new PlatoM("Tiramisu", 345430.0,5430.0, TipoPlato.POSTRE);
-        PlatoM platoD = new PlatoM("Budin de chocolate", 3242.0,242.0, TipoPlato.POSTRE);
-        platoD.addAcompanamiento(honey);
-        PlatoM platoE = new PlatoM("Sufle", 2312.0,312.0, TipoPlato.POSTRE);
-        PlatoM platoF = new PlatoM("3 Bochas de helado", 3543.0,543.0, TipoPlato.POSTRE);
+        PlatoM platoB = new PlatoM("Tiramisu", 1500.0,400.0, TipoPlato.POSTRE);
+        PlatoM platoC = new PlatoM("Budín de chocolate", 1300.0,800.0, TipoPlato.POSTRE);
+        platoC.addAcompanamiento(honey);
+        PlatoM platoD = new PlatoM("Flan", 1600.0,312.0, TipoPlato.POSTRE);
+        platoD.addAcompanamiento(cream);
+        PlatoM platoE = new PlatoM("3 Bochas de helado", 1400.0,543.0, TipoPlato.POSTRE);
 
         List<PlatoM> platosMenu = new ArrayList<>();
         platosMenu.add(plato0);
@@ -204,7 +211,6 @@ public class Seeder {
         platosMenu.add(platoC);
         platosMenu.add(platoD);
         platosMenu.add(platoE);
-        platosMenu.add(platoF);
 
         menu.setBebidas(bebidasMenu);
         menu.setPlatos(platosMenu);
@@ -212,7 +218,7 @@ public class Seeder {
     }
 
     private Orden generarOrden(){
-        Bebida bebida10 = new Bebida("Quilmes", TamanioBebida.GRANDE, 800.00, 0.0);
+        Bebida bebida10 = new Bebida("Quilmes 1Lt", TamanioBebida.GRANDE, 800.00, 0.0);
         Bebida bebida11 = new Bebida("Red Bull", TamanioBebida.CHICO, 700.00, 0.0);
         List<Bebida> bebidas2 = new ArrayList<>();
         bebidas2.add(bebida10);

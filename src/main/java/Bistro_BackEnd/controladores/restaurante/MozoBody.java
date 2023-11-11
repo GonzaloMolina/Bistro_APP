@@ -1,7 +1,5 @@
 package Bistro_BackEnd.controladores.restaurante;
 
-import Bistro_BackEnd.model.empleado.Mozo;
-
 public class MozoBody {
 
     private String nombre;

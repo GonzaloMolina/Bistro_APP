@@ -1,6 +1,5 @@
 package Bistro_BackEnd.controladores.menu;
 
-import Bistro_BackEnd.controladores.consumibles.BebidaBodyResponse;
 import Bistro_BackEnd.model.consumibles.TamanioBebida;
 import Bistro_BackEnd.model.consumibles.TipoPlato;
 import Bistro_BackEnd.model.menu.Menu;

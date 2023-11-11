@@ -2,14 +2,14 @@ package Bistro_BackEnd.controladores.consumibles;
 
 import Bistro_BackEnd.model.consumibles.Acompanamiento;
 
-public class AcompanammientoBodyResponse {
+public class AcompanamientoBodyResponse {
 
     private Long id;
     private String nombre;
 
-    public AcompanammientoBodyResponse() {}
+    public AcompanamientoBodyResponse() {}
 
-    public AcompanammientoBodyResponse(Acompanamiento acompanamiento) {
+    public AcompanamientoBodyResponse(Acompanamiento acompanamiento) {
         this.id = acompanamiento.getId();
         this.nombre = acompanamiento.getNombre();
     }

@@ -6,7 +6,6 @@ import Bistro_BackEnd.dao.empleado.MozoDao;
 import Bistro_BackEnd.dao.mesa.MesaDao;
 import Bistro_BackEnd.dao.peticion.SolicitudDao;
 import Bistro_BackEnd.dao.restaurante.RestauranteDao;
-import Bistro_BackEnd.model.Orden.Orden;
 import Bistro_BackEnd.model.empleado.Estado;
 import Bistro_BackEnd.model.empleado.Mozo;
 import Bistro_BackEnd.model.empleado.Solicitud;
@@ -17,10 +16,7 @@ import Bistro_BackEnd.servicios.excepciones.InvalidOrNullFieldException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 
 @Service

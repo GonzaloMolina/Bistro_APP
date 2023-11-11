@@ -1,9 +1,8 @@
 package Bistro_BackEnd.controladores.menu;
 
-import Bistro_BackEnd.controladores.consumibles.AcompanammientoBodyResponse;
+import Bistro_BackEnd.controladores.consumibles.AcompanamientoBodyResponse;
 import Bistro_BackEnd.controladores.consumibles.SalsaBodyResponse;
 import Bistro_BackEnd.model.consumibles.Acompanamiento;
-import Bistro_BackEnd.model.consumibles.Plato;
 import Bistro_BackEnd.model.consumibles.Salsa;
 import Bistro_BackEnd.model.consumibles.TipoPlato;
 import Bistro_BackEnd.model.menu.PlatoM;
@@ -18,7 +17,7 @@ public class PlatoMBodyResponse {
     private double precio;
     private double cost;
     private TipoPlato tipo;
-    private List<AcompanammientoBodyResponse> acompanamientos;
+    private List<AcompanamientoBodyResponse> acompanamientos;
     private List<SalsaBodyResponse> salsas;
 
     public PlatoMBodyResponse(){}
@@ -37,8 +36,8 @@ public class PlatoMBodyResponse {
         return salsas.stream().map(SalsaBodyResponse::new).collect(Collectors.toList());
     }
 
-    private List<AcompanammientoBodyResponse> mapAcompanamiento(List<Acompanamiento> acompanamientos) {
-        return acompanamientos.stream().map(AcompanammientoBodyResponse::new).collect(Collectors.toList());
+    private List<AcompanamientoBodyResponse> mapAcompanamiento(List<Acompanamiento> acompanamientos) {
+        return acompanamientos.stream().map(AcompanamientoBodyResponse::new).collect(Collectors.toList());
     }
 
     public Long getId() {
@@ -73,11 +72,11 @@ public class PlatoMBodyResponse {
         this.tipo = tipo;
     }
 
-    public List<AcompanammientoBodyResponse> getAcompanamiento() {
+    public List<AcompanamientoBodyResponse> getAcompanamiento() {
         return this.acompanamientos;
     }
 
-    public void setAcompanamiento(List<AcompanammientoBodyResponse> acompanamiento) {
+    public void setAcompanamiento(List<AcompanamientoBodyResponse> acompanamiento) {
         this.acompanamientos = acompanamiento;
     }
 
