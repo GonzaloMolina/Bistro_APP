@@ -44,8 +44,7 @@ public class ControladorRestaurante {
     @PutMapping(value = "/updateState", produces = { "application/json" },consumes = { "application/json" })
     public ResponseEntity updateState(@RequestBody StateBody body) throws InvalidOrNullFieldException {
         try{
-            service.updateState(body);
-            return new ResponseEntity<>("ok", HttpStatus.OK);
+            return new ResponseEntity<>(service.updateState(body), HttpStatus.OK);
         }
         catch (Exception error){ return new ResponseEntity<>(error.getMessage(), HttpStatus.BAD_REQUEST); }
     }
@@ -82,6 +81,19 @@ public class ControladorRestaurante {
     public ResponseEntity createTable(@RequestBody MesaBody body) throws InvalidOrNullFieldException {
         try{
             return new ResponseEntity<>(service.createTable(body), HttpStatus.OK);
+        }
+        catch (Exception error){ return new ResponseEntity<>(error.getMessage(), HttpStatus.BAD_REQUEST); }
+    }
+
+    //Post_createMesa
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Successful retrieval of all users",response = String.class),
+    })
+    @PostMapping(value = "/register", produces = { "application/json" },consumes = { "application/json" })
+    public ResponseEntity Register(@RequestBody RestauranteBody body) throws InvalidOrNullFieldException {
+        try{
+            service.register(body);
+            return new ResponseEntity<>("ok", HttpStatus.OK);
         }
         catch (Exception error){ return new ResponseEntity<>(error.getMessage(), HttpStatus.BAD_REQUEST); }
     }
