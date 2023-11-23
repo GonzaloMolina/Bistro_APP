@@ -85,7 +85,7 @@ public class ControladorRestaurante {
         catch (Exception error){ return new ResponseEntity<>(error.getMessage(), HttpStatus.BAD_REQUEST); }
     }
 
-    //Post_createMesa
+    //Post_Register
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Successful retrieval of all users",response = String.class),
     })
@@ -110,5 +110,51 @@ public class ControladorRestaurante {
         catch (Exception error){ return new ResponseEntity<>(error.getMessage(), HttpStatus.BAD_REQUEST); }
     }
 
+    //Post_asignar_mesa
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Successful retrieval of all users",response = String.class),
+    })
+    @PostMapping(value = "/asignar", produces = { "application/json" },consumes = { "application/json" })
+    public ResponseEntity asignar(@RequestBody AsignarBody body) throws InvalidOrNullFieldException {
+        try{
+            return new ResponseEntity<>(service.asignarMesa(body), HttpStatus.OK);
+        }
+        catch (Exception error){ return new ResponseEntity<>(error.getMessage(), HttpStatus.BAD_REQUEST); }
+    }
 
+    //Post_desasignar_mesa
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Successful retrieval of all users",response = String.class),
+    })
+    @PostMapping(value = "/desasignar", produces = { "application/json" },consumes = { "application/json" })
+    public ResponseEntity desasignar(@RequestBody AsignarBody body) throws InvalidOrNullFieldException {
+        try{
+            return new ResponseEntity<>(service.desasignarMesa(body), HttpStatus.OK);
+        }
+        catch (Exception error){ return new ResponseEntity<>(error.getMessage(), HttpStatus.BAD_REQUEST); }
+    }
+
+    //Post_create plato
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Successful retrieval of all users",response = String.class),
+    })
+    @PostMapping(value = "/newPlato", produces = { "application/json" },consumes = { "application/json" })
+    public ResponseEntity crearPlato(@RequestBody PlatoBody body) throws InvalidOrNullFieldException {
+        try{
+            return new ResponseEntity<>(new RestauranteBodyResponse(service.crearPlato(body)), HttpStatus.OK);
+        }
+        catch (Exception error){ return new ResponseEntity<>(error.getMessage(), HttpStatus.BAD_REQUEST); }
+    }
+
+    //Post_eliminar plato
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Successful retrieval of all users",response = String.class),
+    })
+    @PostMapping(value = "/deleteConsumible", produces = { "application/json" },consumes = { "application/json" })
+    public ResponseEntity deleteConsumible(@RequestBody DeleteBody body) throws InvalidOrNullFieldException {
+        try{
+            return new ResponseEntity<>(new RestauranteBodyResponse(service.deleteConsumible(body)), HttpStatus.OK);
+        }
+        catch (Exception error){ return new ResponseEntity<>(error.getMessage(), HttpStatus.BAD_REQUEST); }
+    }
 }

@@ -12,6 +12,7 @@ public class Mesa {
     private int capacidad;
     private Double cuenta;
     private Long menuId;
+    private boolean estaAsignada;
 
     @OneToOne
     private Orden orden;
@@ -22,6 +23,12 @@ public class Mesa {
 
     public Mesa(Long menuId) {
         this.menuId= menuId;
+        this.estaAsignada = false;
+    }
+
+    public Mesa(Long menuId, boolean estado) {
+        this.menuId= menuId;
+        this.estaAsignada = estado;
     }
 
     //Getters
@@ -64,5 +71,17 @@ public class Mesa {
 
     public void setMenuId(Long menuId) {
         this.menuId = menuId;
+    }
+
+    public boolean isEstaAsignada() {
+        return estaAsignada;
+    }
+
+    public void setEstaAsignada(boolean estaAsignada) {
+        this.estaAsignada = estaAsignada;
+    }
+
+    public void cambiarEstado(){
+        this.estaAsignada = !this.estaAsignada;
     }
 }

@@ -7,10 +7,12 @@ import Bistro_BackEnd.dao.menu.MenuDao;
 import Bistro_BackEnd.dao.mesa.MesaDao;
 import Bistro_BackEnd.dao.peticion.SolicitudDao;
 import Bistro_BackEnd.dao.restaurante.RestauranteDao;
+import Bistro_BackEnd.model.consumibles.TipoPlato;
 import Bistro_BackEnd.model.empleado.Estado;
 import Bistro_BackEnd.model.empleado.Mozo;
 import Bistro_BackEnd.model.empleado.Solicitud;
 import Bistro_BackEnd.model.menu.Menu;
+import Bistro_BackEnd.model.menu.PlatoM;
 import Bistro_BackEnd.model.mesa.Mesa;
 import Bistro_BackEnd.model.restaurante.Restaurante;
 import Bistro_BackEnd.servicios.excepciones.ExcepcionIdInvalida;
@@ -41,6 +43,7 @@ public class RestauranteServiceImpl implements RestauranteService {
         String pass = body.getPassword();
 
         Restaurante res = dao.findById(mail).orElse(new Restaurante());
+        System.out.println(new BCryptPasswordEncoder().matches(pass, res.getPassword()));
         if(new BCryptPasswordEncoder().matches(pass, res.getPassword())){
             return new RestauranteBodyResponse(res);
         }else{
@@ -144,13 +147,79 @@ public class RestauranteServiceImpl implements RestauranteService {
     @Override
     public void register(RestauranteBody body) throws InvalidOrNullFieldException {
         if(dao.existsById(body.getEmail())){ throw new InvalidOrNullFieldException("Resto email"); }
-        else {
+        else { System.out.println(body.getPassword());
             String pass = new BCryptPasswordEncoder().encode(body.getPassword());
             body.setPassword(pass);
+            System.out.println(body.getPassword());
             Restaurante newResto = new Restaurante(body);
             Menu menu = menuDao.save(newResto.getMenu());
             newResto.setMenu(menu);
             dao.save(newResto);
+        }
+    }
+
+    @Override
+    public RestauranteBodyResponse asignarMesa(AsignarBody body) throws InvalidOrNullFieldException {
+        if(!dao.existsById(body.getAdmin())){ throw new InvalidOrNullFieldException("ADMIN"); }
+        if(!mozoDao.existsById(Long.valueOf(body.getEmpleadoId()))){ throw new InvalidOrNullFieldException("emp ID"); }
+        if(!mesaDao.existsById(Long.valueOf(body.getMesaId()))){ throw new InvalidOrNullFieldException("mesa ID"); }
+
+        Mozo emp = mozoDao.findById(Long.valueOf(body.getEmpleadoId())).orElse(new Mozo());
+        Mesa t = mesaDao.findById(Long.valueOf(body.getMesaId())).orElse(new Mesa());
+        t.cambiarEstado();
+        emp.addMesa(t);
+        mesaDao.save(t);
+        mozoDao.save(emp);
+        return new RestauranteBodyResponse(dao.findById(body.getAdmin()).orElse(new Restaurante()));
+    }
+
+    @Override
+    public RestauranteBodyResponse desasignarMesa(AsignarBody body) throws InvalidOrNullFieldException {
+        if(!dao.existsById(body.getAdmin())){ throw new InvalidOrNullFieldException("ADMIN"); }
+        if(!mozoDao.existsById(Long.valueOf(body.getEmpleadoId()))){ throw new InvalidOrNullFieldException("emp ID"); }
+        if(!mesaDao.existsById(Long.valueOf(body.getMesaId()))){ throw new InvalidOrNullFieldException("mesa ID"); }
+
+        Mozo emp = mozoDao.findById(Long.valueOf(body.getEmpleadoId())).orElse(new Mozo());
+        Mesa t = mesaDao.findById(Long.valueOf(body.getMesaId())).orElse(new Mesa());
+        t.cambiarEstado();
+        emp.removeMesa(t);
+        mesaDao.save(t);
+        mozoDao.save(emp);
+        return new RestauranteBodyResponse(dao.findById(body.getAdmin()).orElse(new Restaurante()));
+    }
+
+    @Override
+    public Restaurante crearPlato(PlatoBody body) throws InvalidOrNullFieldException {
+        if(!dao.existsById(body.getAdmin())){ throw new InvalidOrNullFieldException("ADMIN"); }
+        else{
+            Restaurante res = dao.findById(body.getAdmin()).orElse(new Restaurante());
+            TipoPlato type = this.mapType(body.getTipo().toLowerCase());
+            PlatoM ptl = new PlatoM(body.getNombre(), body.getPrecio(), body.getCost(), type);
+
+            res.getMenu().addPlate(ptl);
+            dao.save(res);
+            return res;
+        }
+    }
+
+    private TipoPlato mapType(String tipo){
+        switch (tipo) {
+            case("pasta"): return TipoPlato.PASTA;
+            case("pescado"): return TipoPlato.PESCADO;
+            case("postre"): return TipoPlato.POSTRE;
+            default: return TipoPlato.CARNE;
+        }
+    }
+
+    @Override
+    public Restaurante deleteConsumible(DeleteBody body) throws InvalidOrNullFieldException {
+        if(!dao.existsById(body.getAdmin())){ throw new InvalidOrNullFieldException("ADMIN"); }
+        else{
+            Restaurante res = dao.findById(body.getAdmin()).orElse(new Restaurante());
+            res.getMenu().deletePlato(Long.valueOf(body.getTarget()));
+            res.getMenu().deleteBebida(Long.valueOf(body.getTarget()));
+            dao.save(res);
+            return res;
         }
     }
 }

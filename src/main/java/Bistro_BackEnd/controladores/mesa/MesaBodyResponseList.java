@@ -6,10 +6,12 @@ public class MesaBodyResponseList {
 
     private Long id;
     private Integer capacidad;
+    private boolean estaAsignada;
 
     public MesaBodyResponseList(Mesa mesa) {
         this.id = mesa.getId();
         this.capacidad = mesa.getCapacidad();
+        this.estaAsignada = mesa.isEstaAsignada();
     }
 
     public Long getId() {
@@ -26,5 +28,13 @@ public class MesaBodyResponseList {
 
     public void setCapacidad(Integer capacidad) {
         this.capacidad = capacidad;
+    }
+
+    public boolean isEstaAsignada() {
+        return estaAsignada;
+    }
+
+    public void setEstaAsignada(boolean estaAsignada) {
+        this.estaAsignada = estaAsignada;
     }
 }
