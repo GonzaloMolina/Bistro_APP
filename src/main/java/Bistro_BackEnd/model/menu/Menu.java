@@ -6,6 +6,7 @@ import Bistro_BackEnd.model.consumibles.TipoPlato;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Entity
 public class Menu {
@@ -70,5 +71,17 @@ public class Menu {
             if(!res.contains(drink.getTamanio())){ res.add(drink.getTamanio());}
         });
         return res;
+    }
+
+    public void addPlate(PlatoM ptl) {
+        this.platos.add(ptl);
+    }
+
+    public void deletePlato(Long id) {
+        this.platos = this.platos.stream().filter(platoM -> !platoM.getId().equals(id)).collect(Collectors.toList());
+    }
+
+    public void deleteBebida(Long id) {
+        this.bebidas = this.bebidas.stream().filter(bebida -> !bebida.getId().equals(id)).collect(Collectors.toList());
     }
 }

@@ -1,5 +1,6 @@
 package Bistro_BackEnd.model.restaurante;
 
+import Bistro_BackEnd.controladores.restaurante.RestauranteBody;
 import Bistro_BackEnd.model.Orden.Orden;
 import Bistro_BackEnd.model.empleado.Mozo;
 import Bistro_BackEnd.model.empleado.Solicitud;
@@ -42,6 +43,16 @@ public class Restaurante {
         this.password = password;
         this.phone = tel;
         this.direction = dir;
+        this.menu = new Menu();
+    }
+
+    public Restaurante(RestauranteBody body) {
+        this.adminName = body.getAdminName();
+        this.restoName = body.getRestoName();
+        this.email = body.getEmail();
+        this.password = body.getPassword();
+        this.phone = body.getPhone();
+        this.direction = body.getDirection();
         this.menu = new Menu();
     }
 

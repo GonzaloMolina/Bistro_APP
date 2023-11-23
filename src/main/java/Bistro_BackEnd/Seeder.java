@@ -232,7 +232,12 @@ public class Seeder {
 
     private List<Mesa> crearMesas(Integer n, Menu menu){
         List<Mesa> res = new ArrayList<>();
-        for (int i = 0; i < n; i++) { res.add(new Mesa(menu.getId())); }
+        for (int i = 0; i < n; i++) {
+            Mesa m = new Mesa(menu.getId());
+            m.setCapacidad((int )(Math.random() * 9 + 1));
+            m.cambiarEstado();
+            res.add(m);
+        }
         return res;
     }
 }

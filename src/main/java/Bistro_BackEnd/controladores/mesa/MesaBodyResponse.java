@@ -11,6 +11,7 @@ public class MesaBodyResponse {
     private Integer capacidad;
     private double cuenta;
     private OrdenBodyResponse orden;
+    private boolean estaAsignada;
 
     public MesaBodyResponse(Mesa mesaR) {
         this.id = mesaR.getId();
@@ -18,6 +19,7 @@ public class MesaBodyResponse {
         this.capacidad = mesaR.getCapacidad();
         this.cuenta = mesaR.getCuenta();
         this.orden = this.mapOrden(mesaR.getOrden());
+        this.estaAsignada = mesaR.isEstaAsignada();
     }
 
     private OrdenBodyResponse mapOrden(Orden orden) {
@@ -66,5 +68,13 @@ public class MesaBodyResponse {
 
     public void setMenuId(Long menuId) {
         this.menuId = menuId;
+    }
+
+    public boolean isEstaAsignada() {
+        return estaAsignada;
+    }
+
+    public void setEstaAsignada(boolean estaAsignada) {
+        this.estaAsignada = estaAsignada;
     }
 }

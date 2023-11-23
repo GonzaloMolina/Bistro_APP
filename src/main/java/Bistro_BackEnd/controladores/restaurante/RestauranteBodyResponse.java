@@ -2,11 +2,13 @@ package Bistro_BackEnd.controladores.restaurante;
 
 import Bistro_BackEnd.controladores.empleado.MozoResponseBody;
 import Bistro_BackEnd.controladores.empleado.PeticionBodyResponseList;
+import Bistro_BackEnd.controladores.menu.MenuResponseBody;
 import Bistro_BackEnd.controladores.mesa.MesaBodyResponseList;
 import Bistro_BackEnd.controladores.orden.OrdenBodyResponseList;
 import Bistro_BackEnd.model.Orden.Orden;
 import Bistro_BackEnd.model.empleado.Mozo;
 import Bistro_BackEnd.model.empleado.Solicitud;
+import Bistro_BackEnd.model.menu.Menu;
 import Bistro_BackEnd.model.mesa.Mesa;
 import Bistro_BackEnd.model.restaurante.Restaurante;
 
@@ -20,6 +22,7 @@ public class RestauranteBodyResponse {
     private String email;
     private String tel;
     private String direccion;
+    private MenuResponseBody menu;
     private List<MozoResponseBody> empleados;
     private List<OrdenBodyResponseList> ordenes;
     private List<PeticionBodyResponseList> solicitudes;
@@ -35,6 +38,11 @@ public class RestauranteBodyResponse {
         this.ordenes = this.mapOrdenes(restaurante.getOrdenes());
         this.solicitudes = this.mapSolicitudes(restaurante.getSolicitudes());
         this.mesas = this.mapMesas(restaurante.getMesas());
+        this.menu = this.mapMenu(restaurante.getMenu());
+    }
+
+    private MenuResponseBody mapMenu(Menu menu) {
+        return new MenuResponseBody(menu);
     }
 
     private List<MesaBodyResponseList> mapMesas(List<Mesa> mesas) {
@@ -103,5 +111,13 @@ public class RestauranteBodyResponse {
 
     public void setMesas(List<MesaBodyResponseList> mesas) {
         this.mesas = mesas;
+    }
+
+    public MenuResponseBody getMenu() {
+        return menu;
+    }
+
+    public void setMenu(MenuResponseBody menu) {
+        this.menu = menu;
     }
 }

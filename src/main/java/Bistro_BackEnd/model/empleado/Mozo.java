@@ -38,6 +38,12 @@ public class Mozo extends Empleado {
         return mesasAsignadas;
     }
 
+    public void addMesa(Mesa mesa){ this.mesasAsignadas.add(mesa);}
+
+    public void removeMesa(Mesa mesa){
+        this.mesasAsignadas = this.mesasAsignadas.stream().filter(mesa1 -> !mesa1.getId().equals(mesa.getId())).collect(Collectors.toList());
+    }
+
     public void setMesasAsignadas(List<Mesa> mesasAsignadas) {
         this.mesasAsignadas = mesasAsignadas;
     }
