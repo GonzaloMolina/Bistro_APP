@@ -19,4 +19,5 @@ public interface RestauranteService {
     RestauranteBodyResponse desasignarMesa(AsignarBody body) throws InvalidOrNullFieldException;
     Restaurante crearPlato(PlatoBody body) throws InvalidOrNullFieldException;
     Restaurante deleteConsumible(DeleteBody body) throws InvalidOrNullFieldException;
+    Restaurante crearBebida(BebidaBody body) throws InvalidOrNullFieldException;
 }

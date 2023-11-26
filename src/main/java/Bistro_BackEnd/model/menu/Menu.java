@@ -84,4 +84,8 @@ public class Menu {
     public void deleteBebida(Long id) {
         this.bebidas = this.bebidas.stream().filter(bebida -> !bebida.getId().equals(id)).collect(Collectors.toList());
     }
+
+    public void addBebida(Bebida beb) {
+        this.bebidas.add(beb);
+    }
 }
