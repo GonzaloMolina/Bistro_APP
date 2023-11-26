@@ -146,6 +146,18 @@ public class ControladorRestaurante {
         catch (Exception error){ return new ResponseEntity<>(error.getMessage(), HttpStatus.BAD_REQUEST); }
     }
 
+    //Post_create plato
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Successful retrieval of all users",response = String.class),
+    })
+    @PostMapping(value = "/newBebida", produces = { "application/json" },consumes = { "application/json" })
+    public ResponseEntity crearBebida(@RequestBody BebidaBody body) throws InvalidOrNullFieldException {
+        try{
+            return new ResponseEntity<>(new RestauranteBodyResponse(service.crearBebida(body)), HttpStatus.OK);
+        }
+        catch (Exception error){ return new ResponseEntity<>(error.getMessage(), HttpStatus.BAD_REQUEST); }
+    }
+
     //Post_eliminar plato
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Successful retrieval of all users",response = String.class),

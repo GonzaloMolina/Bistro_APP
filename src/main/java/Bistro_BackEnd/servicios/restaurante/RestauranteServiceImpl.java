@@ -7,6 +7,8 @@ import Bistro_BackEnd.dao.menu.MenuDao;
 import Bistro_BackEnd.dao.mesa.MesaDao;
 import Bistro_BackEnd.dao.peticion.SolicitudDao;
 import Bistro_BackEnd.dao.restaurante.RestauranteDao;
+import Bistro_BackEnd.model.consumibles.Bebida;
+import Bistro_BackEnd.model.consumibles.TamanioBebida;
 import Bistro_BackEnd.model.consumibles.TipoPlato;
 import Bistro_BackEnd.model.empleado.Estado;
 import Bistro_BackEnd.model.empleado.Mozo;
@@ -199,6 +201,28 @@ public class RestauranteServiceImpl implements RestauranteService {
             res.getMenu().addPlate(ptl);
             dao.save(res);
             return res;
+        }
+    }
+
+    @Override
+    public Restaurante crearBebida(BebidaBody body) throws InvalidOrNullFieldException {
+        if(!dao.existsById(body.getAdmin())){ throw new InvalidOrNullFieldException("ADMIN"); }
+        else{
+            Restaurante res = dao.findById(body.getAdmin()).orElse(new Restaurante());
+            TamanioBebida type = this.mapTamanio(body.getTamanio().toLowerCase());
+            Bebida beb = new Bebida(body.getNombre(), type, body.getPrecio(), body.getCost());
+
+            res.getMenu().addBebida(beb);
+            dao.save(res);
+            return res;
+        }
+    }
+
+    private TamanioBebida mapTamanio(String tipo){
+        switch (tipo) {
+            case("chico"): return TamanioBebida.CHICO;
+            case("mediano"): return TamanioBebida.MEDIANO;
+            default: return TamanioBebida.GRANDE;
         }
     }
 
