@@ -110,4 +110,8 @@ public class Restaurante {
     public void setMenu(Menu menu) {
         this.menu = menu;
     }
+
+    public void deleteOrdenById(Long idOrden) {
+        ordenes = ordenes.stream().filter(o -> !o.getId().equals(idOrden)).collect(Collectors.toList());
+    }
 }
