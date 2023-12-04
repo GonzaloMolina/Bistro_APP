@@ -1,5 +1,6 @@
 package Bistro_BackEnd.servicios.orden;
 
+import Bistro_BackEnd.controladores.empleado.LogInBody;
 import Bistro_BackEnd.controladores.orden.OrdenBodyPost;
 import Bistro_BackEnd.controladores.orden.OrdenBodyPut;
 import Bistro_BackEnd.controladores.orden.OrdenBodyResponse;
@@ -12,6 +13,6 @@ public interface OrdenService {
     List<OrdenBodyResponseList> list();
     OrdenBodyResponse getById(Integer id) throws ExcepcionIdInvalida;
     Integer save(OrdenBodyPost ordenBody) throws ExcepcionIdInvalida;
-    void delete(Integer mesaId, Integer id) throws ExcepcionIdInvalida;
+    void delete(Integer mesaId, Integer id, LogInBody body) throws ExcepcionIdInvalida;
     void update(OrdenBodyPut ordenBody) throws ExcepcionIdInvalida;
 }

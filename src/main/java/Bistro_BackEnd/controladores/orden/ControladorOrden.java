@@ -1,5 +1,6 @@
 package Bistro_BackEnd.controladores.orden;
 
+import Bistro_BackEnd.controladores.empleado.LogInBody;
 import Bistro_BackEnd.servicios.excepciones.ExcepcionIdInvalida;
 import Bistro_BackEnd.servicios.excepciones.InvalidOrNullFieldException;
 import Bistro_BackEnd.servicios.orden.OrdenService;
@@ -64,10 +65,11 @@ public class ControladorOrden {
 
     //DELETE_ONE exception for id
     @CrossOrigin(origins = "http://localhost:3000")
-    @DeleteMapping(value = "{mesaId}/{id}", produces = { "application/json" })
-    public ResponseEntity<String> deleteOrder(@PathVariable Integer mesaId,@PathVariable Integer id) throws ExcepcionIdInvalida {
+    @PostMapping(value = "{mesaId}/{id}", produces = { "application/json" })
+    public ResponseEntity<String> deleteOrder(@PathVariable Integer mesaId, @PathVariable Integer id, @RequestBody LogInBody body) throws ExcepcionIdInvalida {
         try{
-            ordenService.delete(mesaId, id);
+            System.out.println(body);
+            ordenService.delete(mesaId, id, body);
             return new ResponseEntity<>("OK", HttpStatus.OK);
         }
         catch (Exception error){

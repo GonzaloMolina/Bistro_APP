@@ -1,5 +1,6 @@
 package Bistro_BackEnd.servicios.orden;
 
+import Bistro_BackEnd.controladores.empleado.LogInBody;
 import Bistro_BackEnd.controladores.orden.OrdenBodyPost;
 import Bistro_BackEnd.controladores.orden.OrdenBodyPut;
 import Bistro_BackEnd.controladores.orden.OrdenBodyResponse;
@@ -7,6 +8,7 @@ import Bistro_BackEnd.dao.consumibles.BebidaDao;
 import Bistro_BackEnd.dao.consumibles.PlatoMDao;
 import Bistro_BackEnd.dao.empleado.MozoDao;
 import Bistro_BackEnd.dao.mesa.MesaDao;
+import Bistro_BackEnd.dao.restaurante.RestauranteDao;
 import Bistro_BackEnd.model.Orden.Orden;
 import Bistro_BackEnd.controladores.orden.OrdenBodyResponseList;
 import Bistro_BackEnd.dao.orden.OrdenDao;
@@ -16,6 +18,7 @@ import Bistro_BackEnd.model.menu.PlatoM;
 import Bistro_BackEnd.model.mesa.Mesa;
 import Bistro_BackEnd.model.pair.Pair;
 import Bistro_BackEnd.model.pair.PairPlatoAcom;
+import Bistro_BackEnd.model.restaurante.Restaurante;
 import Bistro_BackEnd.servicios.excepciones.ExcepcionIdInvalida;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -41,6 +44,9 @@ public class OrdenServiceImp implements OrdenService {
 
     @Autowired
     private MozoDao mozoDao;
+
+    @Autowired
+    private RestauranteDao restauranteDao;
 
     @Override
     public List<OrdenBodyResponseList> list() {
@@ -118,13 +124,16 @@ public class OrdenServiceImp implements OrdenService {
     }
 
     @Override
-    public void delete(Integer mesaId, Integer id) throws ExcepcionIdInvalida {
+    public void delete(Integer mesaId, Integer id, LogInBody body) throws ExcepcionIdInvalida {
         Long idOrden = Long.valueOf(id);
         Long idMesa = Long.valueOf(mesaId);
+        String email = body.getEmail();
         this.validarId(idOrden);
         Mesa m = this.mesaDao.findById(idMesa).orElse(new Mesa());
         m.setOrden(null);
         mesaDao.save(m);
+        Restaurante rest = restauranteDao.findById(email).orElse(new Restaurante());
+        rest.deleteOrdenById(idOrden);
         this.ordenDao.deleteById(idOrden);
     }
 
